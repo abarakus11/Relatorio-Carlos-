@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Dashboard Executivo — Emilly Dantas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<meta name="theme-color" content="#05080f"/>
-<meta name="description" content="RSA Dashboard 2026 — Emilly Dantas · Senior Integration Agent · FIC Capital Group"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<meta name="theme-color" content="#1f1218"/>
+<meta name="description" content="Dashboard executivo de performance — Emilly Dantas · RSA Dashboard 2026 · Jan–Jun 2026"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -36,8 +36,11 @@ body{
 .page-bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .page-bg-shade{
   position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:rgba(5,8,15,.74);
+  background:
+    linear-gradient(180deg,rgba(4,10,18,.55) 0%,rgba(5,14,26,.78) 45%,rgba(4,8,16,.88) 100%),
+    rgba(5,12,22,.45);
 }
+body.page-comercial .page-bg img{object-position:center 40%}
 body>.hdr{position:relative;z-index:1000}
 body>section,body>footer{position:relative;z-index:1}
 a{color:var(--blue);text-decoration:none}
@@ -101,6 +104,7 @@ ul{list-style:none}
   width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block;
   filter:none!important;mix-blend-mode:normal;
 }
+.ftr-ic img{object-position:center 22%}
 .av-txt .badge{
   display:inline-flex;align-items:center;gap:8px;
   font-size:10px;letter-spacing:.14em;text-transform:uppercase;
@@ -195,8 +199,10 @@ ul{list-style:none}
   padding:12px 16px;font-size:13px;color:var(--t2);line-height:1.5;
 }
 #areasPeopleMenu .hdr-area-member a,
-#areasPeopleMenu .hdr-area-name{display:block;padding:12px 16px;border-radius:8px}
-#areasPeopleMenu .hdr-area-name{color:var(--t0)}
+#areasPeopleMenu .hdr-area-name,
+#equipeMenu .hdr-area-name{display:block;padding:12px 16px;border-radius:8px}
+#areasPeopleMenu .hdr-area-name,
+#equipeMenu .hdr-area-name{color:var(--t0)}
 
 /* ═══════════════════ SECTION TITLES ═══════════════════ */
 .sec{padding:72px 0 0;position:relative}
@@ -718,6 +724,8 @@ ul{list-style:none}
 .tb-urg{background:rgba(255,90,90,.1);color:var(--red);border:1px solid rgba(255,90,90,.2)}
 .tb-emg{background:rgba(255,143,63,.1);color:var(--orange);border:1px solid rgba(255,143,63,.2)}
 .tb-pri{background:rgba(16,232,160,.08);color:var(--green);border:1px solid rgba(16,232,160,.18)}
+.tb-standby{background:rgba(255,224,102,.1);color:var(--yellow);border:1px solid rgba(255,224,102,.25)}
+.tb-andamento{background:rgba(0,212,255,.1);color:var(--cyan);border:1px solid rgba(0,212,255,.25)}
 .ti-dt{font-family:var(--mono);font-size:10px;color:var(--t2)}
 .task-ct{
   text-align:center;padding:20px;font-size:12px;color:var(--t2);
@@ -750,35 +758,6 @@ ul{list-style:none}
 .reveal.in{opacity:1;transform:none}
 
 /* ═══════════════════ PRINT ═══════════════════ */
-/* ── Emilly: portfólio, certificações, PDI ── */
-.port-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--b0);background:var(--glass)}
-.port-tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:900px}
-.port-tbl th,.port-tbl td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--b0)}
-.port-tbl th{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);background:rgba(0,212,255,.06);position:sticky;top:0}
-.port-tbl td:first-child,.port-tbl th:first-child{text-align:left;font-weight:600;color:var(--t0)}
-.port-tbl tr:hover td{background:rgba(77,143,255,.06)}
-.port-ok{color:var(--green)}.port-ex{color:var(--cyan)}.port-af{color:var(--orange)}.port-st{color:var(--t2)}
-.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.cert-crd{background:var(--glass);border:1px solid var(--b0);border-radius:var(--radius);padding:20px}
-.cert-org{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
-.cert-ttl{font-size:15px;font-weight:600;color:var(--t0);margin-bottom:8px}
-.cert-desc{font-size:13px;color:var(--t1);line-height:1.55;margin-bottom:12px}
-.cert-tags{display:flex;flex-wrap:wrap;gap:6px}
-.cert-tag{font-size:11px;padding:4px 10px;border-radius:6px;background:rgba(77,143,255,.12);color:var(--blue);border:1px solid rgba(77,143,255,.25)}
-.opp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.opp-crd{display:flex;gap:14px;background:var(--glass);border:1px solid var(--b0);border-radius:var(--radius);padding:18px}
-.opp-av{width:48px;height:48px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--green))}
-.opp-tag{display:inline-block;margin-top:8px;font-size:11px;color:var(--cyan)}
-.pdi-tbl{width:100%;border-collapse:collapse}
-.pdi-tbl th,.pdi-tbl td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--b0);font-size:14px}
-.pdi-tbl th{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);width:32%}
-.pdi-tbl td{color:var(--t1)}
-.tb-st-concluido{background:rgba(16,232,160,.12);color:var(--green);border-color:rgba(16,232,160,.3)}
-.tb-st-andamento{background:rgba(77,143,255,.12);color:var(--blue);border-color:rgba(77,143,255,.3)}
-.tb-st-afazer{background:rgba(255,224,102,.12);color:var(--yellow);border-color:rgba(255,224,102,.3)}
-.tb-st-atrasada{background:rgba(255,90,90,.15);color:var(--red);border-color:rgba(255,90,90,.35)}
-.tb-st-standby{background:rgba(157,111,255,.12);color:var(--purple);border-color:rgba(157,111,255,.3)}
-
 @media print{
   .page-bg,.page-bg-shade{display:none!important}
   body{background:#fff;color:#111}
@@ -787,19 +766,140 @@ ul{list-style:none}
 @media(prefers-reduced-motion:reduce){
   .page-bg img{opacity:.35}
 }
+
+/* ═══════════════════ TEMA — COMERCIAL FEMININO CORPORATIVO ═══════════════════ */
+body.page-comercial{
+  --bg0:#140c12;--bg1:rgba(28,16,24,.94);--bg2:#1f1218;--bg3:#2a1822;
+  --card:rgba(42,26,36,.9);--card2:rgba(48,30,40,.94);
+  --glass:linear-gradient(155deg,rgba(48,30,40,.94),rgba(32,18,28,.92));
+  --b0:rgba(255,228,238,.09);--b1:rgba(255,210,225,.15);--b2:rgba(255,200,218,.22);
+  --t0:#fdf6f9;--t1:#d4b8c4;--t2:#9a7d8a;
+  --blue:#d4a5b8;--cyan:#e8b4cc;--green:#9ec9b0;--purple:#c4a8dc;
+  --orange:#e8c0a8;--pink:#f0a8c4;--yellow:#e8d8b0;--red:#e8a0a8;
+  --rose:#d4a5b8;--blush:#f0d4e0;--mauve:#b898c8;--pearl:#fdf6f9;
+  --disp:'Cormorant Garamond',Georgia,serif;--body:'Outfit',sans-serif;
+  --radius:22px;--shadow:0 24px 56px rgba(20,8,16,.45);
+}
+body.page-comercial ::selection{background:rgba(212,165,184,.38);color:#fff}
+body.page-comercial .page-bg-shade{
+  background:
+    linear-gradient(165deg,rgba(42,18,32,.5) 0%,rgba(24,12,20,.82) 50%,rgba(18,10,16,.9) 100%),
+    rgba(80,36,56,.18);
+}
+body.page-comercial .hdr{
+  background:linear-gradient(180deg,rgba(36,20,30,.75),rgba(24,12,20,.4));
+  border-bottom-color:rgba(255,220,232,.1);
+}
+body.page-comercial .hdr-overlay{
+  background:linear-gradient(115deg,rgba(36,18,28,.82) 0%,rgba(48,24,38,.65) 50%,rgba(28,14,22,.88) 100%);
+}
+body.page-comercial .hdr-mesh{
+  background-image:
+    radial-gradient(circle at 18% 40%,rgba(212,165,184,.14) 0%,transparent 52%),
+    radial-gradient(circle at 82% 18%,rgba(196,168,220,.1) 0%,transparent 48%);
+}
+body.page-comercial .av::before{
+  background:conic-gradient(from 0deg,#e8b4cc,#d4a5b8,#c4a8dc,#f0d4e0,#e8b4cc);
+  animation:avRingSpin 14s linear infinite;
+}
+body.page-comercial .av-in{border-color:rgba(255,228,238,.2);background:#261820}
+body.page-comercial .av-txt .badge{
+  color:var(--blush);background:rgba(240,180,200,.12);
+  border-color:rgba(232,180,204,.35);font-weight:500;letter-spacing:.12em;
+}
+body.page-comercial .av-txt .badge::before{
+  background:var(--blush);box-shadow:0 0 12px rgba(240,180,204,.65);
+}
+body.page-comercial .av-txt h1{
+  font-weight:600;letter-spacing:.02em;text-transform:none;
+  font-size:clamp(2.2rem,4.2vw,3.4rem);
+}
+body.page-comercial .av-txt h1 span{
+  background:linear-gradient(120deg,#f5e6ee,#e8b4cc 45%,#d4a5b8);
+  -webkit-background-clip:text;background-clip:text;
+}
+body.page-comercial .av-txt p{color:var(--t1);font-weight:400}
+body.page-comercial .hdr-btn-equipe{
+  font-family:var(--body);font-weight:600;font-size:.8rem;letter-spacing:.1em;
+  border-radius:999px;
+  background:linear-gradient(135deg,rgba(212,165,184,.28),rgba(196,168,220,.14));
+  border-color:rgba(232,180,204,.45);
+  box-shadow:0 6px 24px rgba(80,32,56,.2),inset 0 1px 0 rgba(255,255,255,.1);
+}
+body.page-comercial .hdr-btn-equipe:hover{
+  border-color:rgba(245,220,232,.65);
+  background:linear-gradient(135deg,rgba(232,180,204,.4),rgba(212,165,184,.22));
+  box-shadow:0 10px 32px rgba(120,48,72,.28);
+}
+body.page-comercial .hdr-equipe-wrap.open .hdr-btn-equipe{
+  border-color:rgba(245,220,232,.7);
+  background:linear-gradient(135deg,rgba(232,180,204,.42),rgba(196,168,220,.2));
+}
+body.page-comercial .hdr-equipe-menu{
+  background:rgba(36,22,30,.97);border-color:rgba(232,180,204,.35);
+  border-radius:16px;box-shadow:0 20px 48px rgba(24,8,18,.5);
+}
+body.page-comercial .hdr-equipe-item:hover{background:rgba(212,165,184,.14)}
+body.page-comercial .hdr-equipe-menu button{color:var(--t1)}
+body.page-comercial .hdr-areas-back{color:var(--t2);border-bottom-color:rgba(255,220,232,.12)}
+body.page-comercial .hdr-equipe-menu button:hover,
+body.page-comercial .hdr-equipe-menu button:focus-visible{
+  background-color:rgba(212,165,184,.16);color:var(--pearl);
+}
+body.page-comercial .hdr-equipe-menu button:active{background-color:rgba(212,165,184,.24)}
+body.page-comercial .hdr-areas-people-hd{color:var(--blush)}
+body.page-comercial a{color:#e8b4cc}
+body.page-comercial .sec-hd-inner{
+  border-left-color:rgba(212,165,184,.55);
+  background:linear-gradient(90deg,rgba(212,165,184,.08),transparent 60%);
+}
+body.page-comercial .sec-hd h2{
+  font-family:var(--disp);font-weight:600;letter-spacing:.04em;text-transform:none;
+}
+body.page-comercial .kpi,
+body.page-comercial .crd,
+body.page-comercial .ti,
+body.page-comercial .ach,
+body.page-comercial .an{
+  border-color:rgba(255,220,232,.08);
+  box-shadow:0 12px 40px rgba(16,6,12,.35),inset 0 1px 0 rgba(255,255,255,.04);
+}
+body.page-comercial .kpi:hover,
+body.page-comercial .crd:hover{border-color:rgba(232,180,204,.22)}
+body.page-comercial .kpi::before{
+  background:linear-gradient(105deg,transparent 38%,rgba(255,240,246,.07) 50%,transparent 62%);
+}
+body.page-comercial .sec-intel::before{
+  background-image:
+    linear-gradient(rgba(212,165,184,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,165,184,.05) 1px,transparent 1px);
+}
+body.page-comercial .an::before{
+  background:linear-gradient(90deg,transparent,var(--an-accent),transparent);
+}
+body.page-comercial .tl::before{
+  background:linear-gradient(180deg,rgba(212,165,184,.5),rgba(196,168,220,.25),transparent);
+}
+body.page-comercial .tl-dot{box-shadow:0 0 14px currentColor}
+body.page-comercial .ftr{
+  background:linear-gradient(180deg,transparent,rgba(28,14,22,.96));
+  border-top-color:rgba(255,220,232,.08);
+}
+body.page-comercial .ftr-ic{border-color:rgba(212,165,184,.45);box-shadow:0 0 28px rgba(212,165,184,.2)}
+body.page-comercial ::-webkit-scrollbar-thumb{background:#3d2834}
 </style>
 </head>
-<body>
+<body class="page-comercial">
 
 <div class="page-bg" aria-hidden="true">
-  <img src="https://i.pinimg.com/originals/36/e4/d0/36e4d0b856694fc471344b644a1dd6e4.gif" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+  <img src="/assets/comercial-bg.jpg" alt="" width="1920" height="1080" loading="eager" decoding="async">
 </div>
 <div class="page-bg-shade" aria-hidden="true"></div>
 
 <!-- HEADER -->
 <header class="hdr">
   <div class="hdr-bg" aria-hidden="true">
-    <img src="https://media1.tenor.com/images/a8a4aa014e13eafcc76b8dd0ff0ccc25/tenor.gif?itemid=12272656" alt="" width="1920" height="400" loading="eager" decoding="async">
+    <img src="/assets/comercial-bg.jpg" alt="" width="1920" height="400" loading="eager" decoding="async">
   </div>
   <div class="hdr-overlay" aria-hidden="true"></div>
   <div class="hdr-mesh" aria-hidden="true"></div>
@@ -815,7 +915,7 @@ ul{list-style:none}
             <button type="button" class="hdr-btn-equipe" id="btnEquipe" aria-expanded="false" aria-controls="equipeMenu">Equipe</button>
             <ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Equipe financeiro">
               <li class="hdr-equipe-item" role="listitem"><a href="emilly.html">Emilly Dantas</a></li>
-              <li class="hdr-equipe-item" role="listitem"><span class="hdr-area-name">Paulo Robson</span></li>
+              <li class="hdr-equipe-item" role="listitem"><a href="paulo-robson.html">Paulo Robson</a></li>
             </ul>
           </div>
           <div class="hdr-equipe-wrap" id="areasWrap">
@@ -845,7 +945,7 @@ ul{list-style:none}
     <div class="sec-hd reveal">
       <div class="sec-hd-inner">
         <h2>Indicadores do Portfólio</h2>
-        <p>Demandas institucionais · FIC Capital Group · 1º semestre 2026 (dados reais)</p>
+        <p>RSA Dashboard 2026 · Janeiro a Junho 2026 · fonte: Relatorio_Claude.pdf</p>
       </div>
     </div>
     <div class="kpi-grid" id="kpiGrid"></div>
@@ -862,78 +962,24 @@ ul{list-style:none}
       </div>
     </div>
     <div class="charts-r1">
-        <div class="crd crd-live reveal">
-        <div class="crd-hd"><div><h3>Distribuição por Status</h3><p>Situação atual das 246 tarefas</p></div></div>
-        <canvas id="cDonut"></canvas>
+      <div class="crd crd-live reveal">
+        <div class="crd-hd"><div><h3>Evolução Mensal</h3><p>Volume de entregas por mês · Jan–Jun 2026</p></div></div>
+        <canvas id="cLine"></canvas>
       </div>
       <div class="crd crd-live reveal">
-        <div class="crd-hd"><div><h3>Tarefas por Área</h3><p>Administração · Financeiro · Marketing · Jurídico</p></div></div>
-        <canvas id="cBar"></canvas>
+        <div class="crd-hd"><div><h3>Por Status</h3><p>Situação das 246 demandas do portfólio</p></div></div>
+        <canvas id="cDonut"></canvas>
       </div>
     </div>
     <div class="charts-r2" style="padding-top:20px">
       <div class="crd crd-live reveal">
-        <div class="crd-hd"><div><h3>Conclusão por Área</h3><p>% de tarefas finalizadas no semestre</p></div></div>
-        <canvas id="cLine"></canvas>
+        <div class="crd-hd"><div><h3>Volume por Mês</h3><p>Comparativo Jan–Jun 2026</p></div></div>
+        <canvas id="cBar"></canvas>
       </div>
       <div class="crd crd-live reveal">
-        <div class="crd-hd"><div><h3>Por Prioridade</h3><p>Emergente · Prioridade · Urgente</p></div></div>
+        <div class="crd-hd"><div><h3>Top Entregas Recorrentes</h3><p>Principais tipos de demanda no semestre</p></div></div>
         <canvas id="cTop"></canvas>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFÓLIO -->
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-hd reveal">
-      <div class="sec-hd-inner">
-        <h2>Entregas por Empresa e Projeto</h2>
-        <p>Matriz documental do portfólio — MBP · Protocolos · DCF · REF · Prospecto</p>
-      </div>
-    </div>
-    <div class="port-wrap reveal" id="portWrap"></div>
-  </div>
-</section>
-
-<!-- CERTIFICAÇÕES -->
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-hd reveal">
-      <div class="sec-hd-inner">
-        <h2>Treinamentos e Certificações</h2>
-        <p>Capacitações concluídas no semestre — CEFIS · FGV · SENAI São Paulo</p>
-      </div>
-    </div>
-    <div class="cert-grid reveal" id="certGrid"></div>
-  </div>
-</section>
-
-<!-- OPORTUNIDADES -->
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-hd reveal">
-      <div class="sec-hd-inner">
-        <h2>Oportunidades Geradas</h2>
-        <p>Relacionamentos prospectados e desenvolvidos</p>
-      </div>
-    </div>
-    <div class="opp-grid reveal" id="oppGrid"></div>
-  </div>
-</section>
-
-<!-- PDI -->
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-hd reveal">
-      <div class="sec-hd-inner">
-        <h2>Plano de Desenvolvimento Individual</h2>
-        <p>Head of Integration · 2º semestre 2026 — objetivos e metas</p>
-      </div>
-    </div>
-    <div class="crd reveal" style="padding:8px 0">
-      <table class="pdi-tbl" id="pdiTbl"></table>
     </div>
   </div>
 </section>
@@ -1035,11 +1081,27 @@ const now = new Date();
 const fmtDate = d => d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
 document.getElementById('ftrDate').textContent  = fmtDate(now);
 
-/* ── DATA (RSA Dashboard 2026) ── */
+/* ── DATA (Relatorio_Claude.pdf / RSA Dashboard 2026) ── */
 const {
-  TASKS, KPIS, MON_L, MON_D, CAT_L, CAT_D, CAT_C, AREA_L, AREA_D, AREA_COMP, PRI_L, PRI_D,
-  TOP_L, TOP_D, SKILLS, TL, ACH, ANALYSIS, CATMAP, PORTFOLIO, CERTS, OPPS, PDI,
+  TASKS, KPIS, MON_L, MON_D, CAT_L, CAT_D, CAT_C, TOP_L, TOP_D, SKILLS, TL, ACH, ANALYSIS, CATMAP,
 } = window.EMILLY_REPORT;
+
+const ACH_ICONS={
+  trophy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M5 4H3v2a4 4 0 0 0 4 4M19 4h2v2a4 4 0 0 1-4 4"/></svg>',
+  org:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>',
+  metric:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg>',
+  layers:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2l9 5-9 5-9-5z"/><path d="M3 12l9 5 9-5M3 17l9 5 9-5"/></svg>',
+  alert:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M10.3 4.3a2 2 0 0 1 3.4 0l8 14a2 2 0 0 1-1.7 3H4a2 2 0 0 1-1.7-3z"/><path d="M12 9v4M12 17h.01"/></svg>',
+  calendar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+};
+const ANAL_ICONS={
+  exec:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>',
+  user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="8" r="4"/><path d="M6 20v-1a6 6 0 0 1 12 0v1"/></svg>',
+  scope:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>',
+  strength:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 3l2.4 6.8H22l-5.6 4.1 2.1 6.8L12 16.8 5.5 20.7l2.1-6.8L2 9.8h7.6z"/></svg>',
+  stack:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M8 4l-6 4 6 4 6-4-6-4z"/><path d="M2 12l6 4 6-4M2 16l6 4 6-4"/></svg>',
+  impact:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4.5 16.5c3-6 11-8 15.5-3.5"/><path d="M12 5v5l3 2"/><path d="M5 19h14"/></svg>',
+};
 
 /* ═══════════════════════════════════════════════
    RENDER KPIs
@@ -1069,111 +1131,94 @@ KPIS.forEach((k,i) => {
 /* ═══════════════════════════════════════════════
    CHART DEFAULTS
 ═══════════════════════════════════════════════ */
-Chart.defaults.color='#9baac7';
+Chart.defaults.color='#d4b8c4';
 Chart.defaults.font.family="'Outfit',sans-serif";
-Chart.defaults.plugins.tooltip.backgroundColor='#0f1929';
-Chart.defaults.plugins.tooltip.borderColor='rgba(255,255,255,.12)';
+Chart.defaults.plugins.tooltip.backgroundColor='#2a1822';
+Chart.defaults.plugins.tooltip.borderColor='rgba(232,180,204,.25)';
 Chart.defaults.plugins.tooltip.borderWidth=1;
 Chart.defaults.plugins.tooltip.padding=12;
-Chart.defaults.plugins.tooltip.cornerRadius=8;
-Chart.defaults.plugins.tooltip.titleColor='#f0f4ff';
-Chart.defaults.plugins.tooltip.bodyColor='#9baac7';
+Chart.defaults.plugins.tooltip.cornerRadius=12;
+Chart.defaults.plugins.tooltip.titleColor='#fdf6f9';
+Chart.defaults.plugins.tooltip.bodyColor='#d4b8c4';
+const CHART_ROSE='#d4a5b8';
+const CHART_BLUSH='rgba(212,165,184,.35)';
+const CHART_BORDER='#2a1822';
 
-const catBase=[...CAT_D],areaBase=[...AREA_D],compBase=[...AREA_COMP],priBase=[...PRI_D];
-const areaColors=['#4d8fff','#10e8a0','#9d6fff','#ff8f3f'];
+const lineBase=[...MON_D],catBase=[...CAT_D],topBase=[...TOP_D];
 
-/* ── Donut: status ── */
+/* ── Line ── */
+const chartLine=new Chart(document.getElementById('cLine'),{
+  type:'line',
+  data:{labels:MON_L,datasets:[{
+    label:'Tarefas',data:[...lineBase],
+    borderColor:CHART_ROSE,
+    backgroundColor:(ctx)=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,280);g.addColorStop(0,'rgba(212,165,184,.32)');g.addColorStop(1,'rgba(212,165,184,0)');return g},
+    fill:true,tension:.45,
+    pointBackgroundColor:CHART_ROSE,pointBorderColor:'#fff',pointBorderWidth:2,
+    pointRadius:5,pointHoverRadius:8,
+  }]},
+  options:{responsive:true,animation:false,interaction:{intersect:false,mode:'index'},
+    plugins:{legend:{display:false}},
+    scales:{x:{grid:{color:'rgba(255,255,255,.04)'}},y:{grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true,suggestedMax:55}}}
+});
+
+/* ── Donut ── */
 const chartDonut=new Chart(document.getElementById('cDonut'),{
   type:'doughnut',
-  data:{labels:CAT_L,datasets:[{data:[...catBase],backgroundColor:CAT_C,borderColor:'#0f1929',borderWidth:3,hoverOffset:8}]},
+  data:{labels:CAT_L,datasets:[{data:[...catBase],backgroundColor:CAT_C,borderColor:CHART_BORDER,borderWidth:3,hoverOffset:8}]},
   options:{responsive:true,animation:false,cutout:'60%',rotation:0,
     plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:10,font:{size:11}}}}}
 });
 
-/* ── Bar: por área ── */
+/* ── Bar ── */
 const chartBar=new Chart(document.getElementById('cBar'),{
   type:'bar',
-  data:{labels:AREA_L,datasets:[{
-    label:'Tarefas',data:[...areaBase],
-    backgroundColor:areaColors,
+  data:{labels:MON_L,datasets:[{
+    label:'Tarefas',data:[...lineBase],
+    backgroundColor:lineBase.map((_,i)=>i===2?CHART_ROSE:CHART_BLUSH),
     borderRadius:6,
   }]},
   options:{responsive:true,animation:false,plugins:{legend:{display:false}},
-    scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true,suggestedMax:100}}}
+    scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true,suggestedMax:55}}}
 });
 
-/* ── Line: % conclusão ── */
-const chartLine=new Chart(document.getElementById('cLine'),{
-  type:'bar',
-  data:{labels:AREA_L,datasets:[{
-    label:'% concluído',data:[...compBase],
-    backgroundColor:compBase.map((v,i)=>`rgba(${i===0?'77,143,255':i===1?'16,232,160':i===2?'157,111,255':'255,143,63'},.75)`),
-    borderRadius:8,
-  }]},
-  options:{responsive:true,animation:false,plugins:{legend:{display:false}},
-    scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}}}
-});
-
-/* ── Top: prioridade ── */
+/* ── Top ── */
 const chartTop=new Chart(document.getElementById('cTop'),{
-  type:'doughnut',
-  data:{labels:PRI_L,datasets:[{data:[...priBase],backgroundColor:['#ff5a5a','#4d8fff','#ff8f3f'],borderColor:'#0f1929',borderWidth:3,hoverOffset:6}]},
-  options:{responsive:true,animation:false,cutout:'55%',
-    plugins:{legend:{position:'bottom',labels:{padding:8,boxWidth:10,font:{size:11}}}}}
+  type:'bar',
+  data:{labels:TOP_L,datasets:[{
+    label:'Ocorrências',data:[...topBase],
+    backgroundColor:['#d4a5b8','#9ec9b0','#c4a8dc','#e8c0a8','#e8b4cc','#f0a8c4','#e8d8b0','#e8a0a8'],
+    borderRadius:5,
+  }]},
+  options:{indexAxis:'y',responsive:true,animation:false,plugins:{legend:{display:false}},
+    scales:{x:{grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true,suggestedMax:10},y:{grid:{display:false},ticks:{font:{size:11}}}}}
 });
 
+/* ── Animação infinita dos gráficos ── */
 (function startChartMotion(){
   let t=0;
   function tick(){
     t+=0.028;
-    chartDonut.options.rotation=(t*22)%360;
-    chartDonut.data.datasets[0].data=catBase.map((v,i)=>Math.max(1,v*(1+.08*Math.sin(t*1.1+i*.75))));
-    chartDonut.update('none');
-    chartBar.data.datasets[0].data=areaBase.map((v,i)=>Math.max(0,v*(1+.1*Math.sin(t*1.15+i*.6))));
-    chartBar.update('none');
-    chartLine.data.datasets[0].data=compBase.map((v,i)=>Math.min(100,Math.max(0,v*(1+.03*Math.sin(t+i*.5)))));
+    const dsLine=chartLine.data.datasets[0];
+    dsLine.data=lineBase.map((v,i)=>Math.max(0,v*(1+.14*Math.sin(t+i*.85))));
+    dsLine.tension=.35+.2*(.5+.5*Math.sin(t*.7));
+    dsLine.pointRadius=lineBase.map((_,i)=>4+2.5*Math.sin(t*1.4+i*.9));
     chartLine.update('none');
-    chartTop.data.datasets[0].data=priBase.map((v,i)=>Math.max(1,v*(1+.08*Math.sin(t*.95+i*.55))));
+
+    chartDonut.options.rotation=(t*22)%360;
+    chartDonut.data.datasets[0].data=catBase.map((v,i)=>Math.max(1,v*(1+.1*Math.sin(t*1.1+i*.75))));
+    chartDonut.update('none');
+
+    chartBar.data.datasets[0].data=lineBase.map((v,i)=>Math.max(0,v*(1+.12*Math.sin(t*1.15+i*.6))));
+    chartBar.update('none');
+
+    chartTop.data.datasets[0].data=topBase.map((v,i)=>Math.max(0,v*(1+.11*Math.sin(t*.95+i*.55))));
     chartTop.update('none');
+
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
 })();
-
-/* ── Portfólio, certificações, oportunidades, PDI ── */
-function portCls(v){
-  if(v==='✔')return'port-ok';
-  if(v==='Em Ex.')return'port-ex';
-  if(v==='A Fazer')return'port-af';
-  return'port-st';
-}
-function portCell(v){return`<td class="${portCls(v)}">${v}</td>`;}
-const portWrap=document.getElementById('portWrap');
-if(portWrap){
-  let h='<table class="port-tbl"><thead><tr><th>Empresa</th><th>MBP V1</th><th>MBP V2</th><th>Prot. Adm</th><th>Prot. Fin</th><th>DCF V1</th><th>REF</th><th>Prospecto</th></tr></thead><tbody>';
-  PORTFOLIO.forEach(r=>{
-    h+=`<tr><td>${r.emp}</td>${portCell(r.mbp1)}${portCell(r.mbp2)}${portCell(r.prot)}${portCell(r.fin)}${portCell(r.dcf)}${portCell(r.ref)}${portCell(r.prosp)}</tr>`;
-  });
-  portWrap.innerHTML=h+'</tbody></table>';
-}
-const certGrid=document.getElementById('certGrid');
-if(certGrid){
-  CERTS.forEach(c=>{
-    certGrid.innerHTML+=`<article class="cert-crd"><div class="cert-org">${c.org}</div><h3 class="cert-ttl">${c.title}</h3><p class="cert-desc">${c.desc}</p><div class="cert-tags">${c.skills.map(s=>`<span class="cert-tag">${s}</span>`).join('')}</div></article>`;
-  });
-}
-const oppGrid=document.getElementById('oppGrid');
-if(oppGrid){
-  OPPS.forEach(o=>{
-    oppGrid.innerHTML+=`<article class="opp-crd"><div class="opp-av">${o.init}</div><div><strong>${o.name}</strong><p style="font-size:13px;color:var(--t1);margin-top:6px;line-height:1.5">${o.desc}</p><span class="opp-tag">${o.tag}</span></div></article>`;
-  });
-}
-const pdiTbl=document.getElementById('pdiTbl');
-if(pdiTbl){
-  let p='<tbody>';
-  PDI.forEach(row=>{p+=`<tr><th>${row.obj}</th><td>${row.meta}</td></tr>`;});
-  pdiTbl.innerHTML=p+'</tbody>';
-}
 
 /* ═══════════════════════════════════════════════
    RENDER SKILLS — RODA GIGANTE
@@ -1331,12 +1376,9 @@ function renderTasks(tasks){
   const ct=document.getElementById('taskCt');
   g.innerHTML='';
   if(!tasks.length){ct.textContent='Nenhuma tarefa encontrada.';return}
-  const stMap={concluido:'tb-st-concluido',andamento:'tb-st-andamento',afazer:'tb-st-afazer',atrasada:'tb-st-atrasada',standby:'tb-st-standby'};
-  const stLbl={concluido:'Concluído',andamento:'Em execução',afazer:'A fazer',atrasada:'Atrasada',standby:'Standby'};
   tasks.forEach((t,i)=>{
     const ci=CATMAP[t.cat]||{color:'#9baac7',label:t.cat};
-    const pc=t.pri==='urgente'?'tb-urg':t.pri==='emergente'?'tb-emg':'tb-pri';
-    const sc=stMap[t.status]||'tb-pri';
+    const pc=t.pri==='urgente'?'tb-urg':t.pri==='emergente'?'tb-emg':t.pri==='standby'?'tb-standby':t.pri==='andamento'?'tb-andamento':'tb-pri';
     const d=document.createElement('div');
     d.className='ti';
     d.style.setProperty('--ti-accent',ci.color);
@@ -1345,15 +1387,15 @@ function renderTasks(tasks){
     <div style="flex:1;min-width:0">
       <div class="ti-nm">${t.name}</div>
       <div class="ti-meta">
-        <span class="tbg" style="background:${ci.color}14;color:${ci.color};border-color:${ci.color}33">${t.area||ci.label}</span>
+        <span class="tbg" style="background:${ci.color}14;color:${ci.color};border-color:${ci.color}33">${ci.label}</span>
         <span class="tbg ${pc}">${t.pri}</span>
-        <span class="tbg ${sc}">${stLbl[t.status]||t.status}</span>
+        <span class="tbg" style="background:rgba(255,255,255,.04);color:var(--t2);border-color:var(--b0)">${t.co}</span>
         <span class="ti-dt">${t.dt}/26</span>
       </div>
     </div>`;
     g.appendChild(d);
   });
-  ct.textContent=`Exibindo ${tasks.length} de ${TASKS.length} tarefas do portfólio RSA Dashboard 2026`;
+  ct.textContent=`Exibindo ${tasks.length} amostras · portfólio RSA Dashboard 2026: 246 demandas no total`;
 }
 renderTasks(TASKS);
 
