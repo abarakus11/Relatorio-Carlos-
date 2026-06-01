@@ -11,10 +11,23 @@
       { name: 'Samara Gomes', href: 'samara.html' },
       { name: 'Giovana Cabral' },
     ],
-    marketing: [],
-    financeiro: [],
-    infraestrutura: [],
-    juridico: [],
+    marketing: [
+      { name: 'Luan Carlos' },
+      { name: 'Adrian Pontes' },
+      { name: 'Gabriel Viana' },
+    ],
+    financeiro: [
+      { name: 'Emilly Dantas' },
+      { name: 'Paulo Robson' },
+    ],
+    infraestrutura: [
+      { name: 'Jorge Buarque' },
+      { name: 'Hugo Legramandi' },
+    ],
+    juridico: [
+      { name: 'Carolina' },
+      { name: 'Rafaela Dupont' },
+    ],
   };
 
   const AREA_LABELS = {
