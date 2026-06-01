@@ -133,6 +133,30 @@ ul{list-style:none}
   transform:translateY(-1px);
 }
 .hdr-btn-equipe:active{transform:translateY(0)}
+.hdr-equipe-wrap{position:relative;display:inline-block}
+.hdr-equipe-wrap.open .hdr-btn-equipe{
+  border-color:rgba(0,212,255,.6);
+  background:linear-gradient(135deg,rgba(77,143,255,.38),rgba(0,212,255,.22));
+}
+.hdr-equipe-menu{
+  position:absolute;top:calc(100% + 8px);left:0;min-width:220px;
+  margin:0;padding:6px;list-style:none;z-index:20;
+  background:rgba(10,18,32,.97);border:1px solid rgba(77,143,255,.4);
+  border-radius:10px;
+  box-shadow:0 14px 40px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.05);
+  opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:opacity .22s ease,transform .22s ease,visibility .22s;
+  backdrop-filter:blur(14px);
+}
+.hdr-equipe-wrap.open .hdr-equipe-menu{
+  opacity:1;visibility:visible;transform:translateY(0);
+}
+.hdr-equipe-item{
+  padding:12px 16px;border-radius:8px;
+  font-size:14px;font-weight:500;color:var(--t0);
+  cursor:default;transition:background .15s ease;
+}
+.hdr-equipe-item:hover{background:rgba(77,143,255,.12)}
 
 /* ═══════════════════ SECTION TITLES ═══════════════════ */
 .sec{padding:72px 0 0;position:relative}
@@ -717,7 +741,12 @@ ul{list-style:none}
         <span class="badge">Relatório de Performance Anual</span>
         <h1>Carlos Eber <span>Santos</span></h1>
         <p>Tecnologia Sênior &nbsp;·&nbsp; Infraestrutura &amp; BPO</p>
-        <button type="button" class="hdr-btn-equipe">Equipe</button>
+        <div class="hdr-equipe-wrap" id="equipeWrap">
+          <button type="button" class="hdr-btn-equipe" id="btnEquipe" aria-expanded="false" aria-controls="equipeMenu">Equipe</button>
+          <ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Membros da equipe">
+            <li class="hdr-equipe-item" role="listitem">Giovane Oliveira</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -1361,6 +1390,23 @@ const obs=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 // re-observe after dynamic render
 setTimeout(()=>{document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))},100);
+
+/* dropdown Equipe */
+(function(){
+  const wrap=document.getElementById('equipeWrap');
+  const btn=document.getElementById('btnEquipe');
+  if(!wrap||!btn)return;
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    const open=wrap.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  document.addEventListener('click',()=>{
+    wrap.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+  });
+  document.getElementById('equipeMenu')?.addEventListener('click',e=>e.stopPropagation());
+})();
 </script>
 </body>
 </html>
