@@ -9,8 +9,10 @@ Site estático (HTML, CSS e JavaScript). Pronto para [GitHub](https://github.com
 ```
 relatorio-carlos/
 ├── index.html          # Página principal
+├── profile-photo.js    # Foto embutida (gerada por build-profile.js)
+├── carlos-eber-perfil.jpg
 ├── assets/
-│   └── carlos-eber-perfil.png
+│   └── carlos-eber-perfil.jpg
 ├── vercel.json         # Cache de assets na Vercel
 ├── .gitignore
 └── README.md
