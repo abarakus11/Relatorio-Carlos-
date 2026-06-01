@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Perfil — FIC Capital Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<meta name="theme-color" content="#05080f"/>
+<meta name="description" content="Perfil colaborador · FIC Capital Group"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg0:#05080f;--bg1:rgba(9,14,26,.92);--bg2:#0d1526;--bg3:#111d33;
+  --glass:linear-gradient(145deg,rgba(15,25,41,.94),rgba(10,18,32,.9));
+  --b0:rgba(255,255,255,.06);--b1:rgba(255,255,255,.11);
+  --t0:#f0f4ff;--t1:#9baac7;--t2:#5a6a85;
+  --blue:#4d8fff;--cyan:#00d4ff;--green:#10e8a0;--purple:#9d6fff;
+  --disp:'Bebas Neue',sans-serif;--body:'Outfit',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  --radius:18px;
+}
+html{scroll-behavior:smooth}
+body{
+  position:relative;min-height:100vh;
+  background:var(--bg0);color:var(--t0);font-family:var(--body);font-size:15px;line-height:1.65;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+.page-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.page-bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.page-bg-shade{position:fixed;inset:0;z-index:0;pointer-events:none;background:rgba(5,8,15,.74)}
+body>.hdr{position:relative;z-index:1000}
+body>section,body>footer{position:relative;z-index:1}
+ul{list-style:none}
+.wrap{max-width:1440px;margin:0 auto;padding:0 40px}
+@media(max-width:768px){.wrap{padding:0 16px}}
+
+.hdr{
+  position:relative;overflow:visible;background:#040711;
+  border-bottom:1px solid var(--b0);padding:52px 0 60px;
+}
+.hdr-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hdr-bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;pointer-events:none}
+.hdr-overlay{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(105deg,rgba(4,7,17,.88) 0%,rgba(8,20,41,.72) 45%,rgba(4,8,16,.85) 100%);
+}
+.hdr-mesh{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 20% 50%,rgba(77,143,255,.1) 0%,transparent 55%),
+    radial-gradient(circle at 80% 20%,rgba(0,212,255,.06) 0%,transparent 45%);
+}
+.hdr-inner{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:36px}
+.av-wrap{display:flex;align-items:center;gap:24px}
+.av{width:90px;height:90px;border-radius:50%;flex-shrink:0;position:relative;isolation:isolate}
+.av::before{
+  content:'';position:absolute;inset:0;border-radius:50%;z-index:0;
+  background:conic-gradient(from 0deg,var(--blue),var(--cyan),var(--green),var(--blue));
+  animation:avRingSpin 8s linear infinite;
+}
+@keyframes avRingSpin{to{transform:rotate(360deg)}}
+.av-in{
+  position:absolute;inset:3px;z-index:1;border-radius:50%;overflow:hidden;
+  background:#0d1526;border:2px solid rgba(255,255,255,.08);
+}
+.av-in img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.av-txt .badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--cyan);background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.22);
+  border-radius:8px;padding:5px 12px;margin-bottom:12px;
+}
+.av-txt .badge::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan);animation:statusPulse 2s ease-in-out infinite;
+}
+@keyframes statusPulse{0%,100%{opacity:1}50%{opacity:.35}}
+.av-txt h1{
+  font-family:var(--disp);font-size:clamp(2rem,4vw,3.2rem);
+  letter-spacing:.06em;color:#fff;line-height:1;margin-bottom:8px;
+}
+.av-txt h1 .hl{
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.av-txt p{font-size:14px;color:var(--t1);margin-bottom:16px}
+.hdr-btn-equipe{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--disp);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;
+  padding:10px 28px;border-radius:10px;cursor:pointer;
+  background:linear-gradient(135deg,rgba(77,143,255,.25),rgba(0,212,255,.12));
+  border:1px solid rgba(77,143,255,.45);
+  box-shadow:0 4px 20px rgba(77,143,255,.15),inset 0 1px 0 rgba(255,255,255,.08);
+  transition:border-color .2s,box-shadow .2s,transform .2s,background .2s;
+}
+.hdr-btn-equipe:hover{
+  border-color:rgba(0,212,255,.55);
+  background:linear-gradient(135deg,rgba(77,143,255,.38),rgba(0,212,255,.2));
+  transform:translateY(-1px);
+}
+.hdr-actions{display:flex;flex-wrap:wrap;gap:10px}
+.hdr-equipe-wrap{position:relative;display:inline-block}
+.hdr-equipe-wrap.open{z-index:10001}
+.hdr-equipe-wrap.open .hdr-btn-equipe{
+  border-color:rgba(0,212,255,.6);
+  background:linear-gradient(135deg,rgba(77,143,255,.38),rgba(0,212,255,.22));
+}
+.hdr-equipe-menu{
+  position:absolute;top:calc(100% + 8px);left:0;min-width:240px;margin:0;padding:6px;list-style:none;z-index:10002;
+  max-height:min(320px,70vh);overflow-y:auto;pointer-events:auto;
+  background:rgba(10,18,32,.97);border:1px solid rgba(77,143,255,.4);border-radius:10px;
+  box-shadow:0 14px 40px rgba(0,0,0,.55);opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:opacity .22s,transform .22s,visibility .22s;backdrop-filter:blur(14px);
+}
+.hdr-equipe-wrap.open .hdr-equipe-menu:not([hidden]){opacity:1;visibility:visible;transform:translateY(0)}
+.hdr-equipe-wrap .hdr-equipe-menu[hidden]{display:none}
+.hdr-equipe-item{padding:12px 16px;border-radius:8px;font-size:14px;font-weight:500;color:var(--t0)}
+.hdr-equipe-item:hover{background:rgba(77,143,255,.12)}
+.hdr-equipe-item a{color:inherit;text-decoration:none;display:block}
+.hdr-equipe-menu{color-scheme:dark}
+.hdr-equipe-menu button{
+  display:block;width:100%;margin:0;font-family:inherit;font-weight:500;font-size:14px;line-height:1.4;
+  text-align:left;cursor:pointer;background-color:transparent;border:0;color:var(--t1);
+  -webkit-appearance:none;appearance:none;
+}
+.hdr-area-trigger{padding:12px 16px;border-radius:8px}
+.hdr-areas-back{
+  padding:10px 16px 12px;font-size:13px;color:var(--t2);
+  margin-bottom:2px;border-bottom:1px solid var(--b0);border-radius:8px 8px 0 0;
+}
+.hdr-equipe-menu button:hover,.hdr-equipe-menu button:focus-visible{
+  background-color:rgba(77,143,255,.14);color:var(--t0);
+}
+.hdr-areas-people-hd{
+  padding:6px 16px 8px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cyan);font-weight:600;border-bottom:1px solid var(--b0);margin-bottom:4px;
+}
+#areasPeopleMenu .hdr-area-member a,#areasPeopleMenu .hdr-area-name,
+#equipeMenu .hdr-area-name{display:block;padding:12px 16px;border-radius:8px}
+
+.sec{padding:72px 0 0}
+.sec-hd{margin-bottom:36px}
+.sec-hd-inner{
+  padding-left:20px;border-left:2px solid rgba(77,143,255,.45);
+  background:linear-gradient(90deg,rgba(77,143,255,.06),transparent 55%);
+  padding-top:4px;padding-bottom:4px;border-radius:0 12px 12px 0;
+}
+.sec-hd h2{
+  font-family:var(--disp);font-size:clamp(1.35rem,2.4vw,1.95rem);
+  letter-spacing:.08em;color:#fff;margin-bottom:8px;
+}
+.sec-hd p{font-size:13px;color:var(--t1);max-width:62ch;line-height:1.65}
+
+.perfil-pendente{
+  background:var(--glass);border:1px solid var(--b0);border-radius:var(--radius);
+  padding:48px 40px;text-align:center;max-width:720px;margin:0 auto;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);backdrop-filter:blur(14px);
+}
+.perfil-pendente-ic{font-size:48px;margin-bottom:16px;opacity:.9}
+.perfil-pendente h3{
+  font-family:var(--disp);font-size:1.5rem;letter-spacing:.08em;color:var(--cyan);margin-bottom:12px;
+}
+.perfil-pendente p{font-size:15px;color:var(--t1);line-height:1.7;max-width:48ch;margin:0 auto 8px}
+.perfil-pendente small{font-size:12px;color:var(--t2)}
+
+.ftr{
+  background:linear-gradient(180deg,transparent,rgba(9,14,26,.95));
+  border-top:1px solid var(--b0);padding:48px 0 40px;margin-top:88px;
+}
+.ftr-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:28px}
+.ftr-logo{display:flex;align-items:center;gap:16px}
+.ftr-ic{
+  width:48px;height:48px;border-radius:50%;overflow:hidden;
+  border:2px solid rgba(77,143,255,.4);box-shadow:0 0 24px rgba(77,143,255,.2);
+}
+.ftr-ic img{width:100%;height:100%;object-fit:cover;display:block}
+.ftr-logo strong{display:block;font-weight:600;color:var(--t0);font-size:15px;margin-bottom:2px}
+.ftr-logo span{font-family:var(--mono);font-size:10px;color:var(--t2)}
+.ftr-c{text-align:center;max-width:360px}
+.ftr-c p{font-size:12px;color:var(--t1);line-height:1.75}
+.ftr-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.ftr-r span{font-size:11px;color:var(--t2)}
+
+body.page-comercial{
+  --bg0:#140c12;--bg1:rgba(28,16,24,.94);--bg2:#1f1218;--bg3:#2a1822;
+  --glass:linear-gradient(155deg,rgba(48,30,40,.94),rgba(32,18,28,.92));
+  --b0:rgba(255,228,238,.09);--b1:rgba(255,210,225,.15);
+  --t0:#fdf6f9;--t1:#d4b8c4;--t2:#9a7d8a;
+  --blue:#d4a5b8;--cyan:#e8b4cc;--green:#9ec9b0;--purple:#c4a8dc;
+  --blush:#f0d4e0;--pearl:#fdf6f9;
+  --disp:'Cormorant Garamond',Georgia,serif;
+}
+body.page-comercial .page-bg-shade{
+  background:linear-gradient(165deg,rgba(42,18,32,.5) 0%,rgba(24,12,20,.82) 50%,rgba(18,10,16,.9) 100%),rgba(80,36,56,.18);
+}
+body.page-comercial .hdr{background:linear-gradient(180deg,rgba(36,20,30,.75),rgba(24,12,20,.4));border-bottom-color:rgba(255,220,232,.1)}
+body.page-comercial .hdr-overlay{background:linear-gradient(115deg,rgba(36,18,28,.82) 0%,rgba(48,24,38,.65) 50%,rgba(28,14,22,.88) 100%)}
+body.page-comercial .hdr-mesh{
+  background-image:radial-gradient(circle at 18% 40%,rgba(212,165,184,.14) 0%,transparent 52%),radial-gradient(circle at 82% 18%,rgba(196,168,220,.1) 0%,transparent 48%);
+}
+body.page-comercial .av::before{background:conic-gradient(from 0deg,#e8b4cc,#d4a5b8,#c4a8dc,#f0d4e0,#e8b4cc);animation:avRingSpin 14s linear infinite}
+body.page-comercial .av-in{border-color:rgba(255,228,238,.2);background:#261820}
+body.page-comercial .av-txt .badge{color:var(--blush);background:rgba(240,180,200,.12);border-color:rgba(232,180,204,.35);letter-spacing:.12em}
+body.page-comercial .av-txt .badge::before{background:var(--blush);box-shadow:0 0 12px rgba(240,180,204,.65)}
+body.page-comercial .av-txt h1{font-weight:600;letter-spacing:.02em;text-transform:none;font-size:clamp(2.2rem,4.2vw,3.4rem)}
+body.page-comercial .av-txt h1 .hl{background:linear-gradient(120deg,#f5e6ee,#e8b4cc 45%,#d4a5b8);-webkit-background-clip:text;background-clip:text}
+body.page-comercial .hdr-btn-equipe{
+  font-family:var(--body);font-weight:600;font-size:.8rem;letter-spacing:.1em;border-radius:999px;
+  background:linear-gradient(135deg,rgba(212,165,184,.28),rgba(196,168,220,.14));border-color:rgba(232,180,204,.45);
+}
+body.page-comercial .hdr-btn-equipe:hover{border-color:rgba(245,220,232,.65);background:linear-gradient(135deg,rgba(232,180,204,.4),rgba(212,165,184,.22))}
+body.page-comercial .hdr-equipe-wrap.open .hdr-btn-equipe{border-color:rgba(245,220,232,.7);background:linear-gradient(135deg,rgba(232,180,204,.42),rgba(196,168,220,.2))}
+body.page-comercial .hdr-equipe-menu{background:rgba(36,22,30,.97);border-color:rgba(232,180,204,.35);border-radius:16px}
+body.page-comercial .hdr-equipe-item:hover{background:rgba(212,165,184,.14)}
+body.page-comercial .hdr-equipe-menu button{color:var(--t1)}
+body.page-comercial .hdr-equipe-menu button:hover,body.page-comercial .hdr-equipe-menu button:focus-visible{background-color:rgba(212,165,184,.16);color:var(--pearl)}
+body.page-comercial .sec-hd-inner{border-left-color:rgba(212,165,184,.55);background:linear-gradient(90deg,rgba(212,165,184,.08),transparent 60%)}
+body.page-comercial .sec-hd h2{font-family:var(--disp);font-weight:600;letter-spacing:.04em;text-transform:none}
+body.page-comercial .perfil-pendente{border-color:rgba(255,220,232,.12);background:var(--glass)}
+</style>
+</head>
+<body>
+
+<div class="page-bg" aria-hidden="true">
+  <img src="https://i.pinimg.com/originals/36/e4/d0/36e4d0b856694fc471344b644a1dd6e4.gif" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+</div>
+<div class="page-bg-shade" aria-hidden="true"></div>
+
+<header class="hdr">
+  <div class="hdr-bg" aria-hidden="true">
+    <img src="https://media1.tenor.com/images/a8a4aa014e13eafcc76b8dd0ff0ccc25/tenor.gif?itemid=12272656" alt="" width="1920" height="400" loading="eager" decoding="async">
+  </div>
+  <div class="hdr-overlay" aria-hidden="true"></div>
+  <div class="hdr-mesh" aria-hidden="true"></div>
+  <div class="wrap hdr-inner">
+    <div class="av-wrap">
+      <div class="av"><div class="av-in"><img data-profile="stub" src="" alt="" width="84" height="84" loading="eager" decoding="async"></div></div>
+      <div class="av-txt">
+        <span class="badge" id="profBadge">Perfil · FIC Capital Group</span>
+        <h1><span id="profH1First">—</span> <span class="hl" id="profH1Span"></span></h1>
+        <p id="profRole">— · FIC Capital Group</p>
+        <div class="hdr-actions">
+          <div class="hdr-equipe-wrap" id="equipeWrap">
+            <button type="button" class="hdr-btn-equipe" id="btnEquipe" aria-expanded="false" aria-controls="equipeMenu">Equipe</button>
+            <ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Equipe"></ul>
+          </div>
+          <div class="hdr-equipe-wrap" id="areasWrap">
+            <button type="button" class="hdr-btn-equipe" id="btnAreas" aria-expanded="false" aria-controls="areasMenu">Áreas</button>
+            <ul class="hdr-equipe-menu" id="areasMenu" role="list" aria-label="Áreas da empresa">
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="tecnologia">Tecnologia</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="comercial">Comercial</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="marketing">Marketing</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="financeiro">Financeiro</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="infraestrutura">Infraestrutura</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="juridico">Jurídico</button></li>
+            </ul>
+            <ul class="hdr-equipe-menu" id="areasPeopleMenu" role="list" aria-label="Membros da área" hidden>
+              <li role="listitem"><button type="button" class="hdr-areas-back">← Voltar</button></li>
+              <li class="hdr-areas-people-hd" id="areasPeopleHd" role="presentation"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="sec-hd-inner">
+        <h2>Relatório de Performance</h2>
+        <p>O dashboard completo será publicado assim que o relatório for recebido e processado</p>
+      </div>
+    </div>
+    <div class="perfil-pendente">
+      <div class="perfil-pendente-ic" aria-hidden="true">📊</div>
+      <h3>Em elaboração</h3>
+      <p>Esta página já está cadastrada com foto de perfil, área e equipe. Os indicadores, gráficos e atividades serão exibidos aqui automaticamente.</p>
+      <small>FIC Capital Group · Uso interno</small>
+    </div>
+  </div>
+</section>
+
+<footer class="ftr">
+  <div class="wrap ftr-in">
+    <div class="ftr-logo">
+      <div class="ftr-ic"><img data-profile="stub" src="" alt="" width="44" height="44" loading="lazy" decoding="async"></div>
+      <div><strong id="ftrName">—</strong><span id="ftrRole">FIC Capital Group</span></div>
+    </div>
+    <div class="ftr-c">
+      <p>Perfil colaborador<br>Dashboard executivo — aguardando relatório</p>
+    </div>
+    <div class="ftr-r">
+      <span id="ftrDate"></span>
+      <span>Documento confidencial</span>
+    </div>
+  </div>
+</footer>
+
+<script src="members-registry.js"></script>
+<script src="perfil-init.js"></script>
+<script src="areas-menu.js"></script>
+<script>
+(function(){
+  function initHdrDropdown(wrapId,btnId,menuId){
+    const wrap=document.getElementById(wrapId);
+    const btn=document.getElementById(btnId);
+    const menu=document.getElementById(menuId);
+    if(!wrap||!btn)return;
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      document.querySelectorAll('.hdr-equipe-wrap.open').forEach(w=>{
+        if(w!==wrap){
+          w.classList.remove('open');
+          const b=w.querySelector('.hdr-btn-equipe');
+          if(b)b.setAttribute('aria-expanded','false');
+        }
+      });
+      const open=wrap.classList.toggle('open');
+      btn.setAttribute('aria-expanded',open?'true':'false');
+    });
+    menu?.addEventListener('click',e=>e.stopPropagation());
+  }
+  initHdrDropdown('equipeWrap','btnEquipe','equipeMenu');
+  initHdrDropdown('areasWrap','btnAreas','areasMenu');
+  document.addEventListener('click',()=>{
+    document.querySelectorAll('.hdr-equipe-wrap.open').forEach(w=>{
+      w.classList.remove('open');
+      w.dispatchEvent(new CustomEvent('hdr-dropdown-close'));
+      const b=w.querySelector('.hdr-btn-equipe');
+      if(b)b.setAttribute('aria-expanded','false');
+    });
+    if(typeof window.resetAreasMenu==='function')window.resetAreasMenu();
+  });
+})();
+</script>
+</body>
+</html>
