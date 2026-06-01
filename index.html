@@ -115,7 +115,24 @@ ul{list-style:none}
   background:linear-gradient(90deg,var(--blue),var(--cyan));
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.av-txt p{font-size:14px;color:var(--t1);letter-spacing:.02em}
+.av-txt p{font-size:14px;color:var(--t1);letter-spacing:.02em;margin-bottom:16px}
+.hdr-btn-equipe{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--disp);font-size:.85rem;letter-spacing:.14em;
+  text-transform:uppercase;color:#fff;
+  padding:10px 28px;border-radius:10px;cursor:pointer;
+  background:linear-gradient(135deg,rgba(77,143,255,.25),rgba(0,212,255,.12));
+  border:1px solid rgba(77,143,255,.45);
+  box-shadow:0 4px 20px rgba(77,143,255,.15),inset 0 1px 0 rgba(255,255,255,.08);
+  transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease,background .2s ease;
+}
+.hdr-btn-equipe:hover{
+  border-color:rgba(0,212,255,.55);
+  background:linear-gradient(135deg,rgba(77,143,255,.38),rgba(0,212,255,.2));
+  box-shadow:0 8px 28px rgba(77,143,255,.28);
+  transform:translateY(-1px);
+}
+.hdr-btn-equipe:active{transform:translateY(0)}
 
 /* ═══════════════════ SECTION TITLES ═══════════════════ */
 .sec{padding:72px 0 0;position:relative}
@@ -700,6 +717,7 @@ ul{list-style:none}
         <span class="badge">Relatório de Performance Anual</span>
         <h1>Carlos Eber <span>Santos</span></h1>
         <p>Tecnologia Sênior &nbsp;·&nbsp; Infraestrutura &amp; BPO</p>
+        <button type="button" class="hdr-btn-equipe">Equipe</button>
       </div>
     </div>
   </div>
