@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Dashboard Executivo — Samara Gomes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<meta name="theme-color" content="#05080f"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<meta name="theme-color" content="#1f1218"/>
 <meta name="description" content="Dashboard executivo de performance — Samara Gomes · Abr–Jul 2026"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -747,6 +747,120 @@ ul{list-style:none}
 @media(prefers-reduced-motion:reduce){
   .page-bg img{opacity:.35}
 }
+
+/* ═══════════════════ TEMA — COMERCIAL FEMININO CORPORATIVO ═══════════════════ */
+body.page-comercial{
+  --bg0:#140c12;--bg1:rgba(28,16,24,.94);--bg2:#1f1218;--bg3:#2a1822;
+  --card:rgba(42,26,36,.9);--card2:rgba(48,30,40,.94);
+  --glass:linear-gradient(155deg,rgba(48,30,40,.94),rgba(32,18,28,.92));
+  --b0:rgba(255,228,238,.09);--b1:rgba(255,210,225,.15);--b2:rgba(255,200,218,.22);
+  --t0:#fdf6f9;--t1:#d4b8c4;--t2:#9a7d8a;
+  --blue:#d4a5b8;--cyan:#e8b4cc;--green:#9ec9b0;--purple:#c4a8dc;
+  --orange:#e8c0a8;--pink:#f0a8c4;--yellow:#e8d8b0;--red:#e8a0a8;
+  --rose:#d4a5b8;--blush:#f0d4e0;--mauve:#b898c8;--pearl:#fdf6f9;
+  --disp:'Cormorant Garamond',Georgia,serif;--body:'Outfit',sans-serif;
+  --radius:22px;--shadow:0 24px 56px rgba(20,8,16,.45);
+}
+body.page-comercial ::selection{background:rgba(212,165,184,.38);color:#fff}
+body.page-comercial .page-bg-shade{
+  background:
+    linear-gradient(165deg,rgba(42,18,32,.5) 0%,rgba(24,12,20,.82) 50%,rgba(18,10,16,.9) 100%),
+    rgba(80,36,56,.18);
+}
+body.page-comercial .hdr{
+  background:linear-gradient(180deg,rgba(36,20,30,.75),rgba(24,12,20,.4));
+  border-bottom-color:rgba(255,220,232,.1);
+}
+body.page-comercial .hdr-overlay{
+  background:linear-gradient(115deg,rgba(36,18,28,.82) 0%,rgba(48,24,38,.65) 50%,rgba(28,14,22,.88) 100%);
+}
+body.page-comercial .hdr-mesh{
+  background-image:
+    radial-gradient(circle at 18% 40%,rgba(212,165,184,.14) 0%,transparent 52%),
+    radial-gradient(circle at 82% 18%,rgba(196,168,220,.1) 0%,transparent 48%);
+}
+body.page-comercial .av::before{
+  background:conic-gradient(from 0deg,#e8b4cc,#d4a5b8,#c4a8dc,#f0d4e0,#e8b4cc);
+  animation:avRingSpin 14s linear infinite;
+}
+body.page-comercial .av-in{border-color:rgba(255,228,238,.2);background:#261820}
+body.page-comercial .av-txt .badge{
+  color:var(--blush);background:rgba(240,180,200,.12);
+  border-color:rgba(232,180,204,.35);font-weight:500;letter-spacing:.12em;
+}
+body.page-comercial .av-txt .badge::before{
+  background:var(--blush);box-shadow:0 0 12px rgba(240,180,204,.65);
+}
+body.page-comercial .av-txt h1{
+  font-weight:600;letter-spacing:.02em;text-transform:none;
+  font-size:clamp(2.2rem,4.2vw,3.4rem);
+}
+body.page-comercial .av-txt h1 span{
+  background:linear-gradient(120deg,#f5e6ee,#e8b4cc 45%,#d4a5b8);
+  -webkit-background-clip:text;background-clip:text;
+}
+body.page-comercial .av-txt p{color:var(--t1);font-weight:400}
+body.page-comercial .hdr-btn-equipe{
+  font-family:var(--body);font-weight:600;font-size:.8rem;letter-spacing:.1em;
+  border-radius:999px;
+  background:linear-gradient(135deg,rgba(212,165,184,.28),rgba(196,168,220,.14));
+  border-color:rgba(232,180,204,.45);
+  box-shadow:0 6px 24px rgba(80,32,56,.2),inset 0 1px 0 rgba(255,255,255,.1);
+}
+body.page-comercial .hdr-btn-equipe:hover{
+  border-color:rgba(245,220,232,.65);
+  background:linear-gradient(135deg,rgba(232,180,204,.4),rgba(212,165,184,.22));
+  box-shadow:0 10px 32px rgba(120,48,72,.28);
+}
+body.page-comercial .hdr-equipe-wrap.open .hdr-btn-equipe{
+  border-color:rgba(245,220,232,.7);
+  background:linear-gradient(135deg,rgba(232,180,204,.42),rgba(196,168,220,.2));
+}
+body.page-comercial .hdr-equipe-menu{
+  background:rgba(36,22,30,.97);border-color:rgba(232,180,204,.35);
+  border-radius:16px;box-shadow:0 20px 48px rgba(24,8,18,.5);
+}
+body.page-comercial .hdr-equipe-item:hover{background:rgba(212,165,184,.14)}
+body.page-comercial .hdr-areas-people-hd{color:var(--blush)}
+body.page-comercial a{color:#e8b4cc}
+body.page-comercial .sec-hd-inner{
+  border-left-color:rgba(212,165,184,.55);
+  background:linear-gradient(90deg,rgba(212,165,184,.08),transparent 60%);
+}
+body.page-comercial .sec-hd h2{
+  font-family:var(--disp);font-weight:600;letter-spacing:.04em;text-transform:none;
+}
+body.page-comercial .kpi,
+body.page-comercial .crd,
+body.page-comercial .ti,
+body.page-comercial .ach,
+body.page-comercial .an{
+  border-color:rgba(255,220,232,.08);
+  box-shadow:0 12px 40px rgba(16,6,12,.35),inset 0 1px 0 rgba(255,255,255,.04);
+}
+body.page-comercial .kpi:hover,
+body.page-comercial .crd:hover{border-color:rgba(232,180,204,.22)}
+body.page-comercial .kpi::before{
+  background:linear-gradient(105deg,transparent 38%,rgba(255,240,246,.07) 50%,transparent 62%);
+}
+body.page-comercial .sec-intel::before{
+  background-image:
+    linear-gradient(rgba(212,165,184,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,165,184,.05) 1px,transparent 1px);
+}
+body.page-comercial .an::before{
+  background:linear-gradient(90deg,transparent,var(--an-accent),transparent);
+}
+body.page-comercial .tl::before{
+  background:linear-gradient(180deg,rgba(212,165,184,.5),rgba(196,168,220,.25),transparent);
+}
+body.page-comercial .tl-dot{box-shadow:0 0 14px currentColor}
+body.page-comercial .ftr{
+  background:linear-gradient(180deg,transparent,rgba(28,14,22,.96));
+  border-top-color:rgba(255,220,232,.08);
+}
+body.page-comercial .ftr-ic{border-color:rgba(212,165,184,.45);box-shadow:0 0 28px rgba(212,165,184,.2)}
+body.page-comercial ::-webkit-scrollbar-thumb{background:#3d2834}
 </style>
 </head>
 <body class="page-comercial">
@@ -991,15 +1105,18 @@ KPIS.forEach((k,i) => {
 /* ═══════════════════════════════════════════════
    CHART DEFAULTS
 ═══════════════════════════════════════════════ */
-Chart.defaults.color='#9baac7';
+Chart.defaults.color='#d4b8c4';
 Chart.defaults.font.family="'Outfit',sans-serif";
-Chart.defaults.plugins.tooltip.backgroundColor='#0f1929';
-Chart.defaults.plugins.tooltip.borderColor='rgba(255,255,255,.12)';
+Chart.defaults.plugins.tooltip.backgroundColor='#2a1822';
+Chart.defaults.plugins.tooltip.borderColor='rgba(232,180,204,.25)';
 Chart.defaults.plugins.tooltip.borderWidth=1;
 Chart.defaults.plugins.tooltip.padding=12;
-Chart.defaults.plugins.tooltip.cornerRadius=8;
-Chart.defaults.plugins.tooltip.titleColor='#f0f4ff';
-Chart.defaults.plugins.tooltip.bodyColor='#9baac7';
+Chart.defaults.plugins.tooltip.cornerRadius=12;
+Chart.defaults.plugins.tooltip.titleColor='#fdf6f9';
+Chart.defaults.plugins.tooltip.bodyColor='#d4b8c4';
+const CHART_ROSE='#d4a5b8';
+const CHART_BLUSH='rgba(212,165,184,.35)';
+const CHART_BORDER='#2a1822';
 
 const lineBase=[...MON_D],catBase=[...CAT_D],topBase=[...TOP_D];
 
@@ -1008,10 +1125,10 @@ const chartLine=new Chart(document.getElementById('cLine'),{
   type:'line',
   data:{labels:MON_L,datasets:[{
     label:'Tarefas',data:[...lineBase],
-    borderColor:'#4d8fff',
-    backgroundColor:(ctx)=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,280);g.addColorStop(0,'rgba(77,143,255,.3)');g.addColorStop(1,'rgba(77,143,255,0)');return g},
+    borderColor:CHART_ROSE,
+    backgroundColor:(ctx)=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,280);g.addColorStop(0,'rgba(212,165,184,.32)');g.addColorStop(1,'rgba(212,165,184,0)');return g},
     fill:true,tension:.45,
-    pointBackgroundColor:'#4d8fff',pointBorderColor:'#fff',pointBorderWidth:2,
+    pointBackgroundColor:CHART_ROSE,pointBorderColor:'#fff',pointBorderWidth:2,
     pointRadius:5,pointHoverRadius:8,
   }]},
   options:{responsive:true,animation:false,interaction:{intersect:false,mode:'index'},
@@ -1022,7 +1139,7 @@ const chartLine=new Chart(document.getElementById('cLine'),{
 /* ── Donut ── */
 const chartDonut=new Chart(document.getElementById('cDonut'),{
   type:'doughnut',
-  data:{labels:CAT_L,datasets:[{data:[...catBase],backgroundColor:CAT_C,borderColor:'#0f1929',borderWidth:3,hoverOffset:8}]},
+  data:{labels:CAT_L,datasets:[{data:[...catBase],backgroundColor:CAT_C,borderColor:CHART_BORDER,borderWidth:3,hoverOffset:8}]},
   options:{responsive:true,animation:false,cutout:'60%',rotation:0,
     plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:10,font:{size:11}}}}}
 });
@@ -1032,7 +1149,7 @@ const chartBar=new Chart(document.getElementById('cBar'),{
   type:'bar',
   data:{labels:MON_L,datasets:[{
     label:'Tarefas',data:[...lineBase],
-    backgroundColor:lineBase.map((_,i)=>i===2?'#4d8fff':'rgba(77,143,255,.3)'),
+    backgroundColor:lineBase.map((_,i)=>i===2?CHART_ROSE:CHART_BLUSH),
     borderRadius:6,
   }]},
   options:{responsive:true,animation:false,plugins:{legend:{display:false}},
@@ -1044,7 +1161,7 @@ const chartTop=new Chart(document.getElementById('cTop'),{
   type:'bar',
   data:{labels:TOP_L,datasets:[{
     label:'Ocorrências',data:[...topBase],
-    backgroundColor:['#4d8fff','#10e8a0','#9d6fff','#ff8f3f','#00d4ff','#ff5fa0','#ffe066','#ff5a5a'],
+    backgroundColor:['#d4a5b8','#9ec9b0','#c4a8dc','#e8c0a8','#e8b4cc','#f0a8c4','#e8d8b0','#e8a0a8'],
     borderRadius:5,
   }]},
   options:{indexAxis:'y',responsive:true,animation:false,plugins:{legend:{display:false}},
