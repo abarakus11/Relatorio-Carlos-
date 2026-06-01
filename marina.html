@@ -589,6 +589,45 @@ ul{list-style:none}
 }
 .ach-ds{font-size:12px;color:var(--t1);line-height:1.6;border-top:1px solid var(--b0);padding-top:12px}
 
+/* ═══════════════════ MEMORIAL ANIMA ═══════════════════ */
+.sec-memorial{background:linear-gradient(180deg,transparent,rgba(255,176,32,.05),transparent)}
+.memorial-intro{
+  background:var(--glass);border:1px solid rgba(255,176,32,.22);border-radius:var(--radius);
+  padding:28px 26px;margin-bottom:24px;
+}
+.memorial-intro p{font-size:14px;color:var(--t1);line-height:1.7}
+.memorial-hl{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:22px 0 8px}
+.memorial-hl-card{
+  background:rgba(15,25,41,.9);border:1px solid var(--b0);border-radius:14px;padding:18px 16px;
+  border-top:2px solid #ffb020;
+}
+.memorial-hl-card .mh-l{font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:.08em}
+.memorial-hl-card .mh-v{font-family:var(--disp);font-size:1.85rem;color:#ffb020;letter-spacing:.04em;line-height:1.1;margin:6px 0}
+.memorial-hl-card .mh-s{font-size:12px;color:var(--t1)}
+.memorial-dl{margin:8px 0 28px}
+.memorial-dl a{
+  display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;
+  color:#00d4ff;border:1px solid rgba(0,212,255,.35);border-radius:999px;padding:10px 18px;
+  background:rgba(0,212,255,.08);text-decoration:none;transition:background .2s,border-color .2s;
+}
+.memorial-dl a:hover{background:rgba(0,212,255,.16);border-color:rgba(0,212,255,.55)}
+.memorial-sections{display:flex;flex-direction:column;gap:12px}
+.memorial-sec{
+  background:var(--card);border:1px solid var(--b0);border-radius:14px;overflow:hidden;
+}
+.memorial-sec summary{
+  cursor:pointer;list-style:none;padding:18px 20px;font-family:var(--disp);
+  letter-spacing:.06em;font-size:1rem;color:#ffe8b0;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.memorial-sec summary::-webkit-details-marker{display:none}
+.memorial-sec summary::after{content:'+';color:#ffb020;font-size:1.2rem;font-family:var(--body)}
+.memorial-sec[open] summary::after{content:'−'}
+.memorial-sec[open] summary{border-bottom:1px solid var(--b0);background:rgba(255,176,32,.06)}
+.memorial-body{padding:18px 20px 22px;font-size:14px;color:var(--t1);line-height:1.65}
+.memorial-body p{margin-bottom:10px}
+.memorial-body .an-list{margin-top:8px}
+
 /* ═══════════════════ ANALYSIS — INTEL ═══════════════════ */
 .sec-intel{position:relative}
 .sec-intel::before{
@@ -899,6 +938,22 @@ ul{list-style:none}
   </div>
 </section>
 
+<!-- MEMORIAL ANIMA -->
+<section class="sec sec-memorial" id="sec-memorial">
+  <div class="wrap">
+    <div class="sec-hd reveal">
+      <div class="sec-hd-inner">
+        <h2>Memorial Descritivo — Banheiros ANIMA</h2>
+        <p>Documento técnico integrado ao relatório · MEMORIAL DESCRITIVO BANHEIROS ANIMA.docx</p>
+      </div>
+    </div>
+    <div class="memorial-intro reveal" id="memorialIntro"></div>
+    <div class="memorial-hl reveal" id="memorialHl"></div>
+    <p class="memorial-dl reveal" id="memorialDl"></p>
+    <div class="memorial-sections reveal" id="memorialSections"></div>
+  </div>
+</section>
+
 <!-- ANALYSIS -->
 <section class="sec sec-intel">
   <div class="wrap">
@@ -918,7 +973,7 @@ ul{list-style:none}
     <div class="sec-hd reveal">
       <div class="sec-hd-inner">
         <h2>Registro de Atividades</h2>
-        <p>Detalhamento de tarefas — infraestrutura (22 no semestre)</p>
+        <p>Detalhamento de tarefas — infraestrutura (23 no semestre)</p>
       </div>
     </div>
     <div class="task-grid" id="taskGrid"></div>
@@ -944,6 +999,7 @@ ul{list-style:none}
 </footer>
 
 <script src="marina-data.js"></script>
+<script src="memorial-anima-data.js"></script>
 <script src="profile-photo-marina.js"></script>
 <script>
 'use strict';
@@ -1235,6 +1291,40 @@ ANALYSIS.forEach(a=>{
     <div class="an-bd">${a.body}</div>
   </article>`;
 });
+
+/* ═══════════════════════════════════════════════
+   RENDER MEMORIAL ANIMA
+═══════════════════════════════════════════════ */
+(function renderMemorial(){
+  const M=window.MEMORIAL_ANIMA;
+  if(!M)return;
+  const intro=document.getElementById('memorialIntro');
+  const hl=document.getElementById('memorialHl');
+  const dl=document.getElementById('memorialDl');
+  const sec=document.getElementById('memorialSections');
+  if(intro){
+    intro.innerHTML=`<h3 style="font-family:var(--disp);font-size:1.35rem;letter-spacing:.06em;color:#fff;margin-bottom:12px">${M.title}</h3>
+      <p style="color:#ffb020;font-size:13px;margin-bottom:14px">${M.subtitle}</p>${M.intro}`;
+  }
+  if(hl&&M.highlights){
+    hl.innerHTML=M.highlights.map(h=>`
+      <div class="memorial-hl-card">
+        <div class="mh-l">${h.label}</div>
+        <div class="mh-v">${h.val}</div>
+        <div class="mh-s">${h.sub}</div>
+      </div>`).join('');
+  }
+  if(dl&&M.downloadHref){
+    dl.innerHTML=`<a href="${M.downloadHref}" download>Baixar memorial completo (.docx)</a>`;
+  }
+  if(sec&&M.sections){
+    sec.innerHTML=M.sections.map(s=>`
+      <details class="memorial-sec">
+        <summary>${s.title}</summary>
+        <div class="memorial-body">${s.body}</div>
+      </details>`).join('');
+  }
+})();
 
 /* ═══════════════════════════════════════════════
    RENDER TASKS
