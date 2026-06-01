@@ -25,6 +25,12 @@
       img.src = 'assets/juridico-bg.png';
     });
   }
+  if (m.area === 'infraestrutura') {
+    document.body.classList.add('page-infraestrutura');
+    document.querySelectorAll('.page-bg img, .hdr-bg img').forEach((img) => {
+      img.src = 'assets/infraestrutura-bg.png';
+    });
+  }
 
   const badge = document.getElementById('profBadge');
   const h1Span = document.getElementById('profH1Span');
