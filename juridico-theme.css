@@ -1,0 +1,111 @@
+/* Tema Jurídico — fundo assets/juridico-bg.png */
+body.page-juridico .page-bg img,
+body.page-juridico .hdr-bg img {
+  object-position: 72% center;
+}
+
+body.page-juridico .page-bg-shade {
+  background:
+    linear-gradient(105deg, rgba(8, 12, 22, 0.88) 0%, rgba(12, 16, 28, 0.72) 42%, rgba(18, 20, 32, 0.45) 100%),
+    rgba(40, 28, 18, 0.06);
+}
+
+body.page-juridico .hdr {
+  background: linear-gradient(180deg, rgba(16, 18, 28, 0.82), rgba(12, 14, 24, 0.45));
+  border-bottom-color: rgba(255, 143, 63, 0.18);
+}
+
+body.page-juridico .hdr-overlay {
+  background: linear-gradient(
+    105deg,
+    rgba(10, 12, 24, 0.92) 0%,
+    rgba(18, 20, 34, 0.7) 50%,
+    rgba(24, 22, 30, 0.55) 100%
+  );
+}
+
+body.page-juridico .hdr-mesh {
+  background-image:
+    radial-gradient(circle at 18% 40%, rgba(255, 143, 63, 0.12) 0%, transparent 52%),
+    radial-gradient(circle at 85% 30%, rgba(255, 224, 102, 0.08) 0%, transparent 48%);
+}
+
+body.page-juridico .av::before {
+  background: conic-gradient(from 0deg, #ff8f3f, #ffe066, #e8c0a8, #ff8f3f);
+}
+
+body.page-juridico .av-txt .badge {
+  color: #ffe8c8;
+  background: rgba(255, 143, 63, 0.12);
+  border-color: rgba(255, 180, 100, 0.32);
+}
+
+body.page-juridico .av-txt .badge::before {
+  background: #ff8f3f;
+  box-shadow: 0 0 12px rgba(255, 143, 63, 0.55);
+}
+
+body.page-juridico .av-txt h1 span,
+body.page-juridico .av-txt h1 .hl {
+  background: linear-gradient(120deg, #fff5e8, #ffe066 45%, #ff8f3f);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+body.page-juridico .hdr-btn-equipe {
+  background: linear-gradient(135deg, rgba(255, 143, 63, 0.22), rgba(255, 224, 102, 0.12));
+  border-color: rgba(255, 180, 100, 0.4);
+  box-shadow: 0 6px 24px rgba(60, 32, 8, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body.page-juridico .hdr-btn-equipe:hover {
+  border-color: rgba(255, 232, 200, 0.55);
+  background: linear-gradient(135deg, rgba(255, 143, 63, 0.34), rgba(255, 224, 102, 0.2));
+}
+
+body.page-juridico .hdr-equipe-wrap.open .hdr-btn-equipe {
+  border-color: rgba(255, 232, 200, 0.65);
+  background: linear-gradient(135deg, rgba(255, 143, 63, 0.38), rgba(255, 224, 102, 0.22));
+}
+
+body.page-juridico .hdr-equipe-menu {
+  background: rgba(18, 16, 24, 0.97);
+  border-color: rgba(255, 180, 100, 0.28);
+}
+
+body.page-juridico .hdr-equipe-item:hover {
+  background: rgba(255, 143, 63, 0.12);
+}
+
+body.page-juridico .hdr-equipe-menu button:hover,
+body.page-juridico .hdr-equipe-menu button:focus-visible {
+  background-color: rgba(255, 143, 63, 0.14);
+  color: #fff5e8;
+}
+
+body.page-juridico .hdr-areas-people-hd {
+  color: #ffe066;
+}
+
+body.page-juridico .sec-hd-inner {
+  border-left-color: rgba(255, 143, 63, 0.5);
+  background: linear-gradient(90deg, rgba(255, 143, 63, 0.1), transparent 60%);
+}
+
+body.page-juridico .perfil-pendente {
+  border-color: rgba(255, 180, 100, 0.15);
+}
+
+body.page-juridico .ftr {
+  background: linear-gradient(180deg, transparent, rgba(12, 14, 24, 0.96));
+  border-top-color: rgba(255, 143, 63, 0.12);
+}
+
+body.page-juridico .ftr-ic {
+  border-color: rgba(255, 143, 63, 0.42);
+  box-shadow: 0 0 24px rgba(255, 143, 63, 0.18);
+}
+
+body.page-juridico ::-webkit-scrollbar-thumb {
+  background: #3d3428;
+}
