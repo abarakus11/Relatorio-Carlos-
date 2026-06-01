@@ -154,9 +154,10 @@ ul{list-style:none}
   transition:opacity .22s ease,transform .22s ease,visibility .22s;
   backdrop-filter:blur(14px);
 }
-.hdr-equipe-wrap.open .hdr-equipe-menu{
+.hdr-equipe-wrap.open .hdr-equipe-menu:not([hidden]){
   opacity:1;visibility:visible;transform:translateY(0);
 }
+.hdr-equipe-wrap .hdr-equipe-menu[hidden]{display:none}
 .hdr-equipe-item{
   padding:12px 16px;border-radius:8px;
   font-size:14px;font-weight:500;color:var(--t0);
@@ -164,6 +165,19 @@ ul{list-style:none}
 }
 .hdr-equipe-item:hover{background:rgba(77,143,255,.12)}
 .hdr-equipe-item a{color:inherit;text-decoration:none;display:block}
+.hdr-area-trigger{
+  width:100%;text-align:left;background:none;border:none;font:inherit;
+  cursor:pointer;color:inherit;font-weight:500;
+}
+.hdr-areas-people-hd{
+  padding:6px 16px 8px;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--cyan);font-weight:600;
+  border-bottom:1px solid var(--b0);margin-bottom:4px;
+}
+.hdr-areas-empty{
+  padding:12px 16px;font-size:13px;color:var(--t2);line-height:1.5;
+}
+#areasPeopleMenu .hdr-area-member a{display:block;padding:12px 16px;border-radius:8px}
 
 /* ═══════════════════ SECTION TITLES ═══════════════════ */
 .sec{padding:72px 0 0;position:relative}
@@ -758,12 +772,16 @@ ul{list-style:none}
           <div class="hdr-equipe-wrap" id="areasWrap">
             <button type="button" class="hdr-btn-equipe" id="btnAreas" aria-expanded="false" aria-controls="areasMenu">Áreas</button>
             <ul class="hdr-equipe-menu" id="areasMenu" role="list" aria-label="Áreas da empresa">
-              <li class="hdr-equipe-item" role="listitem">Tecnologia</li>
-              <li class="hdr-equipe-item" role="listitem">Comercial</li>
-              <li class="hdr-equipe-item" role="listitem">Marketing</li>
-              <li class="hdr-equipe-item" role="listitem">Financeiro</li>
-              <li class="hdr-equipe-item" role="listitem">Infraestrutura</li>
-              <li class="hdr-equipe-item" role="listitem">Jurídico</li>
+              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="tecnologia">Tecnologia</button></li>
+              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="comercial">Comercial</button></li>
+              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="marketing">Marketing</button></li>
+              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="financeiro">Financeiro</button></li>
+              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="infraestrutura">Infraestrutura</button></li>
+              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="juridico">Jurídico</button></li>
+            </ul>
+            <ul class="hdr-equipe-menu" id="areasPeopleMenu" role="list" aria-label="Membros da área" hidden>
+              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-areas-back">← Voltar</button></li>
+              <li class="hdr-areas-people-hd" id="areasPeopleHd" role="presentation"></li>
             </ul>
           </div>
         </div>
@@ -1437,11 +1455,14 @@ setTimeout(()=>{document.querySelectorAll('.reveal').forEach(el=>obs.observe(el)
   document.addEventListener('click',()=>{
     document.querySelectorAll('.hdr-equipe-wrap.open').forEach(w=>{
       w.classList.remove('open');
+      w.dispatchEvent(new CustomEvent('hdr-dropdown-close'));
       const b=w.querySelector('.hdr-btn-equipe');
       if(b)b.setAttribute('aria-expanded','false');
     });
+    if(typeof window.resetAreasMenu==='function')window.resetAreasMenu();
   });
 })();
 </script>
+<script src="areas-menu.js"></script>
 </body>
 </html>
