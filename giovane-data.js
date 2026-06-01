@@ -17,7 +17,7 @@ window.GIOVANE_REPORT = {
     { ic: '💻', label: 'Notebooks / PCs', val: '7', sub: 'Suporte e configuração', color: '#ff5fa0' },
     { ic: '✔️', label: 'Conclusão', val: '100%', sub: 'Taxa de tarefas concluídas', color: '#10e8a0' },
   ],
-  MON_L: ['Nov/24', 'Mai/25', 'Jun/25'],
+  MON_L: ['Mai/26', 'Mai/25', 'Jun/25'],
   MON_D: [1, 1, 40],
   CAT_L: ['Helpdesk geral', 'Manutenção', 'Infraestrutura', 'Apresentações', 'Outros'],
   CAT_D: [28, 7, 4, 1, 2],
@@ -37,7 +37,7 @@ window.GIOVANE_REPORT = {
     { nm: '🛠️ Gestão de Incidentes', pct: 91, c: '#ff8f3f' },
   ],
   TL: [
-    { dt: 'Nov/2024', co: 'FIC CAPITAL', cc: '#4d8fff', ttl: 'Início na FIC Capital', desc: 'Integração ao departamento de TI e início do suporte técnico.' },
+    { dt: 'Mai/2026', co: 'FIC CAPITAL', cc: '#4d8fff', ttl: 'Início na FIC Capital', desc: 'Integração ao departamento de TI e início do suporte técnico.' },
     { dt: 'Mai/2025', co: 'FIC CAPITAL', cc: '#9d6fff', ttl: 'Apresentação Radar Benefits', desc: 'Demonstração corporativa do produto Radar Benefits para stakeholders.' },
     { dt: 'Jun/2025 — Sem. 1', co: 'FIC CAPITAL', cc: '#10e8a0', ttl: 'Atendimentos de alta prioridade', desc: 'Monitor Luca, impressora Samara Souza, monitor Caroline e validação de vagas.' },
     { dt: '12–13/Jun', co: 'FIC CAPITAL', cc: '#ff8f3f', ttl: 'Formatação e configuração', desc: 'Helpdesk Larry, formatação de máquinas e HelpDesk Jorge Salsa.' },
@@ -60,7 +60,7 @@ window.GIOVANE_REPORT = {
     },
     {
       feat: false, wide: false, icon: 'user', accent: '#00d4ff', ttl: 'Perfil Profissional',
-      body: '<p>Profissional de suporte técnico com atuação em helpdesk corporativo, manutenção de equipamentos e atendimento a usuários. Integrado à FIC desde Nov/2024, com entregas consistentes em hardware, software e comunicação corporativa.</p>',
+      body: '<p>Profissional de suporte técnico com atuação em helpdesk corporativo, manutenção de equipamentos e atendimento a usuários. Integrado à FIC desde <strong>Mai/2026</strong>, com entregas consistentes em hardware, software e comunicação corporativa.</p>',
     },
     {
       feat: false, wide: false, icon: 'scope', accent: '#9d6fff', ttl: 'Principais Áreas',
@@ -80,7 +80,7 @@ window.GIOVANE_REPORT = {
     },
   ],
   TASKS: [
-    { name: 'Integração ao departamento de TI — início FIC', cat: 'outros', mon: 'nov24', pri: 'prioridade', co: 'FIC CAPITAL', dt: '12/11' },
+    { name: 'Integração ao departamento de TI — início FIC', cat: 'outros', mon: 'mai26', pri: 'prioridade', co: 'FIC CAPITAL', dt: '01/05' },
     { name: 'Monitor – Luca', cat: 'helpdesk', mon: 'jun25', pri: 'prioridade', co: 'FIC CAPITAL', dt: '02/06' },
     { name: 'Impressora – Samara Souza', cat: 'helpdesk', mon: 'jun25', pri: 'prioridade', co: 'FIC CAPITAL', dt: '03/06' },
     { name: 'Monitor – Caroline', cat: 'helpdesk', mon: 'jun25', pri: 'prioridade', co: 'FIC CAPITAL', dt: '03/06' },
