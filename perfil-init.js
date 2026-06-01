@@ -13,6 +13,12 @@
   if (meta) meta.content = m.name + ' · ' + m.role + ' · FIC Capital Group';
 
   if (m.area === 'comercial') document.body.classList.add('page-comercial');
+  if (m.area === 'marketing') {
+    document.body.classList.add('page-marketing');
+    document.querySelectorAll('.page-bg img, .hdr-bg img').forEach((img) => {
+      img.src = 'assets/marketing-bg.png';
+    });
+  }
 
   const badge = document.getElementById('profBadge');
   const h1Span = document.getElementById('profH1Span');

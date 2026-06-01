@@ -18,7 +18,8 @@
       '.hdr-linkedin:focus-visible{outline:2px solid rgba(0,212,255,.55);outline-offset:3px}' +
       'body.page-comercial .hdr-linkedin{color:rgba(245,230,238,.85)}' +
       'body.page-comercial .hdr-linkedin:hover{background:rgba(10,102,194,.45)}' +
-      'body.page-emilly .hdr-linkedin{color:rgba(184,240,255,.9)}';
+      'body.page-emilly .hdr-linkedin{color:rgba(184,240,255,.9)}' +
+      'body.page-marketing .hdr-linkedin{color:rgba(184,240,255,.85)}';
     document.head.appendChild(style);
   }
 
