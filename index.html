@@ -133,6 +133,7 @@ ul{list-style:none}
   transform:translateY(-1px);
 }
 .hdr-btn-equipe:active{transform:translateY(0)}
+.hdr-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
 .hdr-equipe-wrap{position:relative;display:inline-block}
 .hdr-equipe-wrap.open .hdr-btn-equipe{
   border-color:rgba(0,212,255,.6);
@@ -742,11 +743,26 @@ ul{list-style:none}
         <span class="badge">Relatório de Performance Anual</span>
         <h1>Carlos Eber <span>Santos</span></h1>
         <p>Tecnologia Sênior &nbsp;·&nbsp; Infraestrutura &amp; BPO</p>
-        <div class="hdr-equipe-wrap" id="equipeWrap">
-          <button type="button" class="hdr-btn-equipe" id="btnEquipe" aria-expanded="false" aria-controls="equipeMenu">Equipe</button>
-          <ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Membros da equipe">
-            <li class="hdr-equipe-item" role="listitem"><a href="giovane.html">Giovane Oliveira</a></li>
-          </ul>
+        <div class="hdr-actions">
+          <div class="hdr-equipe-wrap" id="equipeWrap">
+            <button type="button" class="hdr-btn-equipe" id="btnEquipe" aria-expanded="false" aria-controls="equipeMenu">Equipe</button>
+            <ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Membros da equipe">
+              <li class="hdr-equipe-item" role="listitem"><a href="giovane.html">Giovane Oliveira</a></li>
+            </ul>
+          </div>
+          <div class="hdr-equipe-wrap" id="areasWrap">
+            <button type="button" class="hdr-btn-equipe" id="btnAreas" aria-expanded="false" aria-controls="areasMenu">Áreas</button>
+            <ul class="hdr-equipe-menu" id="areasMenu" role="list" aria-label="Áreas de atuação">
+              <li class="hdr-equipe-item" role="listitem">Infraestrutura</li>
+              <li class="hdr-equipe-item" role="listitem">Sistemas</li>
+              <li class="hdr-equipe-item" role="listitem">Suporte</li>
+              <li class="hdr-equipe-item" role="listitem">Gestão</li>
+              <li class="hdr-equipe-item" role="listitem">Segurança</li>
+              <li class="hdr-equipe-item" role="listitem">Redes</li>
+              <li class="hdr-equipe-item" role="listitem">Automação</li>
+              <li class="hdr-equipe-item" role="listitem">BPO</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -799,7 +815,7 @@ ul{list-style:none}
 </section>
 
 <!-- SKILLS -->
-<section class="sec">
+<section class="sec" id="sec-areas">
   <div class="wrap">
     <div class="sec-hd reveal">
       <div class="sec-hd-inner">
@@ -1392,21 +1408,36 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 // re-observe after dynamic render
 setTimeout(()=>{document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))},100);
 
-/* dropdown Equipe */
+/* dropdowns cabeçalho (Equipe / Áreas) */
 (function(){
-  const wrap=document.getElementById('equipeWrap');
-  const btn=document.getElementById('btnEquipe');
-  if(!wrap||!btn)return;
-  btn.addEventListener('click',e=>{
-    e.stopPropagation();
-    const open=wrap.classList.toggle('open');
-    btn.setAttribute('aria-expanded',open?'true':'false');
-  });
+  function initHdrDropdown(wrapId,btnId,menuId){
+    const wrap=document.getElementById(wrapId);
+    const btn=document.getElementById(btnId);
+    const menu=document.getElementById(menuId);
+    if(!wrap||!btn)return;
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      document.querySelectorAll('.hdr-equipe-wrap.open').forEach(w=>{
+        if(w!==wrap){
+          w.classList.remove('open');
+          const b=w.querySelector('.hdr-btn-equipe');
+          if(b)b.setAttribute('aria-expanded','false');
+        }
+      });
+      const open=wrap.classList.toggle('open');
+      btn.setAttribute('aria-expanded',open?'true':'false');
+    });
+    menu?.addEventListener('click',e=>e.stopPropagation());
+  }
+  initHdrDropdown('equipeWrap','btnEquipe','equipeMenu');
+  initHdrDropdown('areasWrap','btnAreas','areasMenu');
   document.addEventListener('click',()=>{
-    wrap.classList.remove('open');
-    btn.setAttribute('aria-expanded','false');
+    document.querySelectorAll('.hdr-equipe-wrap.open').forEach(w=>{
+      w.classList.remove('open');
+      const b=w.querySelector('.hdr-btn-equipe');
+      if(b)b.setAttribute('aria-expanded','false');
+    });
   });
-  document.getElementById('equipeMenu')?.addEventListener('click',e=>e.stopPropagation());
 })();
 </script>
 </body>

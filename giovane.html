@@ -134,6 +134,7 @@ ul{list-style:none}
   transform:translateY(-1px);
 }
 .hdr-btn-equipe:active{transform:translateY(0)}
+.hdr-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
 .hdr-equipe-wrap{position:relative;display:inline-block}
 .hdr-equipe-wrap.open .hdr-btn-equipe{
   border-color:rgba(0,212,255,.6);
@@ -158,6 +159,7 @@ ul{list-style:none}
   cursor:default;transition:background .15s ease;
 }
 .hdr-equipe-item:hover{background:rgba(77,143,255,.12)}
+.hdr-equipe-item a{color:inherit;text-decoration:none;display:block}
 
 /* ═══════════════════ SECTION TITLES ═══════════════════ */
 .sec{padding:72px 0 0;position:relative}
@@ -742,11 +744,23 @@ ul{list-style:none}
         <span class="badge">Relatório Mensal · Jun 2025</span>
         <h1>Giovane <span>Oliveira</span></h1>
         <p>TI &amp; Helpdesk &nbsp;·&nbsp; FIC Capital</p>
-        <div class="hdr-equipe-wrap" id="equipeWrap">
-          <button type="button" class="hdr-btn-equipe" id="btnEquipe" aria-expanded="false" aria-controls="equipeMenu">Equipe</button>
-          <ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Membros da equipe">
-            <li class="hdr-equipe-item" role="listitem"><a href="index.html">Carlos Eber Santos</a></li>
-          </ul>
+        <div class="hdr-actions">
+          <div class="hdr-equipe-wrap" id="equipeWrap">
+            <button type="button" class="hdr-btn-equipe" id="btnEquipe" aria-expanded="false" aria-controls="equipeMenu">Equipe</button>
+            <ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Membros da equipe">
+              <li class="hdr-equipe-item" role="listitem"><a href="index.html">Carlos Eber Santos</a></li>
+            </ul>
+          </div>
+          <div class="hdr-equipe-wrap" id="areasWrap">
+            <button type="button" class="hdr-btn-equipe" id="btnAreas" aria-expanded="false" aria-controls="areasMenu">Áreas</button>
+            <ul class="hdr-equipe-menu" id="areasMenu" role="list" aria-label="Áreas de atuação">
+              <li class="hdr-equipe-item" role="listitem">Helpdesk geral</li>
+              <li class="hdr-equipe-item" role="listitem">Manutenção</li>
+              <li class="hdr-equipe-item" role="listitem">Infraestrutura</li>
+              <li class="hdr-equipe-item" role="listitem">Apresentações</li>
+              <li class="hdr-equipe-item" role="listitem">Outros</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -799,7 +813,7 @@ ul{list-style:none}
 </section>
 
 <!-- SKILLS -->
-<section class="sec">
+<section class="sec" id="sec-areas">
   <div class="wrap">
     <div class="sec-hd reveal">
       <div class="sec-hd-inner">
@@ -1228,21 +1242,36 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 // re-observe after dynamic render
 setTimeout(()=>{document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))},100);
 
-/* dropdown Equipe */
+/* dropdowns cabeçalho (Equipe / Áreas) */
 (function(){
-  const wrap=document.getElementById('equipeWrap');
-  const btn=document.getElementById('btnEquipe');
-  if(!wrap||!btn)return;
-  btn.addEventListener('click',e=>{
-    e.stopPropagation();
-    const open=wrap.classList.toggle('open');
-    btn.setAttribute('aria-expanded',open?'true':'false');
-  });
+  function initHdrDropdown(wrapId,btnId,menuId){
+    const wrap=document.getElementById(wrapId);
+    const btn=document.getElementById(btnId);
+    const menu=document.getElementById(menuId);
+    if(!wrap||!btn)return;
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      document.querySelectorAll('.hdr-equipe-wrap.open').forEach(w=>{
+        if(w!==wrap){
+          w.classList.remove('open');
+          const b=w.querySelector('.hdr-btn-equipe');
+          if(b)b.setAttribute('aria-expanded','false');
+        }
+      });
+      const open=wrap.classList.toggle('open');
+      btn.setAttribute('aria-expanded',open?'true':'false');
+    });
+    menu?.addEventListener('click',e=>e.stopPropagation());
+  }
+  initHdrDropdown('equipeWrap','btnEquipe','equipeMenu');
+  initHdrDropdown('areasWrap','btnAreas','areasMenu');
   document.addEventListener('click',()=>{
-    wrap.classList.remove('open');
-    btn.setAttribute('aria-expanded','false');
+    document.querySelectorAll('.hdr-equipe-wrap.open').forEach(w=>{
+      w.classList.remove('open');
+      const b=w.querySelector('.hdr-btn-equipe');
+      if(b)b.setAttribute('aria-expanded','false');
+    });
   });
-  document.getElementById('equipeMenu')?.addEventListener('click',e=>e.stopPropagation());
 })();
 </script>
 </body>
