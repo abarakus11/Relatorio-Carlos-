@@ -17,7 +17,7 @@
       { name: 'Gabriel Viana' },
     ],
     financeiro: [
-      { name: 'Emilly Dantas' },
+      { name: 'Emilly Dantas', href: 'emilly.html' },
       { name: 'Paulo Robson' },
     ],
     infraestrutura: [
