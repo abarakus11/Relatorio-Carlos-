@@ -14,7 +14,7 @@
     marketing: [
       { name: 'Luan Carlos' },
       { name: 'Adrian Pontes' },
-      { name: 'Gabriel Viana' },
+      { name: 'Gabriel Viana', href: 'gabriel.html' },
     ],
     financeiro: [
       { name: 'Emilly Dantas', href: 'emilly.html' },
