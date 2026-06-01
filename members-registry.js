@@ -37,10 +37,13 @@
     { id: 'rafaela', slug: 'rafaela.html', name: 'Rafaela Dupont', first: 'Rafaela', last: 'Dupont', area: 'juridico', initials: 'RD', hasReport: false },
   ];
 
+  const linkedinUrls = window.FIC_LINKEDIN_URLS || {};
+
   PEOPLE.forEach((p) => {
     if (!p.role) p.role = ROLE_BY_AREA[p.area] || 'FIC Capital Group';
     if (!p.subtitle) p.subtitle = 'FIC Capital Group';
     if (!p.badge) p.badge = p.hasReport ? 'Relatório de Performance' : 'Perfil · FIC Capital Group';
+    if (!p.linkedin && linkedinUrls[p.id]) p.linkedin = linkedinUrls[p.id];
     if (!p.accent) {
       const accents = {
         tecnologia: ['#4d8fff', '#10e8a0'],

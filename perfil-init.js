@@ -63,4 +63,6 @@
   if (ftrDate) {
     ftrDate.textContent = now.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
   }
+
+  if (typeof window.applyHdrLinkedIn === 'function') window.applyHdrLinkedIn();
 })();
