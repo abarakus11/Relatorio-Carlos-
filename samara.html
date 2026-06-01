@@ -169,23 +169,27 @@ ul{list-style:none}
 }
 .hdr-equipe-item:hover{background:rgba(77,143,255,.12)}
 .hdr-equipe-item a{color:inherit;text-decoration:none;display:block}
-.hdr-area-trigger,
-.hdr-areas-back{
-  width:100%;text-align:left;
-  background:transparent;border:none;
-  font:inherit;cursor:pointer;
-  color:var(--t1);font-weight:500;font-size:14px;
+.hdr-equipe-menu{color-scheme:dark}
+.hdr-equipe-menu button{
+  display:block;width:100%;margin:0;
+  font-family:inherit;font-weight:500;font-size:14px;line-height:1.4;
+  text-align:left;cursor:pointer;
+  background-color:transparent;background-image:none;
+  border:0;box-shadow:none;outline:none;
+  color:var(--t1);
   -webkit-appearance:none;appearance:none;
-  box-shadow:none;
 }
+.hdr-area-trigger{padding:12px 16px;border-radius:8px}
 .hdr-areas-back{
-  font-size:13px;color:var(--t2);
-  margin-bottom:2px;padding-bottom:10px;
-  border-bottom:1px solid var(--b0);
+  padding:10px 16px 12px;font-size:13px;color:var(--t2);
+  margin-bottom:2px;border-bottom:1px solid var(--b0);
   border-radius:8px 8px 0 0;
 }
-.hdr-area-trigger:hover,
-.hdr-areas-back:hover{background:rgba(77,143,255,.12);color:var(--t0)}
+.hdr-equipe-menu button:hover,
+.hdr-equipe-menu button:focus-visible{
+  background-color:rgba(77,143,255,.14);color:var(--t0);
+}
+.hdr-equipe-menu button:active{background-color:rgba(77,143,255,.2)}
 .hdr-areas-people-hd{
   padding:6px 16px 8px;font-size:10px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--cyan);font-weight:600;
@@ -836,11 +840,13 @@ body.page-comercial .hdr-equipe-menu{
   border-radius:16px;box-shadow:0 20px 48px rgba(24,8,18,.5);
 }
 body.page-comercial .hdr-equipe-item:hover{background:rgba(212,165,184,.14)}
-body.page-comercial .hdr-area-trigger,
-body.page-comercial .hdr-areas-back{color:var(--t1)}
+body.page-comercial .hdr-equipe-menu button{color:var(--t1)}
 body.page-comercial .hdr-areas-back{color:var(--t2);border-bottom-color:rgba(255,220,232,.12)}
-body.page-comercial .hdr-area-trigger:hover,
-body.page-comercial .hdr-areas-back:hover{background:rgba(212,165,184,.14);color:var(--pearl)}
+body.page-comercial .hdr-equipe-menu button:hover,
+body.page-comercial .hdr-equipe-menu button:focus-visible{
+  background-color:rgba(212,165,184,.16);color:var(--pearl);
+}
+body.page-comercial .hdr-equipe-menu button:active{background-color:rgba(212,165,184,.24)}
 body.page-comercial .hdr-areas-people-hd{color:var(--blush)}
 body.page-comercial a{color:#e8b4cc}
 body.page-comercial .sec-hd-inner{
@@ -915,15 +921,15 @@ body.page-comercial ::-webkit-scrollbar-thumb{background:#3d2834}
           <div class="hdr-equipe-wrap" id="areasWrap">
             <button type="button" class="hdr-btn-equipe" id="btnAreas" aria-expanded="false" aria-controls="areasMenu">Áreas</button>
             <ul class="hdr-equipe-menu" id="areasMenu" role="list" aria-label="Áreas da empresa">
-              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="tecnologia">Tecnologia</button></li>
-              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="comercial">Comercial</button></li>
-              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="marketing">Marketing</button></li>
-              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="financeiro">Financeiro</button></li>
-              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="infraestrutura">Infraestrutura</button></li>
-              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-area-trigger" data-area="juridico">Jurídico</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="tecnologia">Tecnologia</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="comercial">Comercial</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="marketing">Marketing</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="financeiro">Financeiro</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="infraestrutura">Infraestrutura</button></li>
+              <li role="listitem"><button type="button" class="hdr-area-trigger" data-area="juridico">Jurídico</button></li>
             </ul>
             <ul class="hdr-equipe-menu" id="areasPeopleMenu" role="list" aria-label="Membros da área" hidden>
-              <li role="listitem"><button type="button" class="hdr-equipe-item hdr-areas-back">← Voltar</button></li>
+              <li role="listitem"><button type="button" class="hdr-areas-back">← Voltar</button></li>
               <li class="hdr-areas-people-hd" id="areasPeopleHd" role="presentation"></li>
             </ul>
           </div>
