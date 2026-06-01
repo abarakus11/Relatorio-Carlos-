@@ -12,6 +12,7 @@ window.FIC_LINKEDIN_URLS = {
   paulo: '',
   jorge: '',
   hugo: '',
+  augusto: '',
   carolina: '',
   rafaela: '',
 };
