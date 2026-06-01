@@ -7,7 +7,10 @@
       { name: 'Carlos Eber Santos', href: 'index.html' },
       { name: 'Giovane Oliveira', href: 'giovane.html' },
     ],
-    comercial: [],
+    comercial: [
+      { name: 'Samara Gomes' },
+      { name: 'Giovana Cabral' },
+    ],
     marketing: [],
     financeiro: [],
     infraestrutura: [],
@@ -60,7 +63,11 @@
       const li = document.createElement('li');
       li.className = 'hdr-area-member';
       li.setAttribute('role', 'listitem');
-      li.innerHTML = `<a href="${m.href}">${m.name}</a>`;
+      if (m.href) {
+        li.innerHTML = `<a href="${m.href}">${m.name}</a>`;
+      } else {
+        li.innerHTML = `<span class="hdr-area-name">${m.name}</span>`;
+      }
       menuPeople.appendChild(li);
     });
   }
