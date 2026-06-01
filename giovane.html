@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Dashboard Executivo — Carlos Eber Santos</title>
+<title>Dashboard Executivo — Giovane Oliveira</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <meta name="theme-color" content="#05080f"/>
-<meta name="description" content="Dashboard executivo de performance — Carlos Eber Santos"/>
+<meta name="description" content="Dashboard executivo de performance — Giovane Oliveira · Jun 2025"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -157,7 +157,6 @@ ul{list-style:none}
   cursor:default;transition:background .15s ease;
 }
 .hdr-equipe-item:hover{background:rgba(77,143,255,.12)}
-.hdr-equipe-item a{color:inherit;text-decoration:none;display:block}
 
 /* ═══════════════════ SECTION TITLES ═══════════════════ */
 .sec{padding:72px 0 0;position:relative}
@@ -737,15 +736,15 @@ ul{list-style:none}
   <div class="hdr-mesh" aria-hidden="true"></div>
   <div class="wrap hdr-inner">
     <div class="av-wrap">
-      <div class="av"><div class="av-in"><img data-profile src="/carlos-eber-perfil.jpg" alt="Carlos Eber Santos" width="84" height="84" loading="eager" decoding="async"></div></div>
+      <div class="av"><div class="av-in"><img src="https://ui-avatars.com/api/?name=Giovane+Oliveira&amp;background=0d1526&amp;color=00d4ff&amp;bold=true&amp;size=256" alt="Giovane Oliveira" width="84" height="84" loading="eager" decoding="async"></div></div>
       <div class="av-txt">
-        <span class="badge">Relatório de Performance Anual</span>
-        <h1>Carlos Eber <span>Santos</span></h1>
-        <p>Tecnologia Sênior &nbsp;·&nbsp; Infraestrutura &amp; BPO</p>
+        <span class="badge">Relatório Mensal · Jun 2025</span>
+        <h1>Giovane <span>Oliveira</span></h1>
+        <p>TI &amp; Helpdesk &nbsp;·&nbsp; FIC Capital</p>
         <div class="hdr-equipe-wrap" id="equipeWrap">
           <button type="button" class="hdr-btn-equipe" id="btnEquipe" aria-expanded="false" aria-controls="equipeMenu">Equipe</button>
           <ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Membros da equipe">
-            <li class="hdr-equipe-item" role="listitem"><a href="giovane.html">Giovane Oliveira</a></li>
+            <li class="hdr-equipe-item" role="listitem"><a href="index.html">Carlos Eber Santos</a></li>
           </ul>
         </div>
       </div>
@@ -873,11 +872,11 @@ ul{list-style:none}
 <footer class="ftr">
   <div class="wrap ftr-in">
     <div class="ftr-logo">
-      <div class="ftr-ic"><img data-profile src="/carlos-eber-perfil.jpg" alt="" width="44" height="44" loading="lazy" decoding="async"></div>
-      <div><strong>Carlos Eber Santos</strong><span>Tecnologia Sênior — Infraestrutura &amp; BPO</span></div>
+      <div class="ftr-ic"><img src="https://ui-avatars.com/api/?name=Giovane+Oliveira&amp;background=0d1526&amp;color=00d4ff&amp;bold=true&amp;size=128" alt="" width="44" height="44" loading="lazy" decoding="async"></div>
+      <div><strong>Giovane Oliveira</strong><span>TI &amp; Helpdesk — FIC Capital</span></div>
     </div>
     <div class="ftr-c">
-      <p>Relatório Profissional de Atividades<br>Dashboard Executivo de Performance Anual</p>
+      <p>Relatório Mensal de Performance<br>Departamento de TI &amp; Helpdesk · Jun 2025</p>
     </div>
     <div class="ftr-r">
       <span id="ftrDate"></span>
@@ -886,7 +885,7 @@ ul{list-style:none}
   </div>
 </footer>
 
-<script src="profile-photo.js"></script>
+<script src="giovane-data.js"></script>
 <script>
 'use strict';
 /* ── DATES ── */
@@ -894,152 +893,11 @@ const now = new Date();
 const fmtDate = d => d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
 document.getElementById('ftrDate').textContent  = fmtDate(now);
 
-/* ── DATA ── */
-const TASKS = [
-  {name:'Solicitação facial',          cat:'suporte',  mon:'mar26',pri:'prioridade',co:'FIC',       dt:'14/03'},
-  {name:'Manutenção preventiva',       cat:'infra',    mon:'mar26',pri:'prioridade',co:'FIC',       dt:'14/03'},
-  {name:'Exportação de dados',         cat:'sistemas', mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Integração Sketchup',         cat:'sistemas', mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Adquirido VR pessoal',        cat:'infra',    mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Problemas de rede',           cat:'redes',    mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Atualização preventiva #1',   cat:'infra',    mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Atualização preventiva #2',   cat:'infra',    mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Atualização preventiva #3',   cat:'infra',    mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Atualização preventiva #4',   cat:'infra',    mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Atualização preventiva #5',   cat:'infra',    mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Notebook sem resposta imagem',cat:'suporte',  mon:'mar26',pri:'urgente',   co:'FIC',       dt:'13/03'},
-  {name:'Solicitação app PODESUBIR #1',cat:'sistemas', mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Solicitação app PODESUBIR #2',cat:'sistemas', mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Solicitação app PODESUBIR #3',cat:'sistemas', mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Solicitação app PODESUBIR #4',cat:'sistemas', mon:'mar26',pri:'prioridade',co:'FIC',       dt:'13/03'},
-  {name:'Criar e-mail hanne.arno@ficequity.com',cat:'sistemas',mon:'fev26',pri:'urgente',co:'FIC', dt:'11/02'},
-  {name:'Solicitação periféricos',     cat:'suporte',  mon:'fev26',pri:'prioridade',co:'LIV',       dt:'11/02'},
-  {name:'Advisor Roberto Hayashi',     cat:'suporte',  mon:'fev26',pri:'emergente', co:'FIC',       dt:'11/02'},
-  {name:'Solicitação geral',           cat:'suporte',  mon:'mar26',pri:'prioridade',co:'FIC',       dt:'08/03'},
-  {name:'Material – TARCIANNE',        cat:'suporte',  mon:'fev26',pri:'urgente',   co:'FIC',       dt:'07/02'},
-  {name:'Manutenção câmeras',          cat:'seguranca',mon:'mar26',pri:'prioridade',co:'FIC',       dt:'07/03'},
-  {name:'Manutenção preventiva PC',    cat:'infra',    mon:'mar26',pri:'prioridade',co:'FIC',       dt:'07/03'},
-  {name:'Regras fluxo de e-mail',      cat:'sistemas', mon:'mar26',pri:'prioridade',co:'FIC',       dt:'07/03'},
-  {name:'Preparo Notebook',            cat:'suporte',  mon:'mar26',pri:'prioridade',co:'FIC',       dt:'07/03'},
-  {name:'Segurança Microsoft',         cat:'seguranca',mon:'fev26',pri:'urgente',   co:'FIC',       dt:'06/02'},
-  {name:'PERMISSÃO SOLICITAÇÕES FIN',  cat:'sistemas', mon:'mai26',pri:'emergente', co:'FIC',       dt:'26/05'},
-  {name:'PERMISSÃO ERP FIN',           cat:'sistemas', mon:'mai26',pri:'prioridade',co:'FIC',       dt:'19/05'},
-  {name:'ADM Crachá',                  cat:'suporte',  mon:'mai26',pri:'prioridade',co:'FIC',       dt:'12/05'},
-  {name:'Compra de furador de papel',  cat:'suporte',  mon:'abr26',pri:'prioridade',co:'FIC',       dt:'24/04'},
-  {name:'Ajustes plataforma Advisor Capital Club',cat:'sistemas',mon:'abr26',pri:'urgente',co:'FIC',dt:'24/04'},
-  {name:'BPO Orçamento Planos de Saúde',cat:'bpo',    mon:'abr26',pri:'emergente', co:'FIC',       dt:'27/04'},
-  {name:'Mudança de tela PC',          cat:'infra',    mon:'abr26',pri:'prioridade',co:'FIC',       dt:'22/04'},
-  {name:'Mudança de PC',               cat:'infra',    mon:'abr26',pri:'emergente', co:'FIC',       dt:'07/04'},
-  {name:'Gestão TecnoFIT',             cat:'gestao',   mon:'mai26',pri:'prioridade',co:'ANIMA',     dt:'31/05'},
-  {name:'E-mail Fabio',                cat:'sistemas', mon:'mai26',pri:'prioridade',co:'FIC',       dt:'10/05'},
-  {name:'Produção dos Bones',          cat:'suporte',  mon:'mai26',pri:'prioridade',co:'FIC',       dt:'08/05'},
-  {name:'Manutenção geral',            cat:'infra',    mon:'mai26',pri:'prioridade',co:'FIC',       dt:'08/05'},
-  {name:'Mudar estação de trabalho Samara',cat:'infra',mon:'abr26',pri:'urgente',  co:'FIC',       dt:'09/04'},
-  {name:'Notebook Reunião',            cat:'suporte',  mon:'mai26',pri:'prioridade',co:'FIC',       dt:'07/05'},
-  {name:'Remessa Fabio Fedex',         cat:'suporte',  mon:'mai26',pri:'prioridade',co:'FIC',       dt:'07/05'},
-  {name:'Manutenção PC corporativo',   cat:'infra',    mon:'abr26',pri:'prioridade',co:'DECPCINATOS',dt:'06/04'},
-  {name:'Lista PCs para licença Windows',cat:'sistemas',mon:'abr26',pri:'urgente', co:'FIC',       dt:'07/04'},
-  {name:'Renomear todas as TVs',       cat:'infra',    mon:'mai26',pri:'urgente',   co:'FIC',       dt:'31/05'},
-  {name:'Pasta Sharepoint – Honda',    cat:'sistemas', mon:'abr26',pri:'prioridade',co:'LEGALCERT', dt:'29/04'},
-  {name:'Modelagem sistema',           cat:'sistemas', mon:'abr26',pri:'prioridade',co:'FIC',       dt:'02/04'},
-  {name:'Formatação mini PC',          cat:'infra',    mon:'abr26',pri:'prioridade',co:'FIC',       dt:'19/04'},
-  {name:'Criação e-mail Breno',        cat:'sistemas', mon:'abr26',pri:'prioridade',co:'FIC',       dt:'18/04'},
-  {name:'Criação e-mail Luan',         cat:'sistemas', mon:'abr26',pri:'prioridade',co:'FIC',       dt:'18/04'},
-  {name:'Manutenção notebook #1',      cat:'infra',    mon:'abr26',pri:'prioridade',co:'FIC',       dt:'18/04'},
-  {name:'Manutenção notebook #2',      cat:'infra',    mon:'abr26',pri:'prioridade',co:'FIC',       dt:'18/04'},
-  {name:'Manutenção notebook #3',      cat:'infra',    mon:'abr26',pri:'prioridade',co:'FIC',       dt:'19/04'},
-  {name:'Cadastro novos associados – E-mail + ERP',cat:'sistemas',mon:'abr26',pri:'urgente',co:'FIC',dt:'25/04'},
-  {name:'Criar e-mail Paulo Vinicius', cat:'sistemas', mon:'mar26',pri:'urgente',   co:'FIC',       dt:'12/03'},
-  {name:'Alteração e-mail cadastral – Cronos',cat:'sistemas',mon:'mar26',pri:'prioridade',co:'LEGALCERT',dt:'20/03'},
-  {name:'Manutenção nº corporativo Emilly→Carlos',cat:'sistemas',mon:'fev26',pri:'urgente',co:'METAL',dt:'26/02'},
-  {name:'Criação de usuário',          cat:'sistemas', mon:'mar26',pri:'prioridade',co:'FIC',       dt:'27/03'},
-  {name:'Criação e-mail Advisor Augusto Lara',cat:'sistemas',mon:'fev26',pri:'emergente',co:'LEGALCERT',dt:'28/02'},
-  {name:'Treinamento Drone',           cat:'suporte',  mon:'fev26',pri:'prioridade',co:'FIC',       dt:'23/02'},
-  {name:'Solicitação manutenção notebook',cat:'infra', mon:'fev26',pri:'urgente',   co:'FIC',       dt:'22/02'},
-  {name:'Manutenção preventiva geral', cat:'infra',    mon:'mar26',pri:'prioridade',co:'FIC',       dt:'14/03'},
-  {name:'Orçamentos gerais',           cat:'gestao',   mon:'mar26',pri:'prioridade',co:'FIC',       dt:'14/03'},
-  {name:'Reunião HAGANA',              cat:'gestao',   mon:'mai26',pri:'prioridade',co:'IPROTECTOR',dt:'18/05'},
-  {name:'Criação site IPROTECTOR',     cat:'sistemas', mon:'mai26',pri:'prioridade',co:'IPROTECTOR',dt:'13/05'},
-  {name:'Projeto Aplicativo',          cat:'sistemas', mon:'abr26',pri:'prioridade',co:'IPROTECTOR',dt:'01/04'},
-  {name:'Desenvolvimento banheiros',   cat:'infra',    mon:'mai26',pri:'prioridade',co:'ANIMA',     dt:'19/05'},
-  {name:'Revestimento Tijolinhos',     cat:'infra',    mon:'mai26',pri:'prioridade',co:'ANIMA',     dt:'19/05'},
-  {name:'Integração meios de pagamento',cat:'sistemas',mon:'abr26',pri:'prioridade',co:'ANIMA',     dt:'06/04'},
-  {name:'Configuração WhatsApp comercial',cat:'automacao',mon:'abr26',pri:'prioridade',co:'ANIMA',  dt:'06/04'},
-  {name:'Implementação sistema pagamentos',cat:'sistemas',mon:'abr26',pri:'prioridade',co:'ANIMA',  dt:'06/04'},
-  {name:'Escolha sistema gestão de alunos',cat:'gestao',mon:'abr26',pri:'prioridade',co:'ANIMA',    dt:'06/04'},
-  {name:'Orçamentos Gerais ANIMA',     cat:'gestao',   mon:'mar26',pri:'prioridade',co:'ANIMA',     dt:'11/03'},
-  {name:'Inventário ANIMA',            cat:'gestao',   mon:'mar26',pri:'prioridade',co:'ANIMA',     dt:'03/03'},
-  {name:'Estrutura Projetos LIV',      cat:'gestao',   mon:'fev26',pri:'prioridade',co:'LIV',       dt:'08/02'},
-  {name:'Plano de ação ANIMA',         cat:'gestao',   mon:'fev26',pri:'prioridade',co:'ANIMA',     dt:'07/02'},
-  {name:'Software IProtector',         cat:'sistemas', mon:'nov25',pri:'prioridade',co:'IPROTECTOR',dt:'28/11'},
-  {name:'Orçamento Sinatra',           cat:'gestao',   mon:'fev26',pri:'prioridade',co:'SINATRA',   dt:'23/02'},
-  {name:'Orçamento ANIMA',             cat:'gestao',   mon:'fev26',pri:'prioridade',co:'ANIMA',     dt:'23/02'},
-];
+/* ── DATA (giovane.pdf) ── */
+const {
+  TASKS, KPIS, MON_L, MON_D, CAT_L, CAT_D, CAT_C, TOP_L, TOP_D, SKILLS, TL, ACH, ANALYSIS, CATMAP,
+} = window.GIOVANE_REPORT;
 
-const CATMAP = {
-  infra:    {color:'#4d8fff',label:'Infraestrutura'},
-  redes:    {color:'#10e8a0',label:'Redes'},
-  seguranca:{color:'#ff5a5a',label:'Segurança'},
-  suporte:  {color:'#ff8f3f',label:'Suporte'},
-  sistemas: {color:'#9d6fff',label:'Sistemas'},
-  automacao:{color:'#00d4ff',label:'Automação'},
-  gestao:   {color:'#ffe066',label:'Gestão'},
-  bpo:      {color:'#ff5fa0',label:'BPO'},
-};
-
-/* ── KPI DATA ── */
-const KPIS = [
-  {ic:'✅',label:'Total de Tarefas',     val:'79',   sub:'Atividades documentadas',        color:'#4d8fff'},
-  {ic:'🏆',label:'Projetos Concluídos',  val:'6',    sub:'Em 5 empresas distintas',        color:'#10e8a0'},
-  {ic:'🎯',label:'Chamados Resolvidos',  val:'55+',  sub:'Tickets urgentes e de suporte',  color:'#9d6fff',gif:'https://i.gifer.com/JH27.gif'},
-  {ic:'📈',label:'Melhor Mês',           val:'MAR/26',sub:'Pico: 30+ tarefas entregues',   color:'#ff8f3f'},
-  {ic:'📊',label:'Média Mensal',         val:'13',   sub:'Tarefas por mês documentadas',   color:'#00d4ff'},
-  {ic:'⚡',label:'Horas Estimadas',      val:'520+', sub:'Horas de trabalho técnico',      color:'#ff5fa0'},
-  {ic:'🔥',label:'Produtividade',        val:'97%',  sub:'Taxa de conclusão de demandas',  color:'#ffe066'},
-  {ic:'🧩',label:'Áreas Atendidas',      val:'8',    sub:'Categorias técnicas cobertas',   color:'#ff5a5a'},
-];
-
-/* ── MONTHLY DATA ── */
-const MON_L = ['Nov/25','Fev/26','Mar/26','Abr/26','Mai/26','Jun/26'];
-const MON_D = [1, 16, 30, 22, 16, 1];
-
-/* ── CAT DATA ── */
-const CAT_L = ['Infraestrutura','Sistemas','Suporte','Gestão','Segurança','Redes','Automação','BPO'];
-const CAT_D = [22, 24, 12, 11, 3, 2, 2, 1];
-const CAT_C = ['#4d8fff','#9d6fff','#ff8f3f','#ffe066','#ff5a5a','#10e8a0','#00d4ff','#ff5fa0'];
-
-/* ── TOP TASKS ── */
-const TOP_L = ['Manutenção de notebooks','Criação / gestão de e-mails','Atualização preventiva','App PODESUBIR','Gestão de projetos ANIMA','Manutenção de PCs','Criação de usuários/sistemas','Suporte a usuários'];
-const TOP_D = [7, 8, 5, 4, 5, 5, 6, 5];
-
-/* ── SKILLS ── */
-const SKILLS=[
-  {nm:'🖧 Infraestrutura de TI',     pct:92,c:'#4d8fff'},
-  {nm:'🛡️ Suporte Corporativo',      pct:95,c:'#ff8f3f'},
-  {nm:'📦 Gestão de Projetos TI',    pct:84,c:'#ffe066'},
-  {nm:'🧩 BPO & Integração',         pct:80,c:'#9d6fff'},
-  {nm:'🔒 Segurança da Informação',  pct:76,c:'#ff5a5a'},
-  {nm:'⚙️ Automação de Processos',   pct:72,c:'#00d4ff'},
-  {nm:'🌐 Redes Corporativas',       pct:74,c:'#10e8a0'},
-  {nm:'☁️ Cloud / Virtualização',    pct:66,c:'#ff5fa0'},
-  {nm:'🛠️ Gestão de Incidentes',     pct:88,c:'#4d8fff'},
-  {nm:'📡 Monitoramento',            pct:68,c:'#10e8a0'},
-];
-
-/* ── TIMELINE ── */
-const TL=[
-  {dt:'Nov/2025',co:'IPROTECTOR',cc:'#4d8fff',ttl:'Início do Software IProtector',desc:'Projeto de software iniciado com 5 etapas planejadas — 1/5 concluída.'},
-  {dt:'Fev/2026', co:'ANIMA',     cc:'#10e8a0',ttl:'Plano de Ação ANIMA & Estrutura LIV',desc:'Reestruturação administrativa e tecnológica da ANIMA e projeto LIV.'},
-  {dt:'Fev/2026', co:'SINATRA',   cc:'#ff5fa0',ttl:'Orçamento e Planejamento SINATRA',desc:'Conclusão do orçamento de infraestrutura para empresa SINATRA.'},
-  {dt:'Mar/2026', co:'FIC',       cc:'#ff8f3f',ttl:'Pico de produtividade — 30+ tarefas',desc:'Atualizações preventivas, suporte intenso, criações de e-mail e segurança Microsoft.'},
-  {dt:'Mar/2026', co:'ANIMA',     cc:'#10e8a0',ttl:'Inventário e Orçamentos Gerais ANIMA',desc:'Levantamento completo de ativos e orçamentos — 4/7 etapas executadas.'},
-  {dt:'Abr/2026', co:'ANIMA',     cc:'#10e8a0',ttl:'WhatsApp Comercial + Sistema de Pagamentos',desc:'Configuração do WhatsApp Business API e integração com meios de pagamento.'},
-  {dt:'Abr/2026', co:'IPROTECTOR',cc:'#4d8fff',ttl:'Aplicativo IPROTECTOR',desc:'Projeto de aplicativo executado e concluído em Mai/26.'},
-  {dt:'Mai/2026', co:'FIC',       cc:'#ff8f3f',ttl:'Gestão TecnoFIT & Permissões ERP',desc:'Configuração de permissões ERP/FIN e gestão da plataforma TecnoFIT.'},
-  {dt:'Mai/2026', co:'IPROTECTOR',cc:'#4d8fff',ttl:'Site IPROTECTOR lançado',desc:'Conclusão e entrega do site institucional IPROTECTOR.'},
-];
-
-/* ── ACHIEVEMENTS ── */
 const ACH_ICONS={
   trophy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M5 4H3v2a4 4 0 0 0 4 4M19 4h2v2a4 4 0 0 1-4 4"/></svg>',
   org:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>',
@@ -1048,16 +906,6 @@ const ACH_ICONS={
   alert:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M10.3 4.3a2 2 0 0 1 3.4 0l8 14a2 2 0 0 1-1.7 3H4a2 2 0 0 1-1.7-3z"/><path d="M12 9v4M12 17h.01"/></svg>',
   calendar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
 };
-const ACH=[
-  {icon:'trophy',tag:'peak_output',ttl:'Recorde Mensal',val:'30+',accent:'#4d8fff',ds:'Tarefas em Mar/26 — maior volume documentado'},
-  {icon:'org',tag:'client_coverage',ttl:'Empresas Atendidas',val:'5',accent:'#10e8a0',ds:'ANIMA, IPROTECTOR, FIC, LIV, SINATRA'},
-  {icon:'metric',tag:'completion_rate',ttl:'Produtividade',val:'97%',accent:'#ffe066',ds:'Taxa de conclusão no período analisado'},
-  {icon:'layers',tag:'tech_breadth',ttl:'Diversidade Técnica',val:'8',accent:'#9d6fff',ds:'Áreas de competência cobertas simultaneamente'},
-  {icon:'alert',tag:'incident_response',ttl:'Incidentes Urgentes',val:'18',accent:'#ff5a5a',ds:'Chamados urgentes/emergentes resolvidos'},
-  {icon:'calendar',tag:'active_period',ttl:'Meses Ativos',val:'6',accent:'#00d4ff',ds:'Período com entregas consistentemente documentadas'},
-];
-
-/* ── ANALYSIS ── */
 const ANAL_ICONS={
   exec:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>',
   user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="8" r="4"/><path d="M6 20v-1a6 6 0 0 1 12 0v1"/></svg>',
@@ -1066,20 +914,6 @@ const ANAL_ICONS={
   stack:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M8 4l-6 4 6 4 6-4-6-4z"/><path d="M2 12l6 4 6-4M2 16l6 4 6-4"/></svg>',
   impact:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4.5 16.5c3-6 11-8 15.5-3.5"/><path d="M12 5v5l3 2"/><path d="M5 19h14"/></svg>',
 };
-const ANALYSIS=[
-  {feat:true,wide:false,icon:'exec',tag:'executive_summary',accent:'#4d8fff',ttl:'Resumo Executivo',
-   body:'<p>Carlos Eber Santos atuou como profissional sênior de Tecnologia durante aproximadamente 8 meses documentados. Executou <strong>79+ atividades</strong> em 5 empresas, cobrindo desde manutenções preventivas e suporte técnico até implantação de sistemas, gestão de projetos e configuração de ambientes corporativos complexos.</p>'},
-  {feat:false,wide:false,icon:'user',tag:'professional_profile',accent:'#00d4ff',ttl:'Perfil Profissional',
-   body:'<p>Profissional multidisciplinar com forte atuação em infraestrutura de TI, suporte a usuários corporativos e gestão de projetos simultâneos. Capaz de gerenciar múltiplos clientes com alto grau de autonomia e resolutividade.</p>'},
-  {feat:false,wide:false,icon:'scope',tag:'core_domains',accent:'#9d6fff',ttl:'Principais Áreas',
-   body:'<ul class="an-list"><li>Suporte Corporativo &amp; Helpdesk Avançado</li><li>Infraestrutura de Redes e Servidores</li><li>Implantação e Configuração de Sistemas</li><li>Gestão de Projetos de Tecnologia</li><li>BPO — Processos e Automações</li><li>Segurança da Informação</li></ul>'},
-  {feat:false,wide:false,icon:'strength',tag:'key_strengths',accent:'#ffe066',ttl:'Pontos Fortes',
-   body:'<ul class="an-list"><li>Alta resolutividade: 97% das tarefas concluídas</li><li>Versatilidade técnica em múltiplas stacks</li><li>Gestão simultânea de 5 empresas/clientes</li><li>Resposta ágil a incidentes urgentes</li><li>Liderança em projetos estratégicos</li></ul>'},
-  {feat:false,wide:false,icon:'stack',tag:'tech_stack',accent:'#10e8a0',ttl:'Tecnologias Utilizadas',
-   body:'<ul class="an-list"><li>Microsoft 365 (Exchange, SharePoint, Teams)</li><li>Active Directory &amp; Azure AD</li><li>ERP Corporativo + Módulos Financeiros</li><li>WhatsApp Business API</li><li>Hardware corporativo (notebooks, PCs, TVs)</li><li>Cloud, Virtualização, Câmeras IP</li></ul>'},
-  {feat:true,wide:true,icon:'impact',tag:'business_impact',accent:'#ff8f3f',ttl:'Impacto para as Empresas',
-   body:'<p>Garantiu a <strong>disponibilidade de infraestrutura crítica</strong>, implantou <strong>sistemas estratégicos</strong> (pagamentos, gestão de alunos, WhatsApp comercial) e realizou <strong>manutenção preventiva</strong> de ativos, reduzindo downtime e aumentando a eficiência operacional das organizações atendidas.</p>'},
-];
 
 /* ═══════════════════════════════════════════════
    RENDER KPIs
