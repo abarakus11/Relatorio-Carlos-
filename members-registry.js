@@ -24,7 +24,20 @@
 
   /** @type {Array<{id:string,slug:string,name:string,first:string,last:string,area:string,role?:string,subtitle?:string,initials:string,badge?:string,hasReport:boolean,accent?:[string,string]}>} */
   const PEOPLE = [
-    { id: 'carlos', slug: 'index.html', name: 'Carlos Eber Santos', first: 'Carlos Eber', last: 'Santos', area: 'tecnologia', role: 'Tecnologia Sênior', subtitle: 'Infraestrutura & BPO', initials: 'CS', badge: 'Relatório de Performance Anual', hasReport: true },
+    {
+      id: 'carlos',
+      slug: 'index.html',
+      name: 'Carlos Eber Santos',
+      first: 'Carlos Eber',
+      last: 'Santos',
+      area: 'tecnologia',
+      areas: ['tecnologia', 'infraestrutura'],
+      role: 'Tecnologia Sênior',
+      subtitle: 'Infraestrutura & BPO',
+      initials: 'CS',
+      badge: 'Relatório de Performance Anual',
+      hasReport: true,
+    },
     { id: 'giovane', slug: 'giovane.html', name: 'Giovane Oliveira', first: 'Giovane', last: 'Oliveira', area: 'tecnologia', role: 'TI & Helpdesk', subtitle: 'FIC Capital', initials: 'GO', badge: 'Relatório Mensal · Jun 2025', hasReport: true },
     { id: 'samara', slug: 'samara.html', name: 'Samara Gomes', first: 'Samara', last: 'Gomes', area: 'comercial', role: 'BDR', subtitle: 'Business Development Representative', initials: 'SG', badge: 'Relatório de Performance · Comercial', hasReport: true },
     { id: 'giovana', slug: 'giovana.html', name: 'Giovana Cabral', first: 'Giovana', last: 'Cabral', area: 'comercial', initials: 'GC', hasReport: false },
@@ -63,12 +76,36 @@
   const bySlug = Object.fromEntries(PEOPLE.map((p) => [p.slug, p]));
   const byId = Object.fromEntries(PEOPLE.map((p) => [p.id, p]));
 
+  function memberAreas(p) {
+    return p.areas && p.areas.length ? p.areas : [p.area];
+  }
+
+  function hrefForArea(p, areaKey) {
+    const areas = memberAreas(p);
+    if (!areas.includes(areaKey)) return p.slug;
+    if (areaKey === p.area) return p.slug;
+    return p.slug + '?area=' + encodeURIComponent(areaKey);
+  }
+
+  function viewAreaFromQuery(member) {
+    if (!member) return null;
+    const q = new URLSearchParams(location.search).get('area');
+    const areas = memberAreas(member);
+    if (q && areas.includes(q)) return q;
+    return member.area;
+  }
+
   const byArea = {};
   Object.keys(AREA_LABELS).forEach((key) => {
-    byArea[key] = PEOPLE.filter((p) => p.area === key).map((p) => ({
-      name: p.name,
-      href: p.slug,
-    }));
+    byArea[key] = [];
+  });
+  PEOPLE.forEach((p) => {
+    memberAreas(p).forEach((areaKey) => {
+      byArea[areaKey].push({
+        name: p.name,
+        href: hrefForArea(p, areaKey),
+      });
+    });
   });
 
   function memberFromPath() {
@@ -108,6 +145,9 @@
     byId,
     byArea,
     memberFromPath,
+    memberAreas,
+    hrefForArea,
+    viewAreaFromQuery,
     avatarSvg,
     applyAvatars,
   };

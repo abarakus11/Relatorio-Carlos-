@@ -12,24 +12,12 @@
   const meta = document.querySelector('meta[name="description"]');
   if (meta) meta.content = m.name + ' · ' + m.role + ' · FIC Capital Group';
 
-  if (m.area === 'comercial') document.body.classList.add('page-comercial');
-  if (m.area === 'marketing') {
-    document.body.classList.add('page-marketing');
-    document.querySelectorAll('.page-bg img, .hdr-bg img').forEach((img) => {
-      img.src = 'assets/marketing-bg.png';
-    });
-  }
-  if (m.area === 'juridico') {
-    document.body.classList.add('page-juridico');
-    document.querySelectorAll('.page-bg img, .hdr-bg img').forEach((img) => {
-      img.src = 'assets/juridico-bg.png';
-    });
-  }
-  if (m.area === 'infraestrutura') {
-    document.body.classList.add('page-infraestrutura');
-    document.querySelectorAll('.page-bg img, .hdr-bg img').forEach((img) => {
-      img.src = 'assets/infraestrutura-bg.png';
-    });
+  const viewArea =
+    window.FIC_MEMBERS && window.FIC_MEMBERS.viewAreaFromQuery
+      ? window.FIC_MEMBERS.viewAreaFromQuery(m)
+      : m.area;
+  if (window.FIC_VIEW_AREA && window.FIC_VIEW_AREA.applyAreaTheme) {
+    window.FIC_VIEW_AREA.applyAreaTheme(viewArea);
   }
 
   const badge = document.getElementById('profBadge');
@@ -59,8 +47,10 @@
   if (ftrRole) ftrRole.textContent = m.role + ' — ' + m.subtitle.replace(/ &/g, '');
 
   const menu = document.getElementById('equipeMenu');
-  if (menu && byArea) {
-    const list = byArea[m.area] || [];
+  if (menu && byArea && window.FIC_VIEW_AREA) {
+    window.FIC_VIEW_AREA.refreshEquipeMenu(m, viewArea);
+  } else if (menu && byArea) {
+    const list = byArea[viewArea] || [];
     menu.innerHTML = list
       .map((person) => {
         const isCurrent = person.href === m.slug;
@@ -70,7 +60,7 @@
         return '<li class="hdr-equipe-item" role="listitem"><a href="' + person.href + '">' + person.name + '</a></li>';
       })
       .join('');
-    const areaLabel = window.FIC_MEMBERS.AREA_LABELS[m.area] || m.area;
+    const areaLabel = window.FIC_MEMBERS.AREA_LABELS[viewArea] || viewArea;
     menu.setAttribute('aria-label', 'Equipe de ' + areaLabel);
   }
 
