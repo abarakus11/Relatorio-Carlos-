@@ -51,7 +51,6 @@ window.GIOVANE_REPORT = {
     { icon: 'alert', ttl: 'Helpdesk', val: '28', accent: '#ff8f3f', ds: 'Chamados de suporte atendidos no período' },
     { icon: 'layers', ttl: 'Categorias', val: '5', accent: '#9d6fff', ds: 'Helpdesk, manutenção, infra, apresentações e outros' },
     { icon: 'org', ttl: 'Equipamentos', val: '5', accent: '#00d4ff', ds: 'Tipos de hardware mais atendidos no mês' },
-    { icon: 'calendar', ttl: 'Período', val: 'Jun/25', accent: '#ffe066', ds: 'Relatório mensal TI & Helpdesk — FIC Capital' },
   ],
   ANALYSIS: [
     {
