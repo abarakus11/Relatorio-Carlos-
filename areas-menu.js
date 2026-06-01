@@ -8,7 +8,7 @@
       { name: 'Giovane Oliveira', href: 'giovane.html' },
     ],
     comercial: [
-      { name: 'Samara Gomes' },
+      { name: 'Samara Gomes', href: 'samara.html' },
       { name: 'Giovana Cabral' },
     ],
     marketing: [],
