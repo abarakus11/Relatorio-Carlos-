@@ -1,0 +1,18 @@
+---
+description: Após alterações no projeto, fazer commit e push para atualizar a Vercel
+alwaysApply: true
+---
+
+# Deploy via Git (Vercel)
+
+Este projeto está ligado à Vercel com deploy automático a partir do branch `main` no GitHub (`abarakus11/Relatorio-Carlos-`).
+
+Sempre que concluir alterações solicitadas pelo utilizador neste repositório:
+
+1. Fazer `git add` dos ficheiros relevantes
+2. Criar commit com mensagem clara em português
+3. Fazer `git push origin main` (sem pedir confirmação extra para deploy)
+
+Se o commit falhar por identidade Git, usar `-c user.name="abarakus11" -c user.email="abarakus11@users.noreply.github.com"` apenas no comando de commit (não alterar `git config` global).
+
+Não fazer push com force em `main` salvo pedido explícito.
