@@ -290,6 +290,7 @@ ul{list-style:none}
 @media(prefers-reduced-motion:reduce){
   .kpi-live,.kpi-ic:not(.kpi-ic-bolt):not(.kpi-ic-fire):not(.kpi-ic-gif),.kpi-glow,.kpi-particle,.kpi::before,.kpi::after{animation:none!important}
   .kpi-ic-bolt::before,.kpi-ic-fire::before,.kpi-ic-fire::after,.kpi-ic-bolt .kpi-emoji,.kpi-ic-fire .kpi-emoji{animation:none!important}
+  .tl-live::before,.tl-live .tl-dot,.tl-live .tl-crd,.tl-live .tl-crd::after{animation:none!important}
 }
 
 /* ═══════════════════ CHARTS ═══════════════════ */
@@ -395,16 +396,57 @@ ul{list-style:none}
   background:linear-gradient(180deg,var(--blue),var(--purple),rgba(0,0,0,0));
   border-radius:2px;
 }
+.tl-live::before{
+  background:linear-gradient(180deg,var(--blue),var(--purple),var(--cyan),var(--purple),transparent);
+  background-size:100% 220%;
+  animation:tlLine 7s linear infinite;
+}
+@keyframes tlLine{
+  0%{background-position:0% 0%}
+  100%{background-position:0% 100%}
+}
 .tl-item{position:relative;padding-bottom:24px}
 .tl-dot{
   position:absolute;left:-36px;top:10px;width:18px;height:18px;border-radius:50%;
   border:2px solid var(--bg0);z-index:2;flex-shrink:0;
 }
+.tl-live .tl-dot{animation:tlDot 2.6s ease-in-out infinite}
+.tl-live .tl-item:nth-child(1) .tl-dot{animation-delay:0s}
+.tl-live .tl-item:nth-child(2) .tl-dot{animation-delay:.35s}
+.tl-live .tl-item:nth-child(3) .tl-dot{animation-delay:.7s}
+.tl-live .tl-item:nth-child(4) .tl-dot{animation-delay:1.05s}
+.tl-live .tl-item:nth-child(5) .tl-dot{animation-delay:1.4s}
+.tl-live .tl-item:nth-child(6) .tl-dot{animation-delay:1.75s}
+.tl-live .tl-item:nth-child(7) .tl-dot{animation-delay:2.1s}
+.tl-live .tl-item:nth-child(8) .tl-dot{animation-delay:2.45s}
+.tl-live .tl-item:nth-child(9) .tl-dot{animation-delay:2.8s}
+@keyframes tlDot{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 transparent}
+  50%{transform:scale(1.15);box-shadow:0 0 12px currentColor}
+}
 .tl-crd{
   background:var(--card);border:1px solid var(--b0);border-radius:12px;
-  padding:16px 18px;transition:.22s ease;
+  padding:16px 18px;transition:border-color .22s ease,background .22s ease;
+  position:relative;overflow:hidden;
 }
-.tl-crd:hover{border-color:var(--b1);background:var(--card2);transform:translateX(6px)}
+.tl-live .tl-crd{animation:tlFloat 5.5s ease-in-out infinite}
+.tl-live .tl-item:nth-child(odd) .tl-crd{animation-delay:0s}
+.tl-live .tl-item:nth-child(even) .tl-crd{animation-delay:2.75s}
+.tl-live .tl-crd::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.04) 50%,transparent 58%);
+  animation:tlShine 4.5s linear infinite;
+}
+@keyframes tlFloat{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(5px)}
+}
+@keyframes tlShine{
+  0%{transform:translateX(-120%)}
+  100%{transform:translateX(120%)}
+}
+.tl-crd:hover{border-color:var(--b1);background:var(--card2);transform:translateX(6px)!important;animation-play-state:paused}
+.tl-crd:hover::after{animation-play-state:paused}
 .tl-meta{display:flex;align-items:center;gap:10px;margin-bottom:7px;flex-wrap:wrap}
 .tl-dt{font-size:11px;color:var(--t2);font-weight:500}
 .tl-co{font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;font-weight:600}
@@ -596,7 +638,7 @@ ul{list-style:none}
       <h2>Timeline de Projetos</h2>
       <p>Principais marcos e entregas ao longo do período analisado</p>
     </div>
-    <div class="tl" id="tlEl"></div>
+    <div class="tl tl-live" id="tlEl"></div>
   </div>
 </section>
 
