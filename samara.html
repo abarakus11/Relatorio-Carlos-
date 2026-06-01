@@ -36,8 +36,11 @@ body{
 .page-bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .page-bg-shade{
   position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:rgba(5,8,15,.74);
+  background:
+    linear-gradient(180deg,rgba(4,10,18,.55) 0%,rgba(5,14,26,.78) 45%,rgba(4,8,16,.88) 100%),
+    rgba(5,12,22,.45);
 }
+body.page-comercial .page-bg img{object-position:center 40%}
 body>.hdr{position:relative;z-index:1000}
 body>section,body>footer{position:relative;z-index:1}
 a{color:var(--blue);text-decoration:none}
@@ -746,17 +749,17 @@ ul{list-style:none}
 }
 </style>
 </head>
-<body>
+<body class="page-comercial">
 
 <div class="page-bg" aria-hidden="true">
-  <img src="https://i.pinimg.com/originals/36/e4/d0/36e4d0b856694fc471344b644a1dd6e4.gif" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+  <img src="/assets/comercial-bg.jpg" alt="" width="1920" height="1080" loading="eager" decoding="async">
 </div>
 <div class="page-bg-shade" aria-hidden="true"></div>
 
 <!-- HEADER -->
 <header class="hdr">
   <div class="hdr-bg" aria-hidden="true">
-    <img src="https://media1.tenor.com/images/a8a4aa014e13eafcc76b8dd0ff0ccc25/tenor.gif?itemid=12272656" alt="" width="1920" height="400" loading="eager" decoding="async">
+    <img src="/assets/comercial-bg.jpg" alt="" width="1920" height="400" loading="eager" decoding="async">
   </div>
   <div class="hdr-overlay" aria-hidden="true"></div>
   <div class="hdr-mesh" aria-hidden="true"></div>
