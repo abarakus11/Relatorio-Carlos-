@@ -358,8 +358,13 @@ ul{list-style:none}
   margin-left:calc(min(300px,78vw)/-2);margin-top:-34px;
   transform-style:preserve-3d;
   transform:rotateX(calc(var(--i)*36deg)) translateZ(220px);
+  transition:opacity .18s ease;
+  backface-visibility:hidden;
 }
-.ferris-cabin-in{transform-style:preserve-3d;will-change:transform}
+.ferris-cabin-in{
+  transform-style:preserve-3d;will-change:transform;
+  backface-visibility:hidden;
+}
 .sk{
   background:var(--card);border:1px solid var(--b0);border-radius:12px;
   padding:16px 18px;box-shadow:0 12px 40px rgba(0,0,0,.45);
@@ -959,28 +964,38 @@ SKILLS.forEach((s,i)=>{
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const stage=document.getElementById('ferrisStage');
   const wheel=document.getElementById('ferrisWheel');
+  const cabins=[...wheel.querySelectorAll('.ferris-cabin')];
   const cabinIns=[...wheel.querySelectorAll('.ferris-cabin-in')];
-  let rx=0,ry=0,rz=0,vx=0,vy=0,vz=0;
+  let rx=0,ry=0,vx=0,vy=0;
   let dragging=false,lastX=0,lastY=0,nextDirAt=0;
+  const RY_MAX=42;
 
   function pickRandomVelocity(){
-    const s=.22+Math.random()*.38;
-    const a=Math.random()*Math.PI*2,b=Math.random()*Math.PI*2;
-    vx=s*Math.cos(a)*Math.cos(b);
-    vy=s*Math.sin(a)*Math.cos(b);
-    vz=s*Math.sin(b)*.55;
+    const s=.2+Math.random()*.32;
+    vx=s*(Math.random()>.5?1:-1);
+    vy=(Math.random()-.5)*s*.7;
   }
 
   function apply(){
-    wheel.style.transform=`rotateZ(${rz}deg) rotateY(${ry}deg) rotateX(${rx}deg)`;
-    cabinIns.forEach((el,i)=>{
-      el.style.transform=`rotateZ(${-rz}deg) rotateY(${-ry}deg) rotateX(${-(rx+i*ferrisStep)}deg)`;
+    ry=Math.max(-RY_MAX,Math.min(RY_MAX,ry));
+    wheel.style.transform=`rotateY(${ry}deg) rotateX(${rx}deg)`;
+    const ryRad=ry*Math.PI/180;
+    cabins.forEach((cabin,i)=>{
+      const el=cabinIns[i];
+      const angX=(rx+i*ferrisStep)*Math.PI/180;
+      const facing=Math.cos(angX)*Math.cos(ryRad);
+      const visible=facing>0.12;
+      cabin.style.opacity=visible?Math.min(1,.2+facing*.9):0;
+      cabin.style.visibility=visible?'visible':'hidden';
+      cabin.style.pointerEvents=visible?'auto':'none';
+      cabin.style.zIndex=visible?String(Math.round(facing*100)):0;
+      el.style.transform=`rotateX(${-(rx+i*ferrisStep)}deg)`;
     });
   }
 
   function tick(now){
     if(!dragging){
-      rx+=vx;ry+=vy;rz+=vz;
+      rx+=vx;ry+=vy;
       if(now>=nextDirAt){
         pickRandomVelocity();
         nextDirAt=now+2200+Math.random()*2800;
@@ -1003,7 +1018,6 @@ SKILLS.forEach((s,i)=>{
     lastX=e.clientX;lastY=e.clientY;
     ry+=dx*.45;
     rx-=dy*.45;
-    rz+=dx*.08;
     apply();
   });
   stage.addEventListener('pointerup',()=>{
