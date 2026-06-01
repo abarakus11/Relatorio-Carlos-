@@ -2,23 +2,32 @@
 (function () {
   'use strict';
 
-  const PAGE_CLASSES = ['page-comercial', 'page-marketing', 'page-juridico', 'page-infraestrutura', 'page-emilly'];
+  const PAGE_CLASSES = [
+    'page-comercial',
+    'page-marketing',
+    'page-juridico',
+    'page-infraestrutura',
+    'page-administrativo',
+    'page-emilly',
+  ];
   const THEME_CSS = {
     marketing: 'marketing-theme.css',
     juridico: 'juridico-theme.css',
     infraestrutura: 'infraestrutura-theme.css',
+    administrativo: 'administrativo-theme.css',
   };
   const AREA_BG = {
     marketing: 'assets/marketing-bg.png',
     juridico: 'assets/juridico-bg.png',
     infraestrutura: 'assets/infraestrutura-bg.png',
+    administrativo: 'assets/administrativo-bg.png',
   };
   const BODY_CLASS = {
     comercial: 'page-comercial',
     marketing: 'page-marketing',
     juridico: 'page-juridico',
     infraestrutura: 'page-infraestrutura',
-    emilly: 'page-emilly',
+    administrativo: 'page-administrativo',
   };
 
   function rememberDefaultBg() {

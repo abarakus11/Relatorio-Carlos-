@@ -1,0 +1,111 @@
+/* Tema Administrativo — fundo assets/administrativo-bg.png */
+body.page-administrativo .page-bg img,
+body.page-administrativo .hdr-bg img {
+  object-position: 68% center;
+}
+
+body.page-administrativo .page-bg-shade {
+  background:
+    linear-gradient(105deg, rgba(12, 14, 28, 0.9) 0%, rgba(16, 18, 36, 0.72) 42%, rgba(22, 20, 38, 0.42) 100%),
+    rgba(255, 100, 180, 0.04);
+}
+
+body.page-administrativo .hdr {
+  background: linear-gradient(180deg, rgba(14, 16, 32, 0.84), rgba(10, 12, 26, 0.48));
+  border-bottom-color: rgba(16, 224, 116, 0.2);
+}
+
+body.page-administrativo .hdr-overlay {
+  background: linear-gradient(
+    105deg,
+    rgba(10, 12, 28, 0.93) 0%,
+    rgba(18, 20, 40, 0.7) 48%,
+    rgba(28, 22, 44, 0.5) 100%
+  );
+}
+
+body.page-administrativo .hdr-mesh {
+  background-image:
+    radial-gradient(circle at 20% 40%, rgba(16, 224, 116, 0.14) 0%, transparent 52%),
+    radial-gradient(circle at 82% 28%, rgba(255, 77, 166, 0.12) 0%, transparent 48%);
+}
+
+body.page-administrativo .av::before {
+  background: conic-gradient(from 0deg, #10e074, #00d4ff, #ff4da6, #9d6fff, #10e074);
+}
+
+body.page-administrativo .av-txt .badge {
+  color: #e8fff0;
+  background: rgba(16, 224, 116, 0.12);
+  border-color: rgba(16, 224, 116, 0.35);
+}
+
+body.page-administrativo .av-txt .badge::before {
+  background: #10e074;
+  box-shadow: 0 0 12px rgba(16, 224, 116, 0.55);
+}
+
+body.page-administrativo .av-txt h1 span,
+body.page-administrativo .av-txt h1 .hl {
+  background: linear-gradient(120deg, #f0fff4, #10e074 40%, #ff6eb8);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+body.page-administrativo .hdr-btn-equipe {
+  background: linear-gradient(135deg, rgba(16, 224, 116, 0.22), rgba(255, 77, 166, 0.12));
+  border-color: rgba(16, 224, 116, 0.4);
+  box-shadow: 0 6px 24px rgba(20, 8, 32, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body.page-administrativo .hdr-btn-equipe:hover {
+  border-color: rgba(255, 200, 230, 0.55);
+  background: linear-gradient(135deg, rgba(16, 224, 116, 0.34), rgba(255, 77, 166, 0.2));
+}
+
+body.page-administrativo .hdr-equipe-wrap.open .hdr-btn-equipe {
+  border-color: rgba(232, 255, 240, 0.65);
+  background: linear-gradient(135deg, rgba(16, 224, 116, 0.38), rgba(255, 77, 166, 0.22));
+}
+
+body.page-administrativo .hdr-equipe-menu {
+  background: rgba(14, 14, 30, 0.97);
+  border-color: rgba(255, 120, 200, 0.28);
+}
+
+body.page-administrativo .hdr-equipe-item:hover {
+  background: rgba(16, 224, 116, 0.1);
+}
+
+body.page-administrativo .hdr-equipe-menu button:hover,
+body.page-administrativo .hdr-equipe-menu button:focus-visible {
+  background-color: rgba(255, 77, 166, 0.12);
+  color: #ffe8f4;
+}
+
+body.page-administrativo .hdr-areas-people-hd {
+  color: #10e074;
+}
+
+body.page-administrativo .sec-hd-inner {
+  border-left-color: rgba(16, 224, 116, 0.5);
+  background: linear-gradient(90deg, rgba(16, 224, 116, 0.1), transparent 60%);
+}
+
+body.page-administrativo .perfil-pendente {
+  border-color: rgba(255, 120, 200, 0.15);
+}
+
+body.page-administrativo .ftr {
+  background: linear-gradient(180deg, transparent, rgba(12, 14, 28, 0.96));
+  border-top-color: rgba(16, 224, 116, 0.12);
+}
+
+body.page-administrativo .ftr-ic {
+  border-color: rgba(255, 77, 166, 0.42);
+  box-shadow: 0 0 24px rgba(16, 224, 116, 0.18);
+}
+
+body.page-administrativo ::-webkit-scrollbar-thumb {
+  background: #2a2838;
+}

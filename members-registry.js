@@ -65,7 +65,7 @@
         comercial: ['#d4a5b8', '#e8b4cc'],
         marketing: ['#9d6fff', '#ff5fa0'],
         financeiro: ['#4d8fff', '#10e8a0'],
-        administrativo: ['#00d4ff', '#4d8fff'],
+        administrativo: ['#10e074', '#ff4da6'],
         infraestrutura: ['#00d4ff', '#4d8fff'],
         juridico: ['#ff8f3f', '#ffe066'],
       };
