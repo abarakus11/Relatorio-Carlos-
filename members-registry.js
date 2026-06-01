@@ -49,6 +49,7 @@
     { id: 'jorge', slug: 'jorge.html', name: 'Jorge Buarque', first: 'Jorge', last: 'Buarque', area: 'infraestrutura', initials: 'JB', hasReport: false },
     { id: 'hugo', slug: 'hugo.html', name: 'Hugo Legramandi', first: 'Hugo', last: 'Legramandi', area: 'infraestrutura', initials: 'HL', hasReport: false },
     { id: 'augusto', slug: 'augusto.html', name: 'Augusto Mariano', first: 'Augusto', last: 'Mariano', area: 'infraestrutura', initials: 'AM', hasReport: false },
+    { id: 'marina', slug: 'marina.html', name: 'Marina Rodrigues', first: 'Marina', last: 'Rodrigues', area: 'infraestrutura', initials: 'MR', hasReport: false },
     { id: 'carolina', slug: 'carolina.html', name: 'Carolina', first: 'Carolina', last: '', area: 'juridico', initials: 'CA', hasReport: false },
     { id: 'rafaela', slug: 'rafaela.html', name: 'Rafaela Dupont', first: 'Rafaela', last: 'Dupont', area: 'juridico', initials: 'RD', hasReport: false },
   ];
