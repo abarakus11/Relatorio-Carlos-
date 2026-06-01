@@ -8,6 +8,8 @@ const replacements = [
   [/Dashboard Executivo — Samara Gomes/g, 'Dashboard Executivo — Emilly Dantas'],
   [/Samara Gomes · Abr–Jul 2026/g, 'Emilly Dantas · RSA Dashboard 2026 · Jan–Jun 2026'],
   [/data-profile-samara/g, 'data-profile-emilly'],
+  [/<body class="page-comercial">/g, '<body class="page-comercial page-emilly">'],
+  [/\/assets\/comercial-bg\.jpg/g, 'assets/emilly-bg.png'],
   [/\/samara-gomes-perfil\.jpg/g, ''],
   [/Relatório de Atividades · Abr–Jul 2026/g, 'Relatório Semestral · RSA Dashboard 2026'],
   [/Samara <span>Gomes<\/span>/g, 'Emilly <span>Dantas</span>'],

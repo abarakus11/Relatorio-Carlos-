@@ -887,19 +887,72 @@ body.page-comercial .ftr{
 }
 body.page-comercial .ftr-ic{border-color:rgba(212,165,184,.45);box-shadow:0 0 28px rgba(212,165,184,.2)}
 body.page-comercial ::-webkit-scrollbar-thumb{background:#3d2834}
+
+/* ═══════════════════ TEMA — EMILLY · FUNDO FINANCEIRO ═══════════════════ */
+body.page-emilly .page-bg img,
+body.page-emilly .hdr-bg img{object-position:center 42%}
+body.page-emilly .page-bg-shade{
+  background:
+    linear-gradient(165deg,rgba(4,28,38,.72) 0%,rgba(6,22,34,.85) 45%,rgba(4,14,24,.92) 100%),
+    rgba(0,120,140,.12);
+}
+body.page-emilly .hdr{
+  background:linear-gradient(180deg,rgba(8,32,42,.82),rgba(6,20,32,.45));
+  border-bottom-color:rgba(0,212,255,.12);
+}
+body.page-emilly .hdr-overlay{
+  background:linear-gradient(115deg,rgba(6,28,40,.88) 0%,rgba(8,36,48,.7) 50%,rgba(4,16,28,.9) 100%);
+}
+body.page-emilly .hdr-mesh{
+  background-image:
+    radial-gradient(circle at 22% 45%,rgba(0,212,255,.12) 0%,transparent 52%),
+    radial-gradient(circle at 78% 22%,rgba(16,232,160,.08) 0%,transparent 48%);
+}
+body.page-emilly .av::before{
+  background:conic-gradient(from 0deg,#00d4ff,#10e8a0,#4d8fff,#00d4ff);
+}
+body.page-emilly .av-txt .badge{
+  color:#b8f0ff;background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.28);
+}
+body.page-emilly .av-txt .badge::before{background:#00d4ff;box-shadow:0 0 12px rgba(0,212,255,.65)}
+body.page-emilly .av-txt h1 span{
+  background:linear-gradient(120deg,#e8f8ff,#00d4ff 45%,#10e8a0);
+  -webkit-background-clip:text;background-clip:text;
+}
+body.page-emilly .hdr-btn-equipe{
+  background:linear-gradient(135deg,rgba(0,212,255,.22),rgba(16,232,160,.12));
+  border-color:rgba(0,212,255,.4);
+  box-shadow:0 6px 24px rgba(0,60,80,.25),inset 0 1px 0 rgba(255,255,255,.08);
+}
+body.page-emilly .hdr-btn-equipe:hover{
+  border-color:rgba(184,240,255,.55);
+  background:linear-gradient(135deg,rgba(0,212,255,.35),rgba(16,232,160,.2));
+}
+body.page-emilly .hdr-equipe-wrap.open .hdr-btn-equipe{
+  border-color:rgba(184,240,255,.65);
+  background:linear-gradient(135deg,rgba(0,212,255,.38),rgba(77,143,255,.2));
+}
+body.page-emilly .hdr-equipe-menu{
+  background:rgba(8,24,36,.97);border-color:rgba(0,212,255,.3);
+}
+body.page-emilly .sec-hd-inner{
+  border-left-color:rgba(0,212,255,.5);
+  background:linear-gradient(90deg,rgba(0,212,255,.08),transparent 60%);
+}
+body.page-emilly ::-webkit-scrollbar-thumb{background:#1a3a48}
 </style>
 </head>
-<body class="page-comercial">
+<body class="page-comercial page-emilly">
 
 <div class="page-bg" aria-hidden="true">
-  <img src="/assets/comercial-bg.jpg" alt="" width="1920" height="1080" loading="eager" decoding="async">
+  <img src="assets/emilly-bg.png" alt="" width="1920" height="1080" loading="eager" decoding="async">
 </div>
 <div class="page-bg-shade" aria-hidden="true"></div>
 
 <!-- HEADER -->
 <header class="hdr">
   <div class="hdr-bg" aria-hidden="true">
-    <img src="/assets/comercial-bg.jpg" alt="" width="1920" height="400" loading="eager" decoding="async">
+    <img src="assets/emilly-bg.png" alt="" width="1920" height="400" loading="eager" decoding="async">
   </div>
   <div class="hdr-overlay" aria-hidden="true"></div>
   <div class="hdr-mesh" aria-hidden="true"></div>
