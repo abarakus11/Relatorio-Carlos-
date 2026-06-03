@@ -22,6 +22,7 @@
       'body.page-administrativo .hdr-linkedin{color:rgba(232,255,240,.9)}' +
       'body.page-marketing .hdr-linkedin{color:rgba(184,240,255,.85)}' +
       'body.page-juridico .hdr-linkedin{color:rgba(255,232,200,.88)}' +
+      'body.page-infraestrutura .hdr-linkedin{color:rgba(255,232,180,.9)}' +
       'body.page-financeiro .hdr-linkedin{color:rgba(255,240,192,.88)}';
     document.head.appendChild(style);
   }
