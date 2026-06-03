@@ -38,7 +38,7 @@
       badge: 'Relatório de Performance Anual',
       hasReport: true,
     },
-    { id: 'giovane', slug: 'giovane.html', name: 'Giovane Oliveira', first: 'Giovane', last: 'Oliveira', area: 'tecnologia', role: 'TI & Helpdesk', subtitle: 'FIC Capital', initials: 'GO', badge: 'Relatório Mensal · Jun 2025', hasReport: true },
+    { id: 'giovane', slug: 'giovane.html', name: 'Giovane Oliveira', first: 'Giovane', last: 'Oliveira', area: 'tecnologia', role: 'TI & Helpdesk', subtitle: 'FIC Capital', initials: 'GO', badge: 'Relatório Mensal · Jun 2025 · Jun–Jul 2026', hasReport: true },
     { id: 'samara', slug: 'samara.html', name: 'Samara Gomes', first: 'Samara', last: 'Gomes', area: 'comercial', role: 'BDR', subtitle: 'Business Development Representative', initials: 'SG', badge: 'Relatório de Performance · Comercial', hasReport: true },
     { id: 'giovana', slug: 'giovana.html', name: 'Giovana Cabral', first: 'Giovana', last: 'Cabral', area: 'comercial', initials: 'GC', hasReport: false },
     { id: 'luan', slug: 'luan.html', name: 'Luan Carlos', first: 'Luan', last: 'Carlos', area: 'marketing', initials: 'LC', hasReport: false },

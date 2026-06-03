@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <meta name="theme-color" content="#05080f"/>
-<meta name="description" content="Dashboard executivo de performance — Giovane Oliveira · Jun 2025"/>
+<meta name="description" content="Dashboard executivo de performance — Giovane Oliveira · Jun 2025 · Jun–Jul 2026"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -779,7 +779,7 @@ ul{list-style:none}
     <div class="av-wrap">
       <div class="av"><div class="av-in"><img data-profile-giovane src="/giovane-oliveira-perfil.jpg" alt="Giovane Oliveira" width="84" height="84" loading="eager" decoding="async"></div></div>
       <div class="av-txt">
-        <span class="badge">Relatório Mensal · Jun 2025</span>
+        <span class="badge">Relatório Mensal · Jun 2025 · Jun–Jul 2026</span>
         <h1>Giovane <span>Oliveira</span></h1>
         <p>TI &amp; Helpdesk &nbsp;·&nbsp; FIC Capital</p>
         <div class="hdr-actions">
@@ -818,7 +818,7 @@ ul{list-style:none}
     <div class="sec-hd reveal">
       <div class="sec-hd-inner">
         <h2>Indicadores de Performance</h2>
-        <p>KPIs calculados a partir das atividades documentadas no período</p>
+        <p>KPIs · Jun 2025 (giovane.pdf) + Jun–Jul 2026 (relatorio giovannne.pdf)</p>
       </div>
     </div>
     <div class="kpi-grid" id="kpiGrid"></div>
@@ -920,7 +920,7 @@ ul{list-style:none}
     <div class="sec-hd reveal">
       <div class="sec-hd-inner">
         <h2>Registro de Atividades</h2>
-        <p>Lista completa de tarefas extraídas dos relatórios</p>
+        <p>Lista completa de tarefas · Jun 2025 + Jun–Jul 2026 (79 no total)</p>
       </div>
     </div>
     <div class="task-grid" id="taskGrid"></div>
@@ -936,7 +936,8 @@ ul{list-style:none}
       <div><strong>Giovane Oliveira</strong><span>TI &amp; Helpdesk — FIC Capital</span></div>
     </div>
     <div class="ftr-c">
-      <p>Relatório Mensal de Performance<br>Departamento de TI &amp; Helpdesk · Jun 2025</p>
+      <p>Relatório Mensal de Performance<br>Departamento de TI &amp; Helpdesk · Jun 2025 · Jun–Jul 2026</p>
+      <p style="margin-top:.5rem;font-size:.85rem"><a href="assets/relatorio-giovane-jun-jul-2026.pdf" download style="color:var(--accent,#4d8fff)">Baixar relatório Jun–Jul 2026 (.pdf)</a></p>
     </div>
     <div class="ftr-r">
       <span id="ftrDate"></span>
@@ -954,7 +955,7 @@ const now = new Date();
 const fmtDate = d => d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
 document.getElementById('ftrDate').textContent  = fmtDate(now);
 
-/* ── DATA (giovane.pdf) ── */
+/* ── DATA (giovane.pdf + relatorio giovannne.pdf) ── */
 const {
   TASKS, KPIS, MON_L, MON_D, CAT_L, CAT_D, CAT_C, TOP_L, TOP_D, SKILLS, TL, ACH, ANALYSIS, CATMAP,
 } = window.GIOVANE_REPORT;
@@ -1029,7 +1030,7 @@ const chartLine=new Chart(document.getElementById('cLine'),{
   }]},
   options:{responsive:true,animation:false,interaction:{intersect:false,mode:'index'},
     plugins:{legend:{display:false}},
-    scales:{x:{grid:{color:'rgba(255,255,255,.04)'}},y:{grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true,suggestedMax:35}}}
+    scales:{x:{grid:{color:'rgba(255,255,255,.04)'}},y:{grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true,suggestedMax:45}}}
 });
 
 /* ── Donut ── */
@@ -1049,7 +1050,7 @@ const chartBar=new Chart(document.getElementById('cBar'),{
     borderRadius:6,
   }]},
   options:{responsive:true,animation:false,plugins:{legend:{display:false}},
-    scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true,suggestedMax:35}}}
+    scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true,suggestedMax:45}}}
 });
 
 /* ── Top ── */
