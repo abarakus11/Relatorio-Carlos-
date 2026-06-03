@@ -388,7 +388,7 @@ html = html.replace(
 /* Script order: members-registry before inline for avatars */
 html = html.replace(
   '<script src="paulo-data.js"></script>\n<script src="members-registry.js"></script>',
-  '<script src="members-registry.js"></script>\n<script src="paulo-data.js"></script>\n<script src="view-area.js"></script>\n<script src="hdr-linkedin.js"></script>\n<script src="areas-menu.js"></script>'
+  '<script src="members-registry.js"></script>\n<script src="paulo-data.js"></script>\n<script src="profile-photo-paulo.js"></script>\n<script src="view-area.js"></script>\n<script src="hdr-linkedin.js"></script>\n<script src="areas-menu.js"></script>'
 );
 
 /* Remove duplicate scripts at bottom if emilly had them */
