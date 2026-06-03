@@ -179,11 +179,9 @@
       const cy = size / 2;
       const r = size / 2 - 1;
 
-      /* Fundo opaco (jsPDF renderiza transparência como preto) */
+      /* Quadrado inteiro = cor do cabeçalho (cantos somem no PDF) */
       ctx.fillStyle = 'rgb(' + bg[0] + ',' + bg[1] + ',' + bg[2] + ')';
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.fillRect(0, 0, size, size);
 
       ctx.save();
       ctx.beginPath();
