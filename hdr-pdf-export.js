@@ -144,45 +144,62 @@
     return map[part] !== undefined ? map[part] : 0.5;
   }
 
-  /** Avatar circular com object-fit:cover — igual ao site */
-  function imgToDataUrl(img, sizePx, ringRgb) {
+  /** object-fit:cover + object-position — spec CSS */
+  function coverDrawRect(iw, ih, size, focal) {
+    const scale = Math.max(size / iw, size / ih);
+    const dw = iw * scale;
+    const dh = ih * scale;
+    let dx = focal.x * (size - dw);
+    let dy = focal.y * (size - dh);
+    if (dw >= size) dx = Math.min(0, Math.max(size - dw, dx));
+    if (dh >= size) dy = Math.min(0, Math.max(size - dh, dy));
+    return { dx, dy, dw, dh };
+  }
+
+  /** Avatar circular — fundo opaco para evitar manchas no jsPDF */
+  function imgToDataUrl(img, sizePx, ringRgb, bgRgb) {
     if (!img || !img.src) return null;
     const size = sizePx || 320;
     const ring = ringRgb || [77, 143, 255];
+    const bg = bgRgb || [8, 14, 28];
     try {
       const iw = img.naturalWidth || img.width || size;
       const ih = img.naturalHeight || img.height || size;
       if (!iw || !ih) return null;
 
       const focal = parseObjectPosition(img);
+      const { dx, dy, dw, dh } = coverDrawRect(iw, ih, size, focal);
       const canvas = document.createElement('canvas');
       canvas.width = size;
       canvas.height = size;
       const ctx = canvas.getContext('2d');
       if (!ctx) return null;
 
-      const scale = Math.max(size / iw, size / ih);
-      const dw = iw * scale;
-      const dh = ih * scale;
-      const dx = size / 2 - focal.x * iw * scale;
-      const dy = size / 2 - focal.y * ih * scale;
+      const cx = size / 2;
+      const cy = size / 2;
+      const r = size / 2 - 1;
+
+      /* Fundo opaco (jsPDF renderiza transparência como preto) */
+      ctx.fillStyle = 'rgb(' + bg[0] + ',' + bg[1] + ',' + bg[2] + ')';
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fill();
 
       ctx.save();
       ctx.beginPath();
-      ctx.arc(size / 2, size / 2, size / 2 - 1, 0, Math.PI * 2);
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
       ctx.closePath();
       ctx.clip();
       ctx.drawImage(img, dx, dy, dw, dh);
       ctx.restore();
 
-      /* Anel de destaque (como no dashboard) */
       ctx.beginPath();
-      ctx.arc(size / 2, size / 2, size / 2 - 2, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(' + ring[0] + ',' + ring[1] + ',' + ring[2] + ',0.9)';
-      ctx.lineWidth = Math.max(3, size * 0.018);
+      ctx.arc(cx, cy, r - 1, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgb(' + ring[0] + ',' + ring[1] + ',' + ring[2] + ')';
+      ctx.lineWidth = Math.max(3, size * 0.02);
       ctx.stroke();
 
-      return canvas.toDataURL('image/png');
+      return canvas.toDataURL('image/jpeg', 0.92);
     } catch (_) {
       return null;
     }
@@ -306,7 +323,12 @@
       member,
       badge,
       roleLine,
-      photoData: imgToDataUrl(photoEl, 400, AREA_RGB[member?.area] || AREA_RGB.tecnologia),
+      photoData: imgToDataUrl(
+        photoEl,
+        400,
+        AREA_RGB[member?.area] || AREA_RGB.tecnologia,
+        [8, 14, 28]
+      ),
       kpis: report?.KPIS || scrapeKpis(),
       tasks,
       analysis: report?.ANALYSIS
@@ -396,20 +418,11 @@
 
     const photoX = pageW - margin - 44;
     const photoSize = 44;
-    const photoCy = 15 + photoSize / 2;
-    const photoCx = photoX + photoSize / 2;
     if (data.photoData) {
       try {
-        /* Sombra suave atrás do avatar */
-        doc.setFillColor(0, 0, 0);
-        doc.circle(photoCx, photoCy + 0.6, photoSize / 2 + 0.5, 'F');
-        doc.addImage(data.photoData, 'PNG', photoX, 15, photoSize, photoSize, undefined, 'MEDIUM');
-        /* Anel externo na cor da área */
-        doc.setDrawColor(accent[0], accent[1], accent[2]);
-        doc.setLineWidth(0.8);
-        doc.circle(photoCx, photoCy, photoSize / 2 + 0.4, 'S');
+        doc.addImage(data.photoData, 'JPEG', photoX, 15, photoSize, photoSize, undefined, 'MEDIUM');
       } catch (_) {
-        /* foto opcional — ignora se falhar (CORS/formato) */
+        /* foto opcional */
       }
     }
 
