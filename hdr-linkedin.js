@@ -11,8 +11,9 @@
     style.id = 'hdr-linkedin-style';
     style.textContent =
       '.av-txt h1{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}' +
+      '.hdr-profile-links{display:inline-flex;align-items:center;gap:6px;margin-left:4px;vertical-align:middle}' +
       '.hdr-linkedin{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;' +
-      'margin:0 0 0 2px;padding:0;border:0;border-radius:8px;color:rgba(255,255,255,.78);background:transparent;' +
+      'margin:0;padding:0;border:0;border-radius:8px;color:rgba(255,255,255,.78);background:transparent;' +
       'cursor:pointer;text-decoration:none;transition:color .2s,transform .2s,background .2s;flex-shrink:0}' +
       '.hdr-linkedin:hover{color:#fff;background:rgba(10,102,194,.4);transform:translateY(-1px)}' +
       '.hdr-linkedin:focus-visible{outline:2px solid rgba(0,212,255,.55);outline-offset:3px}' +
@@ -50,14 +51,21 @@
     const h1 = document.querySelector('.av-txt h1');
     if (!h1) return;
 
-    let link = h1.querySelector('.hdr-linkedin');
+    let wrap = h1.querySelector('.hdr-profile-links');
+    if (!wrap) {
+      wrap = document.createElement('span');
+      wrap.className = 'hdr-profile-links';
+      h1.appendChild(wrap);
+    }
+
+    let link = wrap.querySelector('.hdr-linkedin');
     if (!link) {
       link = document.createElement('a');
       link.className = 'hdr-linkedin';
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
       link.innerHTML = SVG;
-      h1.appendChild(link);
+      wrap.appendChild(link);
     }
 
     const m = getMember();
@@ -77,4 +85,13 @@
   } else {
     applyHdrLinkedIn();
   }
+
+  (function loadPdfExport() {
+    if (document.getElementById('hdr-pdf-export-script')) return;
+    const s = document.createElement('script');
+    s.id = 'hdr-pdf-export-script';
+    s.src = 'hdr-pdf-export.js';
+    s.defer = true;
+    document.body.appendChild(s);
+  })();
 })();

@@ -73,4 +73,5 @@
   }
 
   if (typeof window.applyHdrLinkedIn === 'function') window.applyHdrLinkedIn();
+  if (typeof window.applyHdrPdfExport === 'function') window.applyHdrPdfExport();
 })();
