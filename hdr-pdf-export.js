@@ -7,6 +7,7 @@
     samara: 'SAMARA_REPORT',
     gabriel: 'GABRIEL_REPORT',
     emilly: 'EMILLY_REPORT',
+    paulo: 'PAULO_REPORT',
     marina: 'MARINA_REPORT',
   };
 

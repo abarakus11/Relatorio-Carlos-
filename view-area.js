@@ -9,6 +9,7 @@
     'page-juridico',
     'page-infraestrutura',
     'page-administrativo',
+    'page-financeiro',
     'page-emilly',
   ];
   const THEME_CSS = {
@@ -17,6 +18,7 @@
     juridico: 'juridico-theme.css',
     infraestrutura: 'infraestrutura-theme.css',
     administrativo: 'administrativo-theme.css',
+    financeiro: 'financeiro-theme.css',
   };
   const AREA_BG = {
     tecnologia: 'assets/tecnologia-bg.png',
@@ -24,6 +26,7 @@
     juridico: 'assets/juridico-bg.png',
     infraestrutura: 'assets/infraestrutura-bg.png',
     administrativo: 'assets/administrativo-bg.png',
+    financeiro: 'assets/tecnologia-bg.png',
   };
   const BODY_CLASS = {
     tecnologia: 'page-tecnologia',
@@ -32,6 +35,7 @@
     juridico: 'page-juridico',
     infraestrutura: 'page-infraestrutura',
     administrativo: 'page-administrativo',
+    financeiro: 'page-financeiro',
   };
 
   function rememberDefaultBg() {
