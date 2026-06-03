@@ -9,6 +9,7 @@
     emilly: 'EMILLY_REPORT',
     paulo: 'PAULO_REPORT',
     marina: 'MARINA_REPORT',
+    hugo: 'HUGO_REPORT',
   };
 
   const AREA_RGB = {

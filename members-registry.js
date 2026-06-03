@@ -47,7 +47,7 @@
     { id: 'emilly', slug: 'emilly.html', name: 'Emilly Dantas', first: 'Emilly', last: 'Dantas', area: 'administrativo', role: 'Senior Integration Agent', subtitle: 'Administração & Financeiro', initials: 'ED', badge: 'Relatório Semestral · RSA Dashboard 2026', hasReport: true },
     { id: 'paulo', slug: 'paulo-robson.html', name: 'Paulo Robson', first: 'Paulo', last: 'Robson', area: 'financeiro', role: 'Director of Controlling', subtitle: 'Gestão Financeira do Grupo', initials: 'PR', badge: 'Relatório Semestral · RSA 2026', hasReport: true },
     { id: 'jorge', slug: 'jorge.html', name: 'Jorge Buarque', first: 'Jorge', last: 'Buarque', area: 'infraestrutura', initials: 'JB', hasReport: false },
-    { id: 'hugo', slug: 'hugo.html', name: 'Hugo Legramandi', first: 'Hugo', last: 'Legramandi', area: 'infraestrutura', initials: 'HL', hasReport: false },
+    { id: 'hugo', slug: 'hugo.html', name: 'Hugo Legramandi', first: 'Hugo', last: 'Legramandi', area: 'infraestrutura', role: 'Chefe de Engenharia', subtitle: 'Infraestrutura & Engenharia', initials: 'HL', badge: 'Relatório Semestral · Infraestrutura 1S2026', hasReport: true },
     { id: 'augusto', slug: 'augusto.html', name: 'Augusto Mariano', first: 'Augusto', last: 'Mariano', area: 'infraestrutura', initials: 'AM', hasReport: false },
     {
       id: 'marina',
