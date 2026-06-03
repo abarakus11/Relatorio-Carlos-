@@ -13,6 +13,7 @@ window.FIC_LINKEDIN_URLS = {
   jorge: '',
   hugo: '',
   augusto: '',
+  roberto: '',
   marina: 'https://www.linkedin.com/in/marina-rodrigues-79b9a3213/',
   carolina: '',
   rafaela: '',

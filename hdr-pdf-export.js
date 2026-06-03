@@ -10,6 +10,7 @@
     paulo: 'PAULO_REPORT',
     marina: 'MARINA_REPORT',
     hugo: 'HUGO_REPORT',
+    roberto: 'ROBERTO_REPORT',
   };
 
   const AREA_RGB = {

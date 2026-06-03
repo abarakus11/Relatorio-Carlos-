@@ -275,7 +275,7 @@ html = html.replace(
 
 html = html.replace(
   /<ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Equipe de infraestrutura"><\/ul>/,
-  '<ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Equipe de infraestrutura">\n              <li class="hdr-equipe-item" role="listitem"><a href="marina.html">Marina Rodrigues</a></li>\n              <li class="hdr-equipe-item" role="listitem"><span class="hdr-area-name">Hugo Legramandi</span></li>\n              <li class="hdr-equipe-item" role="listitem"><a href="jorge.html">Jorge Buarque</a></li>\n              <li class="hdr-equipe-item" role="listitem"><a href="augusto.html">Augusto Mariano</a></li>\n            </ul>'
+  '<ul class="hdr-equipe-menu" id="equipeMenu" role="list" aria-label="Equipe de infraestrutura">\n              <li class="hdr-equipe-item" role="listitem"><a href="marina.html">Marina Rodrigues</a></li>\n              <li class="hdr-equipe-item" role="listitem"><span class="hdr-area-name">Hugo Legramandi</span></li>\n              <li class="hdr-equipe-item" role="listitem"><a href="jorge.html">Jorge Buarque</a></li>\n              <li class="hdr-equipe-item" role="listitem"><a href="augusto.html">Augusto Mariano</a></li>\n              <li class="hdr-equipe-item" role="listitem"><a href="roberto-hayashi.html">Roberto Hayashi</a></li>\n            </ul>'
 );
 
 fs.writeFileSync(path.join(__dirname, 'hugo.html'), html, 'utf8');

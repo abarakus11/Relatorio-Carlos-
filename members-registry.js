@@ -49,6 +49,7 @@
     { id: 'jorge', slug: 'jorge.html', name: 'Jorge Buarque', first: 'Jorge', last: 'Buarque', area: 'infraestrutura', initials: 'JB', hasReport: false },
     { id: 'hugo', slug: 'hugo.html', name: 'Hugo Legramandi', first: 'Hugo', last: 'Legramandi', area: 'infraestrutura', role: 'Chefe de Engenharia', subtitle: 'Infraestrutura & Engenharia', initials: 'HL', badge: 'Relatório Semestral · Infraestrutura 1S2026', hasReport: true },
     { id: 'augusto', slug: 'augusto.html', name: 'Augusto Mariano', first: 'Augusto', last: 'Mariano', area: 'infraestrutura', initials: 'AM', hasReport: false },
+    { id: 'roberto', slug: 'roberto-hayashi.html', name: 'Roberto Hayashi', first: 'Roberto', last: 'Hayashi', area: 'infraestrutura', role: 'Head of Agribusiness', subtitle: 'RWB · Agronegócio', initials: 'RH', badge: 'Relatório Semestral · RSA 1S2026', hasReport: true },
     {
       id: 'marina',
       slug: 'marina.html',
