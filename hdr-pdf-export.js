@@ -123,17 +123,66 @@
     return libsLoading;
   }
 
-  function imgToDataUrl(img) {
+  function parseObjectPosition(img) {
+    let x = 0.5;
+    let y = 0.28;
+    if (img && img instanceof Element) {
+      const op = (getComputedStyle(img).objectPosition || 'center 28%').trim().split(/\s+/);
+      if (op[0]) x = parsePositionPart(op[0], true);
+      if (op[1]) y = parsePositionPart(op[1], false);
+      else if (!/%/.test(op[0]) && op[0] !== 'center') y = parsePositionPart(op[0], false);
+    }
+    return { x, y };
+  }
+
+  function parsePositionPart(part, isX) {
+    if (!part) return 0.5;
+    if (part.endsWith('%')) return Math.min(1, Math.max(0, parseFloat(part) / 100));
+    const map = isX
+      ? { left: 0, center: 0.5, right: 1 }
+      : { top: 0, center: 0.5, bottom: 1 };
+    return map[part] !== undefined ? map[part] : 0.5;
+  }
+
+  /** Avatar circular com object-fit:cover — igual ao site */
+  function imgToDataUrl(img, sizePx, ringRgb) {
     if (!img || !img.src) return null;
+    const size = sizePx || 320;
+    const ring = ringRgb || [77, 143, 255];
     try {
+      const iw = img.naturalWidth || img.width || size;
+      const ih = img.naturalHeight || img.height || size;
+      if (!iw || !ih) return null;
+
+      const focal = parseObjectPosition(img);
       const canvas = document.createElement('canvas');
-      const w = img.naturalWidth || img.width || 120;
-      const h = img.naturalHeight || img.height || 120;
-      canvas.width = w;
-      canvas.height = h;
+      canvas.width = size;
+      canvas.height = size;
       const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, w, h);
-      return canvas.toDataURL('image/jpeg', 0.9);
+      if (!ctx) return null;
+
+      const scale = Math.max(size / iw, size / ih);
+      const dw = iw * scale;
+      const dh = ih * scale;
+      const dx = size / 2 - focal.x * iw * scale;
+      const dy = size / 2 - focal.y * ih * scale;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size / 2 - 1, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(img, dx, dy, dw, dh);
+      ctx.restore();
+
+      /* Anel de destaque (como no dashboard) */
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size / 2 - 2, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(' + ring[0] + ',' + ring[1] + ',' + ring[2] + ',0.9)';
+      ctx.lineWidth = Math.max(3, size * 0.018);
+      ctx.stroke();
+
+      return canvas.toDataURL('image/png');
     } catch (_) {
       return null;
     }
@@ -215,7 +264,7 @@
     });
   }
 
-  function collectProfileData() {
+  async function collectProfileData() {
     const member = getMember();
     const report = getReport();
     const catmap = report?.CATMAP || {};
@@ -225,6 +274,17 @@
       document.querySelector('.av-in img') ||
       document.querySelector('.ftr-ic img') ||
       document.querySelector('[data-profile]');
+
+    if (photoEl && !photoEl.complete) {
+      await new Promise(function (resolve) {
+        const done = function () {
+          resolve();
+        };
+        photoEl.addEventListener('load', done, { once: true });
+        photoEl.addEventListener('error', done, { once: true });
+        setTimeout(done, 1200);
+      });
+    }
 
     let tasks = report?.TASKS || scrapeTasks();
     if (report?.TASKS) {
@@ -246,7 +306,7 @@
       member,
       badge,
       roleLine,
-      photoData: imgToDataUrl(photoEl),
+      photoData: imgToDataUrl(photoEl, 400, AREA_RGB[member?.area] || AREA_RGB.tecnologia),
       kpis: report?.KPIS || scrapeKpis(),
       tasks,
       analysis: report?.ANALYSIS
@@ -334,13 +394,20 @@
     doc.setTextColor(180, 195, 220);
     doc.text('Relatório Executivo de Performance', margin, 32);
 
-    const photoX = pageW - margin - 42;
+    const photoX = pageW - margin - 44;
+    const photoSize = 44;
+    const photoCy = 15 + photoSize / 2;
+    const photoCx = photoX + photoSize / 2;
     if (data.photoData) {
       try {
-        doc.setFillColor(255, 255, 255);
-        doc.circle(photoX + 21, 36, 22, 'F');
-        const fmt = data.photoData.indexOf('image/png') >= 0 ? 'PNG' : 'JPEG';
-        doc.addImage(data.photoData, fmt, photoX, 15, 42, 42, undefined, 'FAST');
+        /* Sombra suave atrás do avatar */
+        doc.setFillColor(0, 0, 0);
+        doc.circle(photoCx, photoCy + 0.6, photoSize / 2 + 0.5, 'F');
+        doc.addImage(data.photoData, 'PNG', photoX, 15, photoSize, photoSize, undefined, 'MEDIUM');
+        /* Anel externo na cor da área */
+        doc.setDrawColor(accent[0], accent[1], accent[2]);
+        doc.setLineWidth(0.8);
+        doc.circle(photoCx, photoCy, photoSize / 2 + 0.4, 'S');
       } catch (_) {
         /* foto opcional — ignora se falhar (CORS/formato) */
       }
@@ -705,7 +772,7 @@
   async function generateProfilePdf() {
     await loadPdfLibs();
     const { jsPDF } = window.jspdf;
-    const data = collectProfileData();
+    const data = await collectProfileData();
     const m = data.member;
     if (!m) throw new Error('Perfil não identificado');
 
