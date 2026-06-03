@@ -8,6 +8,7 @@
     'page-marketing',
     'page-juridico',
     'page-infraestrutura',
+    'page-roberto',
     'page-administrativo',
     'page-financeiro',
     'page-emilly',
@@ -52,6 +53,23 @@
     link.href = href;
     link.dataset.areaTheme = areaKey;
     document.head.appendChild(link);
+  }
+
+  function applyRobertoTheme() {
+    rememberDefaultBg();
+    PAGE_CLASSES.forEach((c) => document.body.classList.remove(c));
+    document.body.classList.add('page-roberto');
+    if (!document.querySelector('link[data-area-theme="roberto"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'roberto-theme.css';
+      link.dataset.areaTheme = 'roberto';
+      document.head.appendChild(link);
+    }
+    const bg = 'assets/roberto-hayashi-bg.png';
+    document.querySelectorAll('.page-bg img, .hdr-bg img').forEach((img) => {
+      img.src = bg;
+    });
   }
 
   function applyAreaTheme(areaKey) {
@@ -107,6 +125,12 @@
     const member = M.memberFromPath();
     if (!member) return;
 
+    if (member.id === 'roberto') {
+      applyRobertoTheme();
+      refreshEquipeMenu(member, M.viewAreaFromQuery(member));
+      return;
+    }
+
     const viewArea = M.viewAreaFromQuery(member);
     const areas = M.memberAreas(member);
     if (areas.length > 1 || viewArea !== member.area) {
@@ -120,6 +144,7 @@
 
   window.FIC_VIEW_AREA = {
     applyAreaTheme,
+    applyRobertoTheme,
     refreshEquipeMenu,
     initMemberViewArea,
     currentPageHref,

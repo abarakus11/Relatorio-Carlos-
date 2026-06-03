@@ -1,0 +1,107 @@
+/* Tema Roberto Hayashi — agronegócio · fundo assets/roberto-hayashi-bg.png */
+body.page-roberto .page-bg img,
+body.page-roberto .hdr-bg img {
+  object-position: center 62%;
+}
+
+body.page-roberto .page-bg-shade {
+  background:
+    linear-gradient(105deg, rgba(6, 14, 8, 0.92) 0%, rgba(10, 22, 14, 0.78) 42%, rgba(18, 28, 16, 0.48) 100%),
+    rgba(255, 200, 60, 0.04);
+}
+
+body.page-roberto .hdr {
+  background: linear-gradient(180deg, rgba(8, 16, 10, 0.88), rgba(6, 12, 8, 0.52));
+  border-bottom-color: rgba(255, 200, 60, 0.22);
+}
+
+body.page-roberto .hdr-overlay {
+  background: linear-gradient(
+    105deg,
+    rgba(4, 10, 6, 0.94) 0%,
+    rgba(12, 24, 14, 0.76) 48%,
+    rgba(20, 32, 18, 0.55) 100%
+  );
+}
+
+body.page-roberto .hdr-mesh {
+  background-image:
+    radial-gradient(circle at 22% 38%, rgba(255, 200, 60, 0.16) 0%, transparent 52%),
+    radial-gradient(circle at 78% 28%, rgba(16, 232, 160, 0.12) 0%, transparent 48%);
+}
+
+body.page-roberto .av::before {
+  background: conic-gradient(from 0deg, #ffe066, #10e8a0, #ffb020, #8fd14a, #ffe066);
+}
+
+body.page-roberto .av-txt .badge {
+  color: #e8ffd4;
+  background: rgba(16, 232, 160, 0.12);
+  border-color: rgba(143, 209, 74, 0.38);
+}
+
+body.page-roberto .av-txt .badge::before {
+  background: #10e8a0;
+  box-shadow: 0 0 12px rgba(16, 232, 160, 0.5);
+}
+
+body.page-roberto .av-txt h1 span,
+body.page-roberto .av-txt h1 .hl {
+  background: linear-gradient(120deg, #f0ffe8, #10e8a0 35%, #ffe066 70%, #ffb020);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+body.page-roberto .hdr-btn-equipe {
+  background: linear-gradient(135deg, rgba(16, 232, 160, 0.2), rgba(255, 224, 102, 0.1));
+  border-color: rgba(143, 209, 74, 0.42);
+  box-shadow: 0 6px 24px rgba(8, 20, 10, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body.page-roberto .hdr-btn-equipe:hover {
+  border-color: rgba(232, 255, 212, 0.55);
+  background: linear-gradient(135deg, rgba(16, 232, 160, 0.32), rgba(255, 224, 102, 0.18));
+}
+
+body.page-roberto .hdr-equipe-wrap.open .hdr-btn-equipe {
+  border-color: rgba(232, 255, 212, 0.65);
+  background: linear-gradient(135deg, rgba(16, 232, 160, 0.36), rgba(255, 224, 102, 0.22));
+}
+
+body.page-roberto .hdr-equipe-menu {
+  background: rgba(8, 14, 10, 0.97);
+  border-color: rgba(143, 209, 74, 0.28);
+}
+
+body.page-roberto .hdr-equipe-item:hover {
+  background: rgba(16, 232, 160, 0.12);
+}
+
+body.page-roberto .hdr-equipe-menu button:hover,
+body.page-roberto .hdr-equipe-menu button:focus-visible {
+  background-color: rgba(255, 224, 102, 0.12);
+  color: #f0ffe8;
+}
+
+body.page-roberto .hdr-areas-people-hd {
+  color: #10e8a0;
+}
+
+body.page-roberto .sec-hd-inner {
+  border-left-color: rgba(16, 232, 160, 0.5);
+  background: linear-gradient(90deg, rgba(16, 232, 160, 0.1), transparent 60%);
+}
+
+body.page-roberto .ftr {
+  background: linear-gradient(180deg, transparent, rgba(6, 12, 8, 0.96));
+  border-top-color: rgba(16, 232, 160, 0.14);
+}
+
+body.page-roberto .ftr-ic {
+  border-color: rgba(255, 224, 102, 0.42);
+  box-shadow: 0 0 24px rgba(16, 232, 160, 0.22);
+}
+
+body.page-roberto ::-webkit-scrollbar-thumb {
+  background: #2a3828;
+}

@@ -224,6 +224,10 @@ const reps = [
 
 for (const [re, rep] of reps) html = html.replace(re, rep);
 
+html = html.replace(/infraestrutura-theme\.css/g, 'roberto-theme.css');
+html = html.replace(/page-infraestrutura/g, 'page-roberto');
+html = html.replace(/assets\/infraestrutura-bg\.png/g, 'assets/roberto-hayashi-bg.png');
+
 const extraSections = `
 <!-- PROJETOS RWB -->
 <section class="sec">
