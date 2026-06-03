@@ -85,23 +85,39 @@
   }
 
   function loadPdfLibs() {
-    if (window.jspdf && window.jspdf.jsPDF && window.jspdf.jsPDF.API.autoTable) {
-      return Promise.resolve();
+    if (window.jspdf && window.jspdf.jsPDF) {
+      const probe = new window.jspdf.jsPDF();
+      if (typeof probe.autoTable === 'function') return Promise.resolve();
     }
     if (libsLoading) return libsLoading;
-    libsLoading = loadScript(
+    const local = [
+      'assets/vendor/jspdf.umd.min.js',
+      'assets/vendor/jspdf.plugin.autotable.min.js',
+    ];
+    const cdn = [
       'https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js',
-      'jspdf-cdn'
-    )
-      .then(function () {
-        return loadScript(
-          'https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js',
-          'jspdf-autotable-cdn'
-        );
+      'https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js',
+    ];
+
+    function tryLoad(urls) {
+      return urls.reduce(function (chain, src) {
+        return chain.then(function () {
+          return loadScript(src);
+        });
+      }, Promise.resolve());
+    }
+
+    libsLoading = tryLoad(local)
+      .catch(function () {
+        return tryLoad(cdn);
       })
       .then(function () {
         if (!window.jspdf || !window.jspdf.jsPDF) {
           throw new Error('jsPDF indisponível');
+        }
+        const probe = new window.jspdf.jsPDF();
+        if (typeof probe.autoTable !== 'function') {
+          throw new Error('Plugin autoTable indisponível');
         }
       });
     return libsLoading;
@@ -320,9 +336,14 @@
 
     const photoX = pageW - margin - 42;
     if (data.photoData) {
-      doc.setFillColor(255, 255, 255);
-      doc.circle(photoX + 21, 36, 22, 'F');
-      doc.addImage(data.photoData, 'JPEG', photoX, 15, 42, 42, undefined, 'FAST');
+      try {
+        doc.setFillColor(255, 255, 255);
+        doc.circle(photoX + 21, 36, 22, 'F');
+        const fmt = data.photoData.indexOf('image/png') >= 0 ? 'PNG' : 'JPEG';
+        doc.addImage(data.photoData, fmt, photoX, 15, 42, 42, undefined, 'FAST');
+      } catch (_) {
+        /* foto opcional — ignora se falhar (CORS/formato) */
+      }
     }
 
     let y = headerH + 28;
@@ -578,7 +599,11 @@
       doc.text(c.label, x, y);
       doc.setDrawColor(225, 232, 245);
       doc.roundedRect(x, y + 2, halfW, imgH, 2, 2, 'S');
-      doc.addImage(c.url, 'PNG', x + 2, y + 4, halfW - 4, imgH - 4);
+      try {
+        doc.addImage(c.url, 'PNG', x + 2, y + 4, halfW - 4, imgH - 4);
+      } catch (_) {
+        /* gráfico opcional */
+      }
       if (i % 2 === 1 || i === imgs.length - 1) y += imgH + 14;
     });
     return y;
@@ -605,7 +630,7 @@
   function drawTasks(doc, data, accent, pageW, margin, startY) {
     if (!data.tasks.length) return startY;
     doc.addPage();
-    let y = drawSectionTitle(doc, 'Registro de Atividades (' + data.tasks.length + ')', margin, margin);
+    let y = drawSectionTitle(doc, 'Registro de Atividades (' + data.tasks.length + ')', margin, margin, accent);
     doc.autoTable({
       startY: y,
       margin: { left: margin, right: margin },
@@ -625,7 +650,7 @@
     const M = data.memorial;
     if (!M || !M.sections?.length) return startY;
     doc.addPage();
-    let y = drawSectionTitle(doc, M.title || 'Memorial Descritivo', margin, margin);
+    let y = drawSectionTitle(doc, M.title || 'Memorial Descritivo', margin, margin, accent);
     if (M.intro) {
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(9);
@@ -669,12 +694,11 @@
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
     doc.setTextColor(90, 100, 120);
-    doc.text(
+    const stubLines = doc.splitTextToSize(
       'Este colaborador já está cadastrado com foto, área e equipe. Os indicadores serão incluídos automaticamente.',
-      margin + 10,
-      y + 24,
-      { maxWidth: pageW - margin * 2 - 20 }
+      pageW - margin * 2 - 20
     );
+    doc.text(stubLines, margin + 10, y + 24);
     return y + 46;
   }
 
@@ -737,7 +761,7 @@
       generateProfilePdf()
         .catch(function (err) {
           console.error(err);
-          alert('Não foi possível gerar o PDF. Verifique sua conexão e tente novamente.');
+          alert('Não foi possível gerar o PDF: ' + (err && err.message ? err.message : 'erro desconhecido'));
         })
         .finally(function () {
           btn.disabled = false;
