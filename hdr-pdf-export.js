@@ -1,4 +1,4 @@
-/* Botão PDF ao lado do LinkedIn — exporta relatório completo do perfil */
+/* Exportação PDF — padrão executivo FIC Capital (ref: testepadrao.pdf) */
 (function () {
   'use strict';
 
@@ -30,6 +30,15 @@
     juridico: 'Jurídico',
   };
 
+  const THEME = {
+    cover: [11, 18, 32],
+    ink: [15, 23, 42],
+    muted: [100, 116, 139],
+    paper: [255, 255, 255],
+    soft: [248, 250, 252],
+    line: [226, 232, 240],
+  };
+
   let libsLoading = null;
 
   if (!document.getElementById('hdr-pdf-export-style')) {
@@ -39,21 +48,15 @@
       '.hdr-pdf-btn{display:inline-flex;align-items:center;justify-content:center;min-width:52px;height:36px;' +
       'padding:0 12px;margin:0;border:1px solid rgba(255,255,255,.22);border-radius:8px;' +
       'font-family:Outfit,system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;' +
-      'text-transform:uppercase;color:rgba(255,255,255,.92);background:rgba(255,255,255,.08);' +
-      'cursor:pointer;transition:color .2s,transform .2s,background .2s,border-color .2s;flex-shrink:0}' +
+      'text-transform:uppercase;color:rgba(255,255,255,.92);background:rgba(255,255,255,.08);cursor:pointer;' +
+      'transition:color .2s,transform .2s,background .2s,border-color .2s;flex-shrink:0}' +
       '.hdr-pdf-btn:hover{color:#fff;background:rgba(77,143,255,.35);border-color:rgba(77,143,255,.55);transform:translateY(-1px)}' +
-      '.hdr-pdf-btn:focus-visible{outline:2px solid rgba(0,212,255,.55);outline-offset:3px}' +
-      '.hdr-pdf-btn[disabled]{opacity:.55;cursor:wait;transform:none}' +
-      'body.page-comercial .hdr-pdf-btn{border-color:rgba(245,230,238,.28);background:rgba(245,230,238,.08)}' +
-      'body.page-marketing .hdr-pdf-btn{border-color:rgba(184,240,255,.28)}' +
-      'body.page-infraestrutura .hdr-pdf-btn{border-color:rgba(255,232,180,.28)}';
+      '.hdr-pdf-btn[disabled]{opacity:.55;cursor:wait}';
     document.head.appendChild(style);
   }
 
   function getMember() {
-    return window.FIC_MEMBERS && window.FIC_MEMBERS.memberFromPath
-      ? window.FIC_MEMBERS.memberFromPath()
-      : null;
+    return window.FIC_MEMBERS?.memberFromPath?.() || null;
   }
 
   function getReport() {
@@ -70,11 +73,9 @@
     return (d.textContent || '').replace(/\s+/g, ' ').trim();
   }
 
-  function loadScript(src, id) {
-    if (id && document.getElementById(id)) return Promise.resolve();
+  function loadScript(src) {
     return new Promise(function (resolve, reject) {
       const s = document.createElement('script');
-      if (id) s.id = id;
       s.src = src;
       s.onload = resolve;
       s.onerror = function () {
@@ -85,9 +86,9 @@
   }
 
   function loadPdfLibs() {
-    if (window.jspdf && window.jspdf.jsPDF) {
-      const probe = new window.jspdf.jsPDF();
-      if (typeof probe.autoTable === 'function') return Promise.resolve();
+    if (window.jspdf?.jsPDF) {
+      const p = new window.jspdf.jsPDF();
+      if (typeof p.autoTable === 'function') return Promise.resolve();
     }
     if (libsLoading) return libsLoading;
     const local = [
@@ -98,27 +99,22 @@
       'https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js',
       'https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js',
     ];
-
-    function tryLoad(urls) {
-      return urls.reduce(function (chain, src) {
-        return chain.then(function () {
-          return loadScript(src);
+    libsLoading = local
+      .reduce(function (c, u) {
+        return c.then(function () {
+          return loadScript(u);
         });
-      }, Promise.resolve());
-    }
-
-    libsLoading = tryLoad(local)
+      }, Promise.resolve())
       .catch(function () {
-        return tryLoad(cdn);
+        return cdn.reduce(function (c, u) {
+          return c.then(function () {
+            return loadScript(u);
+          });
+        }, Promise.resolve());
       })
       .then(function () {
-        if (!window.jspdf || !window.jspdf.jsPDF) {
-          throw new Error('jsPDF indisponível');
-        }
-        const probe = new window.jspdf.jsPDF();
-        if (typeof probe.autoTable !== 'function') {
-          throw new Error('Plugin autoTable indisponível');
-        }
+        const p = new window.jspdf.jsPDF();
+        if (typeof p.autoTable !== 'function') throw new Error('autoTable indisponível');
       });
     return libsLoading;
   }
@@ -126,25 +122,23 @@
   function parseObjectPosition(img) {
     let x = 0.5;
     let y = 0.28;
-    if (img && img instanceof Element) {
+    if (img instanceof Element) {
       const op = (getComputedStyle(img).objectPosition || 'center 28%').trim().split(/\s+/);
-      if (op[0]) x = parsePositionPart(op[0], true);
-      if (op[1]) y = parsePositionPart(op[1], false);
-      else if (!/%/.test(op[0]) && op[0] !== 'center') y = parsePositionPart(op[0], false);
+      if (op[0]) x = parsePos(op[0], true);
+      if (op[1]) y = parsePos(op[1], false);
     }
     return { x, y };
   }
 
-  function parsePositionPart(part, isX) {
+  function parsePos(part, isX) {
     if (!part) return 0.5;
     if (part.endsWith('%')) return Math.min(1, Math.max(0, parseFloat(part) / 100));
     const map = isX
       ? { left: 0, center: 0.5, right: 1 }
       : { top: 0, center: 0.5, bottom: 1 };
-    return map[part] !== undefined ? map[part] : 0.5;
+    return map[part] ?? 0.5;
   }
 
-  /** object-fit:cover + object-position — spec CSS */
   function coverDrawRect(iw, ih, size, focal) {
     const scale = Math.max(size / iw, size / ih);
     const dw = iw * scale;
@@ -156,48 +150,48 @@
     return { dx, dy, dw, dh };
   }
 
-  /** Avatar circular — fundo opaco para evitar manchas no jsPDF */
+  /** Avatar circular — fundo = cor da página onde será colocado */
   function imgToDataUrl(img, sizePx, ringRgb, bgRgb) {
-    if (!img || !img.src) return null;
-    const size = sizePx || 320;
+    if (!img?.src) return null;
+    const size = sizePx || 400;
     const ring = ringRgb || [77, 143, 255];
-    const bg = bgRgb || [8, 14, 28];
+    const bg = bgRgb || [255, 255, 255];
     try {
       const iw = img.naturalWidth || img.width || size;
       const ih = img.naturalHeight || img.height || size;
       if (!iw || !ih) return null;
-
       const focal = parseObjectPosition(img);
       const { dx, dy, dw, dh } = coverDrawRect(iw, ih, size, focal);
       const canvas = document.createElement('canvas');
       canvas.width = size;
       canvas.height = size;
       const ctx = canvas.getContext('2d');
-      if (!ctx) return null;
-
       const cx = size / 2;
-      const cy = size / 2;
-      const r = size / 2 - 1;
+      const r = size / 2 - 2;
 
-      /* Quadrado inteiro = cor do cabeçalho (cantos somem no PDF) */
-      ctx.fillStyle = 'rgb(' + bg[0] + ',' + bg[1] + ',' + bg[2] + ')';
+      ctx.fillStyle = 'rgb(' + bg.join(',') + ')';
       ctx.fillRect(0, 0, size, size);
 
       ctx.save();
       ctx.beginPath();
-      ctx.arc(cx, cy, r, 0, Math.PI * 2);
-      ctx.closePath();
+      ctx.arc(cx, cx, r, 0, Math.PI * 2);
       ctx.clip();
       ctx.drawImage(img, dx, dy, dw, dh);
       ctx.restore();
 
       ctx.beginPath();
-      ctx.arc(cx, cy, r - 1, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgb(' + ring[0] + ',' + ring[1] + ',' + ring[2] + ')';
-      ctx.lineWidth = Math.max(3, size * 0.02);
+      ctx.arc(cx, cx, r, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgb(' + ring.join(',') + ')';
+      ctx.lineWidth = Math.max(4, size * 0.022);
       ctx.stroke();
 
-      return canvas.toDataURL('image/jpeg', 0.92);
+      ctx.beginPath();
+      ctx.arc(cx, cx, r + Math.max(4, size * 0.022) / 2 + 2, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgb(' + bg.join(',') + ')';
+      ctx.lineWidth = 5;
+      ctx.stroke();
+
+      return canvas.toDataURL('image/jpeg', 0.94);
     } catch (_) {
       return null;
     }
@@ -213,14 +207,20 @@
     }
   }
 
+  function scrapeChartData(id) {
+    if (typeof Chart === 'undefined') return null;
+    const c = Chart.getChart(id);
+    if (!c?.data?.labels?.length) return null;
+    const data = c.data.datasets[0]?.data || [];
+    return { labels: c.data.labels.slice(), data: data.map(Number) };
+  }
+
   function scrapeKpis() {
     return Array.from(document.querySelectorAll('#kpiGrid .kpi')).map(function (el) {
       return {
-        ic: el.querySelector('.kpi-emoji')?.textContent?.trim() || '•',
         label: el.querySelector('.kpi-l')?.textContent?.trim() || '',
         val: el.querySelector('.kpi-v')?.textContent?.trim() || '',
         sub: el.querySelector('.kpi-s')?.textContent?.trim() || '',
-        color: '#4d8fff',
       };
     });
   }
@@ -245,6 +245,7 @@
       return {
         ttl: el.querySelector('.an-ttl')?.textContent?.trim() || '',
         body: stripHtml(el.querySelector('.an-bd')?.innerHTML || ''),
+        feat: el.classList.contains('an--feat'),
       };
     });
   }
@@ -297,10 +298,11 @@
         };
         photoEl.addEventListener('load', done, { once: true });
         photoEl.addEventListener('error', done, { once: true });
-        setTimeout(done, 1200);
+        setTimeout(done, 1500);
       });
     }
 
+    const accent = AREA_RGB[member?.area] || AREA_RGB.tecnologia;
     let tasks = report?.TASKS || scrapeTasks();
     if (report?.TASKS) {
       tasks = report.TASKS.map(function (t) {
@@ -315,36 +317,45 @@
       });
     }
 
-    const memorial = window.MEMORIAL_ANIMA || null;
+    const monthly =
+      report?.MON_L?.length
+        ? { labels: report.MON_L, data: report.MON_D || [] }
+        : scrapeChartData('cBar') || scrapeChartData('cLine');
+
+    const categories =
+      report?.CAT_L?.length
+        ? { labels: report.CAT_L, data: report.CAT_D || [] }
+        : scrapeChartData('cDonut');
+
+    const periods = report?.REPORT_PERIODS || [];
+    const periodLabel =
+      periods.map(function (p) {
+        return p.label;
+      }).join(' · ') ||
+      badge.replace(/^Relatório[^·]*·?\s*/i, '').trim() ||
+      badge;
 
     return {
       member,
       badge,
       roleLine,
-      photoData: imgToDataUrl(
-        photoEl,
-        400,
-        AREA_RGB[member?.area] || AREA_RGB.tecnologia,
-        [8, 14, 28]
-      ),
+      periodLabel,
+      areaLabel: AREA_LABELS[member?.area] || member?.area || '',
+      accent,
+      photoData: imgToDataUrl(photoEl, 480, accent, THEME.paper),
       kpis: report?.KPIS || scrapeKpis(),
       tasks,
       analysis: report?.ANALYSIS
         ? report.ANALYSIS.map(function (a) {
-            return { ttl: a.ttl, body: stripHtml(a.body) };
+            return { ttl: a.ttl, body: stripHtml(a.body), feat: a.feat };
           })
         : scrapeAnalysis(),
       achievements: report?.ACH || scrapeAchievements(),
       skills: report?.SKILLS || scrapeSkills(),
       timeline: report?.TL || scrapeTimeline(),
-      periods: report?.REPORT_PERIODS || [],
-      monthly: report
-        ? { labels: report.MON_L || [], data: report.MON_D || [] }
-        : null,
-      categories: report
-        ? { labels: report.CAT_L || [], data: report.CAT_D || [] }
-        : null,
-      memorial,
+      monthly,
+      categories,
+      memorial: window.MEMORIAL_ANIMA || null,
       charts: {
         line: chartDataUrl('cLine'),
         donut: chartDataUrl('cDonut'),
@@ -352,6 +363,7 @@
         top: chartDataUrl('cTop'),
       },
       generatedAt: new Date(),
+      executionRate: tasks.length ? '100%' : '—',
     };
   }
 
@@ -363,168 +375,215 @@
       .replace(/^-|-$/g, '');
   }
 
-  function ensureSpace(doc, y, need, margin) {
+  function fmtDate(d) {
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+  function splitName(member) {
+    if (!member) return { first: 'Colaborador', last: '' };
+    return { first: member.first || member.name.split(' ')[0], last: member.last || '' };
+  }
+
+  function setInk(doc) {
+    doc.setTextColor(THEME.ink[0], THEME.ink[1], THEME.ink[2]);
+  }
+
+  function setMuted(doc) {
+    doc.setTextColor(THEME.muted[0], THEME.muted[1], THEME.muted[2]);
+  }
+
+  function ensureY(doc, y, need, top, bottom) {
     const pageH = doc.internal.pageSize.getHeight();
-    if (y + need > pageH - margin) {
+    if (y + need > pageH - bottom) {
       doc.addPage();
-      return margin;
+      return top;
     }
     return y;
   }
 
-  function drawPageFooter(doc, pageW, margin, accent) {
-    const total = doc.internal.getNumberOfPages();
-    for (let i = 1; i <= total; i++) {
-      doc.setPage(i);
-      doc.setDrawColor(230, 235, 245);
-      doc.line(margin, doc.internal.pageSize.getHeight() - 14, pageW - margin, doc.internal.pageSize.getHeight() - 14);
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(120, 130, 150);
-      doc.text('FIC Capital Group · Documento confidencial · Uso interno', margin, doc.internal.pageSize.getHeight() - 8);
-      doc.setTextColor(accent[0], accent[1], accent[2]);
-      doc.text(String(i) + ' / ' + String(total), pageW - margin, doc.internal.pageSize.getHeight() - 8, { align: 'right' });
-    }
-  }
-
-  function drawSectionTitle(doc, title, x, y, accent) {
+  function paintPageChrome(doc, data, margin, pageW, pageH, contentTop) {
+    const accent = data.accent;
+    doc.setFillColor(THEME.cover[0], THEME.cover[1], THEME.cover[2]);
+    doc.rect(0, 0, pageW, 11, 'F');
     doc.setFillColor(accent[0], accent[1], accent[2]);
-    doc.roundedRect(x, y, 4, 14, 1, 1, 'F');
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(13);
-    doc.setTextColor(30, 40, 60);
-    doc.text(title, x + 10, y + 10);
-    return y + 22;
-  }
-
-  function drawCover(doc, data, accent, pageW, margin) {
-    const m = data.member;
-    const headerH = 72;
-    doc.setFillColor(8, 14, 28);
-    doc.rect(0, 0, pageW, headerH, 'F');
-    doc.setFillColor(accent[0], accent[1], accent[2]);
-    doc.rect(0, headerH - 3, pageW, 3, 'F');
+    doc.rect(0, 11, pageW, 0.8, 'F');
 
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
+    doc.setFontSize(7);
     doc.setTextColor(255, 255, 255);
-    doc.text('FIC CAPITAL', margin, 22);
+    doc.text('FIC CAPITAL', margin, 7.2);
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.setTextColor(180, 195, 220);
-    doc.text('Relatório Executivo de Performance', margin, 32);
+    const mid = (data.member?.name || '') + ' · ' + (data.areaLabel || '');
+    doc.text(mid, pageW / 2, 7.2, { align: 'center' });
+    doc.text(data.periodLabel.slice(0, 28), pageW - margin, 7.2, { align: 'right' });
 
-    const photoX = pageW - margin - 44;
-    const photoSize = 44;
-    if (data.photoData) {
-      try {
-        doc.addImage(data.photoData, 'JPEG', photoX, 15, photoSize, photoSize, undefined, 'MEDIUM');
-      } catch (_) {
-        /* foto opcional */
-      }
-    }
-
-    let y = headerH + 28;
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(28);
-    doc.setTextColor(20, 30, 50);
-    doc.text(m?.name || 'Colaborador', margin, y);
-    y += 12;
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(12);
+    doc.setDrawColor(THEME.line[0], THEME.line[1], THEME.line[2]);
+    doc.line(margin, pageH - 10, pageW - margin, pageH - 10);
+    doc.setFontSize(6.5);
+    setMuted(doc);
+    doc.text('FIC Capital · Confidencial · Uso interno', margin, pageH - 5);
     doc.setTextColor(accent[0], accent[1], accent[2]);
-    doc.text(data.roleLine || m?.role || '', margin, y);
-    y += 10;
+    return contentTop;
+  }
+
+  function drawAllChrome(doc, data, margin, pageW, pageH) {
+    const total = doc.internal.getNumberOfPages();
+    for (let i = 2; i <= total; i++) {
+      doc.setPage(i);
+      paintPageChrome(doc, data, margin, pageW, pageH, 18);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(6.5);
+      setMuted(doc);
+      doc.text(i + ' / ' + total, pageW - margin, pageH - 5, { align: 'right' });
+    }
+  }
+
+  function sectionTitle(doc, title, x, y, accent) {
+    doc.setFillColor(accent[0], accent[1], accent[2]);
+    doc.roundedRect(x, y, 3, 11, 1, 1, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    setInk(doc);
+    doc.text(title, x + 7, y + 8);
+    return y + 16;
+  }
+
+  function metaBox(doc, label, value, x, y, w, h, accent) {
+    doc.setFillColor(THEME.soft[0], THEME.soft[1], THEME.soft[2]);
+    doc.setDrawColor(THEME.line[0], THEME.line[1], THEME.line[2]);
+    doc.roundedRect(x, y, w, h, 2, 2, 'FD');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(6);
+    doc.setTextColor(accent[0], accent[1], accent[2]);
+    doc.text(label.toUpperCase(), x + 4, y + 7);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    setInk(doc);
+    const lines = doc.splitTextToSize(String(value), w - 8);
+    doc.text(lines.slice(0, 2), x + 4, y + 14);
+  }
+
+  /* ── CAPA ── */
+  function drawCoverPage(doc, data, pageW, margin) {
+    const accent = data.accent;
+    const m = data.member;
+    const names = splitName(m);
+    const coverH = 62;
+
+    doc.setFillColor(THEME.cover[0], THEME.cover[1], THEME.cover[2]);
+    doc.rect(0, 0, pageW, coverH, 'F');
+    doc.setFillColor(accent[0], accent[1], accent[2]);
+    doc.rect(0, coverH, pageW, 1.2, 'F');
+
+    doc.setFillColor(THEME.paper[0], THEME.paper[1], THEME.paper[2]);
+    doc.rect(0, coverH + 1.2, pageW, doc.internal.pageSize.getHeight(), 'F');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(255, 255, 255);
+    doc.text('FIC CAPITAL', margin, 16);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7);
+    doc.setTextColor(200, 210, 230);
+    doc.text('EXECUTIVE PERFORMANCE REPORT', margin, 22);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(6.5);
+    doc.text('CONFIDENCIAL · USO INTERNO', margin, 28);
 
     if (data.badge) {
-      doc.setFillColor(
-        Math.min(255, accent[0] + 180),
-        Math.min(255, accent[1] + 180),
-        Math.min(255, accent[2] + 180)
-      );
-      doc.setDrawColor(accent[0], accent[1], accent[2]);
-      doc.roundedRect(margin, y, Math.min(pageW - margin * 2, doc.getTextWidth(data.badge) + 16), 10, 2, 2, 'FD');
-      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(6);
       doc.setTextColor(accent[0], accent[1], accent[2]);
-      doc.text(data.badge, margin + 8, y + 7);
-      y += 18;
+      const badgeLines = doc.splitTextToSize(data.badge.toUpperCase(), pageW - margin * 2 - 58);
+      doc.text(badgeLines[0], margin, 36);
     }
 
-    const areaLabel = AREA_LABELS[m?.area] || m?.area || '';
-    if (areaLabel) {
-      doc.setFontSize(10);
-      doc.setTextColor(100, 110, 130);
-      doc.text('Área: ' + areaLabel, margin, y);
-      y += 8;
+    const photoSize = 52;
+    const photoX = pageW - margin - photoSize;
+    const photoY = 24;
+    if (data.photoData) {
+      try {
+        doc.addImage(data.photoData, 'JPEG', photoX, photoY, photoSize, photoSize, undefined, 'MEDIUM');
+      } catch (_) {}
     }
 
-    const dateStr = data.generatedAt.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric',
-    });
-    doc.text('Gerado em ' + dateStr, margin, y);
-    y += 20;
-
-    doc.setDrawColor(230, 235, 245);
-    doc.line(margin, y, pageW - margin, y);
-    y += 16;
-
+    let y = coverH + 14;
     doc.setFont('helvetica', 'bold');
+    doc.setFontSize(28);
+    setInk(doc);
+    doc.text(names.first.toUpperCase(), margin, y);
+    y += 11;
+    if (names.last) {
+      doc.setTextColor(accent[0], accent[1], accent[2]);
+      doc.text(names.last.toUpperCase(), margin, y);
+      y += 10;
+    }
+
+    doc.setFont('helvetica', 'normal');
     doc.setFontSize(11);
-    doc.setTextColor(50, 60, 80);
-    doc.text('Sobre este documento', margin, y);
+    setInk(doc);
+    doc.text(data.roleLine || m?.role || '', margin, y);
+    y += 7;
+    doc.setFontSize(9);
+    setMuted(doc);
+    doc.text('FIC Capital · Área: ' + data.areaLabel, margin, y);
+    y += 14;
+
+    const boxW = (pageW - margin * 2 - 9) / 4;
+    const boxH = 22;
+    metaBox(doc, 'Período', data.periodLabel, margin, y, boxW, boxH, accent);
+    metaBox(doc, 'Área', data.areaLabel, margin + boxW + 3, y, boxW, boxH, accent);
+    metaBox(doc, 'Gerado em', fmtDate(data.generatedAt), margin + (boxW + 3) * 2, y, boxW, boxH, accent);
+    metaBox(doc, 'Execução', data.executionRate + ' ✓', margin + (boxW + 3) * 3, y, boxW, boxH, accent);
+    y += boxH + 12;
+
+    doc.setDrawColor(THEME.line[0], THEME.line[1], THEME.line[2]);
+    doc.line(margin, y, pageW - margin, y);
     y += 8;
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(80, 90, 110);
+    doc.setFontSize(8.5);
+    setMuted(doc);
     const intro =
       data.kpis.length || data.tasks.length
-        ? 'Consolidação automática do dashboard de performance: indicadores, competências, timeline, análise e registro completo de atividades.'
-        : 'Perfil cadastrado no sistema FIC Capital Group. O dashboard completo será incluído assim que o relatório de performance for publicado.';
-    const introLines = doc.splitTextToSize(intro, pageW - margin * 2);
-    doc.text(introLines, margin, y);
-    return y + introLines.length * 5 + 10;
+        ? 'Consolidação executiva do dashboard de performance: indicadores, competências, timeline, inteligência analítica e registro completo de atividades.'
+        : 'Perfil cadastrado no ecossistema FIC Capital. O dashboard completo será integrado automaticamente quando o relatório for publicado.';
+    doc.text(doc.splitTextToSize(intro, pageW - margin * 2), margin, y);
+
+    doc.setFontSize(6.5);
+    doc.text('FIC Capital · Documento Confidencial · Uso Interno Exclusivo', pageW / 2, doc.internal.pageSize.getHeight() - 8, {
+      align: 'center',
+    });
   }
 
-  function drawKpis(doc, data, accent, pageW, margin, startY) {
-    if (!data.kpis.length) return startY;
-    let y = ensureSpace(doc, startY, 40, margin);
-    y = drawSectionTitle(doc, 'Indicadores de Performance', margin, y, accent);
+  function drawKpiCards(doc, data, x, y, w, accent) {
     const cols = 2;
-    const gap = 8;
-    const cardW = (pageW - margin * 2 - gap) / cols;
-    const cardH = 28;
+    const gap = 4;
+    const cardW = (w - gap) / cols;
+    const cardH = 22;
     let col = 0;
     let rowY = y;
+    const kpis = data.kpis.slice(0, 8);
+    if (!kpis.length) return y;
 
-    data.kpis.forEach(function (k, i) {
-      if (col === 0) {
-        rowY = ensureSpace(doc, rowY, cardH + 6, margin);
-        if (rowY === margin && i > 0) {
-          rowY = drawSectionTitle(doc, 'Indicadores de Performance (cont.)', margin, rowY, accent);
-        }
-      }
-      const x = margin + col * (cardW + gap);
-      doc.setFillColor(248, 250, 255);
-      doc.setDrawColor(225, 232, 245);
-      doc.roundedRect(x, rowY, cardW, cardH, 3, 3, 'FD');
-      doc.setFillColor(accent[0], accent[1], accent[2]);
-      doc.circle(x + 8, rowY + 10, 2.5, 'F');
+    kpis.forEach(function (k, i) {
+      if (col === 0) rowY = ensureY(doc, rowY, cardH + 4, 18, 14);
+      const cx = x + col * (cardW + gap);
+      doc.setFillColor(THEME.soft[0], THEME.soft[1], THEME.soft[2]);
+      doc.setDrawColor(THEME.line[0], THEME.line[1], THEME.line[2]);
+      doc.roundedRect(cx, rowY, cardW, cardH, 2, 2, 'FD');
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(100, 110, 130);
-      doc.text(k.label || '', x + 14, rowY + 9);
+      doc.setFontSize(7);
+      setMuted(doc);
+      doc.text(k.label || '', cx + 4, rowY + 7);
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(16);
+      doc.setFontSize(14);
       doc.setTextColor(accent[0], accent[1], accent[2]);
-      doc.text(String(k.val || ''), x + 14, rowY + 20);
+      doc.text(String(k.val || ''), cx + 4, rowY + 16);
       if (k.sub) {
         doc.setFont('helvetica', 'normal');
-        doc.setFontSize(7);
-        doc.setTextColor(130, 140, 160);
-        doc.text(k.sub, x + 14, rowY + 25);
+        doc.setFontSize(6);
+        setMuted(doc);
+        doc.text(k.sub.slice(0, 40), cx + 4, rowY + 20);
       }
       col++;
       if (col >= cols) {
@@ -532,288 +591,360 @@
         rowY += cardH + gap;
       }
     });
-    return col ? rowY + cardH + 10 : rowY + 10;
+    return col ? rowY + cardH + 6 : rowY + 6;
   }
 
-  function drawAnalysis(doc, data, accent, pageW, margin, startY) {
-    if (!data.analysis.length) return startY;
-    let y = ensureSpace(doc, startY, 30, margin);
-    y = drawSectionTitle(doc, 'Inteligência Analítica', margin, y, accent);
-    data.analysis.forEach(function (a) {
-      y = ensureSpace(doc, y, 24, margin);
+  function drawMonthlyBars(doc, monthly, x, y, w, h, accent) {
+    if (!monthly?.labels?.length) return y;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    setMuted(doc);
+    doc.text('EVOLUÇÃO MENSUAL DE TAREFAS', x, y);
+    y += 5;
+    const max = Math.max.apply(null, monthly.data.concat([1]));
+    const n = monthly.labels.length;
+    const gap = 3;
+    const barW = (w - gap * (n - 1)) / n;
+    const baseY = y + h - 6;
+    monthly.labels.forEach(function (lb, i) {
+      const val = Number(monthly.data[i]) || 0;
+      const bh = Math.max(2, (val / max) * (h - 14));
+      const bx = x + i * (barW + gap);
+      doc.setFillColor(
+        Math.min(255, accent[0] + 80),
+        Math.min(255, accent[1] + 80),
+        Math.min(255, accent[2] + 80)
+      );
+      doc.roundedRect(bx, baseY - bh, barW, bh, 1, 1, 'F');
+      doc.setFillColor(accent[0], accent[1], accent[2]);
+      doc.roundedRect(bx, baseY - bh, barW, Math.min(bh, 3), 1, 1, 'F');
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(10);
-      doc.setTextColor(40, 50, 70);
-      doc.text(a.ttl || 'Análise', margin, y);
-      y += 6;
+      doc.setFontSize(6.5);
+      setInk(doc);
+      doc.text(String(val), bx + barW / 2, baseY - bh - 2, { align: 'center' });
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(9);
-      doc.setTextColor(70, 80, 100);
-      const lines = doc.splitTextToSize(a.body || '', pageW - margin * 2);
-      lines.forEach(function (line) {
-        y = ensureSpace(doc, y, 5, margin);
-        doc.text(line, margin, y);
-        y += 4.5;
-      });
-      y += 6;
+      doc.setFontSize(6);
+      setMuted(doc);
+      doc.text(lb, bx + barW / 2, baseY + 4, { align: 'center' });
     });
-    return y;
+    return y + h + 4;
   }
 
-  function drawAchievements(doc, data, accent, pageW, margin, startY) {
-    if (!data.achievements.length) return startY;
-    let y = ensureSpace(doc, startY, 30, margin);
-    y = drawSectionTitle(doc, 'Conquistas & Destaques', margin, y, accent);
-    const cols = 3;
-    const gap = 6;
-    const cardW = (pageW - margin * 2 - gap * (cols - 1)) / cols;
-    let col = 0;
-    let rowY = y;
-    data.achievements.forEach(function (a) {
-      if (col === 0) rowY = ensureSpace(doc, rowY, 34, margin);
-      const x = margin + col * (cardW + gap);
-      doc.setFillColor(252, 248, 240);
-      doc.setDrawColor(235, 225, 210);
-      doc.roundedRect(x, rowY, cardW, 30, 2, 2, 'FD');
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(14);
-      doc.setTextColor(accent[0], accent[1], accent[2]);
-      doc.text(String(a.val || ''), x + 5, rowY + 12);
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(7.5);
-      doc.setTextColor(50, 55, 70);
-      doc.text(a.ttl || '', x + 5, rowY + 18);
+  function drawCategoryRow(doc, categories, x, y, w, accent) {
+    if (!categories?.labels?.length) return y;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    setMuted(doc);
+    doc.text('DISTRIBUIÇÃO POR CATEGORIA', x, y);
+    y += 5;
+    let cx = x;
+    categories.labels.forEach(function (lb, i) {
+      const val = categories.data[i] ?? '';
+      const chip = lb + '  ' + val;
+      const cw = Math.min(42, doc.getTextWidth(chip) + 8);
+      if (cx + cw > x + w) {
+        cx = x;
+        y += 8;
+      }
+      doc.setFillColor(
+        Math.min(255, accent[0] + 100),
+        Math.min(255, accent[1] + 100),
+        Math.min(255, accent[2] + 100)
+      );
+      doc.roundedRect(cx, y, cw, 7, 2, 2, 'F');
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(6.5);
-      doc.setTextColor(100, 105, 120);
-      const dsLines = doc.splitTextToSize(a.ds || '', cardW - 8);
-      doc.text(dsLines.slice(0, 2), x + 5, rowY + 23);
-      col++;
-      if (col >= cols) {
-        col = 0;
-        rowY += 36;
+      doc.setTextColor(accent[0], accent[1], accent[2]);
+      doc.text(chip, cx + 4, y + 5);
+      cx += cw + 3;
+    });
+    return y + 12;
+  }
+
+  function drawKpiPage(doc, data, margin, pageW, pageH) {
+    doc.addPage();
+    let y = paintPageChrome(doc, data, margin, pageW, pageH, 18);
+    y = sectionTitle(doc, 'Indicadores de Performance', margin, y, data.accent);
+
+    const half = (pageW - margin * 2 - 6) / 2;
+    y = drawMonthlyBars(doc, data.monthly, margin, y, half, 36, data.accent);
+    const yRight = y - 40;
+    if (data.charts.donut) {
+      try {
+        doc.addImage(data.charts.donut, 'PNG', margin + half + 6, yRight, half, 34);
+      } catch (_) {
+        drawCategoryRow(doc, data.categories, margin + half + 6, yRight + 4, half, data.accent);
       }
-    });
-    return (col ? rowY + 36 : rowY) + 8;
-  }
+    } else {
+      drawCategoryRow(doc, data.categories, margin + half + 6, yRight + 4, half, data.accent);
+    }
 
-  function drawSkills(doc, data, accent, pageW, margin, startY) {
-    if (!data.skills.length) return startY;
-    let y = ensureSpace(doc, startY, 30, margin);
-    y = drawSectionTitle(doc, 'Competências Técnicas', margin, y, accent);
-    data.skills.forEach(function (s) {
-      y = ensureSpace(doc, y, 12, margin);
-      const label = (s.nm || '').replace(/^[^\w]+/, '').trim() || s.nm || '';
-      const pct = s.pct || 0;
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(9);
-      doc.setTextColor(50, 60, 80);
-      doc.text(label, margin, y);
-      doc.setFont('helvetica', 'bold');
-      doc.text(String(pct) + '%', pageW - margin, y, { align: 'right' });
-      y += 3;
-      doc.setFillColor(235, 240, 250);
-      doc.roundedRect(margin, y, pageW - margin * 2, 4, 2, 2, 'F');
-      const barW = ((pageW - margin * 2) * pct) / 100;
-      doc.setFillColor(accent[0], accent[1], accent[2]);
-      doc.roundedRect(margin, y, Math.max(barW, 2), 4, 2, 2, 'F');
-      y += 10;
-    });
-    return y + 4;
-  }
+    y += 4;
+    y = drawKpiCards(doc, data, margin, y, pageW - margin * 2, data.accent);
 
-  function drawTimeline(doc, data, accent, pageW, margin, startY) {
-    if (!data.timeline.length) return startY;
-    let y = ensureSpace(doc, startY, 30, margin);
-    y = drawSectionTitle(doc, 'Timeline de Projetos', margin, y, accent);
-    data.timeline.forEach(function (t) {
-      y = ensureSpace(doc, y, 18, margin);
-      doc.setFillColor(accent[0], accent[1], accent[2]);
-      doc.circle(margin + 2, y - 1, 2, 'F');
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(9);
-      doc.setTextColor(40, 50, 70);
-      doc.text((t.dt || '') + (t.co ? ' · ' + t.co : ''), margin + 8, y);
-      y += 5;
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(9);
-      doc.text(t.ttl || '', margin + 8, y);
-      y += 4.5;
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(90, 100, 120);
-      const descLines = doc.splitTextToSize(t.desc || '', pageW - margin - 10);
-      descLines.forEach(function (line) {
-        y = ensureSpace(doc, y, 4.5, margin);
-        doc.text(line, margin + 8, y);
-        y += 4;
-      });
-      y += 4;
-    });
-    return y;
-  }
-
-  function drawCharts(doc, data, accent, pageW, margin, startY) {
-    const imgs = [
-      { url: data.charts.line, label: 'Evolução Mensal' },
-      { url: data.charts.donut, label: 'Por Categoria' },
-      { url: data.charts.bar, label: 'Volume por Mês' },
-      { url: data.charts.top, label: 'Top Atividades' },
+    const charts = [
+      { url: data.charts.line, label: 'Evolução' },
+      { url: data.charts.bar, label: 'Volume' },
+      { url: data.charts.top, label: 'Top atividades' },
     ].filter(function (c) {
       return c.url;
     });
-    if (!imgs.length) return startY;
-
-    let y = ensureSpace(doc, startY, 50, margin);
-    y = drawSectionTitle(doc, 'Análise Gráfica', margin, y, accent);
-    const halfW = (pageW - margin * 2 - 8) / 2;
-    const imgH = 52;
-    imgs.forEach(function (c, i) {
-      if (i % 2 === 0) y = ensureSpace(doc, y, imgH + 14, margin);
-      const x = margin + (i % 2) * (halfW + 8);
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(8);
-      doc.setTextColor(80, 90, 110);
-      doc.text(c.label, x, y);
-      doc.setDrawColor(225, 232, 245);
-      doc.roundedRect(x, y + 2, halfW, imgH, 2, 2, 'S');
-      try {
-        doc.addImage(c.url, 'PNG', x + 2, y + 4, halfW - 4, imgH - 4);
-      } catch (_) {
-        /* gráfico opcional */
-      }
-      if (i % 2 === 1 || i === imgs.length - 1) y += imgH + 14;
-    });
-    return y;
-  }
-
-  function drawMonthlyTable(doc, data, accent, pageW, margin, startY) {
-    if (!data.monthly || !data.monthly.labels?.length) return startY;
-    let y = ensureSpace(doc, startY, 30, margin);
-    y = drawSectionTitle(doc, 'Resumo Mensal', margin, y, accent);
-    doc.autoTable({
-      startY: y,
-      margin: { left: margin, right: margin },
-      head: [['Mês', 'Tarefas']],
-      body: data.monthly.labels.map(function (lb, i) {
-        return [lb, String(data.monthly.data[i] ?? '')];
-      }),
-      styles: { fontSize: 9, cellPadding: 3 },
-      headStyles: { fillColor: accent, textColor: 255 },
-      alternateRowStyles: { fillColor: [248, 250, 255] },
-    });
-    return doc.lastAutoTable.finalY + 10;
-  }
-
-  function drawTasks(doc, data, accent, pageW, margin, startY) {
-    if (!data.tasks.length) return startY;
-    doc.addPage();
-    let y = drawSectionTitle(doc, 'Registro de Atividades (' + data.tasks.length + ')', margin, margin, accent);
-    doc.autoTable({
-      startY: y,
-      margin: { left: margin, right: margin },
-      head: [['Atividade', 'Categoria', 'Prioridade', 'Empresa', 'Data']],
-      body: data.tasks.map(function (t) {
-        return [t.name || '', t.cat || '', t.pri || '', t.co || '', t.dt || ''];
-      }),
-      styles: { fontSize: 7.5, cellPadding: 2.5, overflow: 'linebreak' },
-      headStyles: { fillColor: accent, textColor: 255, fontSize: 8 },
-      columnStyles: { 0: { cellWidth: 68 } },
-      alternateRowStyles: { fillColor: [248, 250, 255] },
-    });
-    return doc.lastAutoTable.finalY + 10;
-  }
-
-  function drawMemorial(doc, data, accent, pageW, margin, startY) {
-    const M = data.memorial;
-    if (!M || !M.sections?.length) return startY;
-    doc.addPage();
-    let y = drawSectionTitle(doc, M.title || 'Memorial Descritivo', margin, margin, accent);
-    if (M.intro) {
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(9);
-      doc.setTextColor(70, 80, 100);
-      const lines = doc.splitTextToSize(stripHtml(M.intro), pageW - margin * 2);
-      doc.text(lines, margin, y);
-      y += lines.length * 4.5 + 8;
+    if (charts.length) {
+      y = ensureY(doc, y, 40, 18, 14);
+      y = sectionTitle(doc, 'Análise Gráfica', margin, y, data.accent);
+      const cw = (pageW - margin * 2 - 8) / Math.min(3, charts.length);
+      charts.slice(0, 3).forEach(function (c, i) {
+        const cx = margin + i * (cw + 4);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(6.5);
+        setMuted(doc);
+        doc.text(c.label, cx, y);
+        try {
+          doc.addImage(c.url, 'PNG', cx, y + 2, cw, 28);
+        } catch (_) {}
+      });
+      y += 34;
     }
-    M.sections.forEach(function (s) {
-      y = ensureSpace(doc, y, 20, margin);
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(10);
-      doc.setTextColor(40, 50, 70);
-      doc.text(s.title || '', margin, y);
-      y += 6;
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8.5);
-      doc.setTextColor(70, 80, 100);
-      const bodyLines = doc.splitTextToSize(stripHtml(s.body || ''), pageW - margin * 2);
-      bodyLines.forEach(function (line) {
-        y = ensureSpace(doc, y, 4.5, margin);
-        doc.text(line, margin, y);
+  }
+
+  function drawSkillsPage(doc, data, margin, pageW, pageH) {
+    if (!data.skills.length && !data.achievements.length) return;
+    doc.addPage();
+    let y = paintPageChrome(doc, data, margin, pageW, pageH, 18);
+
+    if (data.skills.length) {
+      y = sectionTitle(doc, 'Competências Técnicas', margin, y, data.accent);
+      data.skills.forEach(function (s) {
+        y = ensureY(doc, y, 10, 18, 14);
+        const label = (s.nm || '').replace(/^[^\w\s]+/, '').trim() || s.nm;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8.5);
+        setInk(doc);
+        doc.text(label, margin, y);
+        doc.setFont('helvetica', 'bold');
+        doc.text(String(s.pct) + '%', pageW - margin, y, { align: 'right' });
+        y += 2.5;
+        doc.setFillColor(THEME.line[0], THEME.line[1], THEME.line[2]);
+        doc.roundedRect(margin, y, pageW - margin * 2, 3.5, 2, 2, 'F');
+        const bw = ((pageW - margin * 2) * s.pct) / 100;
+        doc.setFillColor(data.accent[0], data.accent[1], data.accent[2]);
+        doc.roundedRect(margin, y, Math.max(2, bw), 3.5, 2, 2, 'F');
+        y += 8;
+      });
+      y += 4;
+    }
+
+    if (data.achievements.length) {
+      y = ensureY(doc, y, 24, 18, 14);
+      y = sectionTitle(doc, 'Conquistas & Destaques', margin, y, data.accent);
+      const cols = 3;
+      const gap = 4;
+      const cardW = (pageW - margin * 2 - gap * (cols - 1)) / cols;
+      let col = 0;
+      let rowY = y;
+      data.achievements.forEach(function (a) {
+        if (col === 0) rowY = ensureY(doc, rowY, 26, 18, 14);
+        const cx = margin + col * (cardW + gap);
+        doc.setFillColor(THEME.soft[0], THEME.soft[1], THEME.soft[2]);
+        doc.setDrawColor(THEME.line[0], THEME.line[1], THEME.line[2]);
+        doc.roundedRect(cx, rowY, cardW, 24, 2, 2, 'FD');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(13);
+        doc.setTextColor(data.accent[0], data.accent[1], data.accent[2]);
+        doc.text(String(a.val || ''), cx + 4, rowY + 11);
+        doc.setFontSize(7);
+        setInk(doc);
+        doc.text(a.ttl || '', cx + 4, rowY + 17);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(6);
+        setMuted(doc);
+        doc.text(doc.splitTextToSize(a.ds || '', cardW - 8).slice(0, 2), cx + 4, rowY + 21);
+        col++;
+        if (col >= cols) {
+          col = 0;
+          rowY += 28;
+        }
+      });
+    }
+  }
+
+  function drawTimelineAnalysisPage(doc, data, margin, pageW, pageH) {
+    if (!data.timeline.length && !data.analysis.length) return;
+    doc.addPage();
+    let y = paintPageChrome(doc, data, margin, pageW, pageH, 18);
+
+    if (data.analysis.length) {
+      y = sectionTitle(doc, 'Inteligência Analítica', margin, y, data.accent);
+      data.analysis.forEach(function (a) {
+        y = ensureY(doc, y, 20, 18, 14);
+        if (a.feat) {
+          doc.setFillColor(
+            Math.min(255, data.accent[0] + 170),
+            Math.min(255, data.accent[1] + 170),
+            Math.min(255, data.accent[2] + 170)
+          );
+          doc.roundedRect(margin, y - 2, pageW - margin * 2, 1, 0, 0, 'F');
+        }
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9);
+        setInk(doc);
+        doc.text(a.ttl || 'Análise', margin, y + 4);
+        y += 8;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        setMuted(doc);
+        doc.splitTextToSize(a.body || '', pageW - margin * 2).forEach(function (line) {
+          y = ensureY(doc, y, 5, 18, 14);
+          doc.text(line, margin, y);
+          y += 4;
+        });
         y += 4;
       });
-      y += 6;
-    });
-    return y;
+      y += 4;
+    }
+
+    if (data.timeline.length) {
+      y = ensureY(doc, y, 20, 18, 14);
+      y = sectionTitle(doc, 'Timeline de Projetos', margin, y, data.accent);
+      data.timeline.forEach(function (t) {
+        y = ensureY(doc, y, 16, 18, 14);
+        doc.setFillColor(data.accent[0], data.accent[1], data.accent[2]);
+        doc.circle(margin + 2, y, 1.5, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(7.5);
+        doc.setTextColor(data.accent[0], data.accent[1], data.accent[2]);
+        doc.text(((t.dt || '') + '  ' + (t.co || '')).trim().toUpperCase(), margin + 6, y + 1);
+        y += 5;
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8.5);
+        setInk(doc);
+        doc.text(t.ttl || '', margin + 6, y);
+        y += 4.5;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        setMuted(doc);
+        doc.splitTextToSize(t.desc || '', pageW - margin - 8).forEach(function (line) {
+          y = ensureY(doc, y, 4, 18, 14);
+          doc.text(line, margin + 6, y);
+          y += 3.5;
+        });
+        y += 3;
+      });
+    }
   }
 
-  function drawPendingStub(doc, data, accent, pageW, margin, startY) {
-    if (data.kpis.length || data.tasks.length) return startY;
-    let y = ensureSpace(doc, startY, 40, margin);
-    y = drawSectionTitle(doc, 'Status do Relatório', margin, y, accent);
-    doc.setFillColor(248, 250, 255);
-    doc.setDrawColor(225, 232, 245);
-    doc.roundedRect(margin, y, pageW - margin * 2, 36, 4, 4, 'FD');
+  function drawTasksPage(doc, data, margin, pageW, pageH) {
+    if (!data.tasks.length) return;
+    doc.addPage();
+    let y = paintPageChrome(doc, data, margin, pageW, pageH, 18);
+    y = sectionTitle(
+      doc,
+      'Registro de Atividades — ' + data.tasks.length + ' tarefas · ' + data.executionRate + ' concluídas',
+      margin,
+      y,
+      data.accent
+    );
+    doc.autoTable({
+      startY: y,
+      margin: { left: margin, right: margin, top: 18, bottom: 14 },
+      head: [['Atividade', 'Categoria', 'Prioridade', 'Empresa', 'Data']],
+      body: data.tasks.map(function (t) {
+        return [t.name, t.cat, t.pri, t.co, t.dt];
+      }),
+      styles: { fontSize: 7, cellPadding: 2.5, overflow: 'linebreak', textColor: THEME.ink },
+      headStyles: { fillColor: data.accent, textColor: 255, fontSize: 7.5 },
+      alternateRowStyles: { fillColor: THEME.soft },
+      columnStyles: { 0: { cellWidth: 62 } },
+    });
+  }
+
+  function drawMemorialPage(doc, data, margin, pageW, pageH) {
+    const M = data.memorial;
+    if (!M?.sections?.length) return;
+    doc.addPage();
+    let y = paintPageChrome(doc, data, margin, pageW, pageH, 18);
+    y = sectionTitle(doc, M.title || 'Memorial Descritivo', margin, y, data.accent);
+    if (M.intro) {
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      setMuted(doc);
+      doc.text(doc.splitTextToSize(stripHtml(M.intro), pageW - margin * 2), margin, y);
+      y += 14;
+    }
+    M.sections.forEach(function (s, i) {
+      y = ensureY(doc, y, 18, 18, 14);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.5);
+      setInk(doc);
+      doc.text(s.title || 'Cap. ' + (i + 1), margin, y);
+      y += 5;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.5);
+      setMuted(doc);
+      doc.splitTextToSize(stripHtml(s.body), pageW - margin * 2).forEach(function (line) {
+        y = ensureY(doc, y, 4, 18, 14);
+        doc.text(line, margin, y);
+        y += 3.5;
+      });
+      y += 4;
+    });
+  }
+
+  function drawPendingPage(doc, data, margin, pageW, pageH) {
+    doc.addPage();
+    let y = paintPageChrome(doc, data, margin, pageW, pageH, 18);
+    y = sectionTitle(doc, 'Status do Relatório', margin, y, data.accent);
+    doc.setFillColor(THEME.soft[0], THEME.soft[1], THEME.soft[2]);
+    doc.roundedRect(margin, y, pageW - margin * 2, 32, 3, 3, 'F');
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
-    doc.setTextColor(50, 60, 80);
-    doc.text('Dashboard em elaboração', margin + 10, y + 14);
+    setInk(doc);
+    doc.text('Dashboard em elaboração', margin + 8, y + 14);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.setTextColor(90, 100, 120);
-    const stubLines = doc.splitTextToSize(
-      'Este colaborador já está cadastrado com foto, área e equipe. Os indicadores serão incluídos automaticamente.',
-      pageW - margin * 2 - 20
+    setMuted(doc);
+    doc.text(
+      doc.splitTextToSize(
+        'Perfil cadastrado com foto, área e equipe. Indicadores serão incluídos automaticamente.',
+        pageW - margin * 2 - 16
+      ),
+      margin + 8,
+      y + 22
     );
-    doc.text(stubLines, margin + 10, y + 24);
-    return y + 46;
   }
 
   async function generateProfilePdf() {
     await loadPdfLibs();
     const { jsPDF } = window.jspdf;
     const data = await collectProfileData();
-    const m = data.member;
-    if (!m) throw new Error('Perfil não identificado');
+    if (!data.member) throw new Error('Perfil não identificado');
 
-    const accent = AREA_RGB[m.area] || AREA_RGB.tecnologia;
     const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
     const pageW = doc.internal.pageSize.getWidth();
-    const margin = 16;
+    const pageH = doc.internal.pageSize.getHeight();
+    const margin = 14;
 
-    let y = drawCover(doc, data, accent, pageW, margin);
-    y = drawPendingStub(doc, data, accent, pageW, margin, y);
-    y = drawKpis(doc, data, accent, pageW, margin, y);
-    y = drawCharts(doc, data, accent, pageW, margin, y);
-    y = drawMonthlyTable(doc, data, accent, pageW, margin, y);
-    y = drawSkills(doc, data, accent, pageW, margin, y);
-    y = drawTimeline(doc, data, accent, pageW, margin, y);
-    y = drawAchievements(doc, data, accent, pageW, margin, y);
-    y = drawAnalysis(doc, data, accent, pageW, margin, y);
-    drawTasks(doc, data, accent, pageW, margin, y);
-    drawMemorial(doc, data, accent, pageW, margin, y);
+    drawCoverPage(doc, data, pageW, margin);
 
-    drawPageFooter(doc, pageW, margin, accent);
+    const hasContent = data.kpis.length || data.tasks.length;
+    if (hasContent) {
+      drawKpiPage(doc, data, margin, pageW, pageH);
+      drawSkillsPage(doc, data, margin, pageW, pageH);
+      drawTimelineAnalysisPage(doc, data, margin, pageW, pageH);
+      drawTasksPage(doc, data, margin, pageW, pageH);
+      drawMemorialPage(doc, data, margin, pageW, pageH);
+    } else {
+      drawPendingPage(doc, data, margin, pageW, pageH);
+    }
 
-    const filename = 'Relatorio-' + slugName(m.name) + '.pdf';
-    doc.save(filename);
+    drawAllChrome(doc, data, margin, pageW, pageH);
+
+    doc.save('Relatorio-' + slugName(data.member.name) + '.pdf');
   }
 
   function applyHdrPdfExport() {
     const wrap = document.querySelector('.hdr-profile-links');
     if (!wrap) return;
-
     let btn = wrap.querySelector('.hdr-pdf-btn');
     if (!btn) {
       btn = document.createElement('button');
@@ -822,15 +953,10 @@
       btn.textContent = 'PDF';
       wrap.appendChild(btn);
     }
-
     const m = getMember();
-    const label = m ? 'Baixar relatório PDF de ' + m.name : 'Baixar relatório PDF';
-    btn.setAttribute('aria-label', label);
-    btn.title = label;
-
+    btn.setAttribute('aria-label', m ? 'Baixar relatório PDF de ' + m.name : 'Baixar relatório PDF');
     if (btn.dataset.pdfBound === '1') return;
     btn.dataset.pdfBound = '1';
-
     btn.addEventListener('click', function () {
       if (btn.disabled) return;
       const prev = btn.textContent;
@@ -839,7 +965,7 @@
       generateProfilePdf()
         .catch(function (err) {
           console.error(err);
-          alert('Não foi possível gerar o PDF: ' + (err && err.message ? err.message : 'erro desconhecido'));
+          alert('Não foi possível gerar o PDF: ' + (err?.message || 'erro desconhecido'));
         })
         .finally(function () {
           btn.disabled = false;
