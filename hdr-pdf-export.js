@@ -388,7 +388,7 @@
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
     doc.setTextColor(255, 255, 255);
-    doc.text('FIC CAPITAL GROUP', margin, 22);
+    doc.text('FIC CAPITAL', margin, 22);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
     doc.setTextColor(180, 195, 220);
