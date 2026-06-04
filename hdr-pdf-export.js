@@ -6,6 +6,7 @@
     giovane: 'GIOVANE_REPORT',
     samara: 'SAMARA_REPORT',
     gabriel: 'GABRIEL_REPORT',
+    adrian: 'ADRIAN_REPORT',
     emilly: 'EMILLY_REPORT',
     paulo: 'PAULO_REPORT',
     marina: 'MARINA_REPORT',
