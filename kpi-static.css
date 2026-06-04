@@ -1,0 +1,24 @@
+/* KPI cards — layout estático (sem flutuação, shimmer ou partículas) */
+.kpi-live {
+  animation: none !important;
+}
+
+.kpi .kpi-glow,
+.kpi .kpi-particle,
+.kpi::before,
+.kpi::after,
+.kpi-ic:not(.kpi-ic-bolt):not(.kpi-ic-fire):not(.kpi-ic-gif) {
+  animation: none !important;
+}
+
+.kpi-ic-bolt::before,
+.kpi-ic-fire::before,
+.kpi-ic-fire::after,
+.kpi-ic-bolt .kpi-emoji,
+.kpi-ic-fire .kpi-emoji {
+  animation: none !important;
+}
+
+.kpi:hover {
+  animation-play-state: unset;
+}
